@@ -83,6 +83,5 @@ domain, domain_filled_auto, origin_file, subcategory`
 ## Статус
 
 Корпус собран, объединён (включая sports.uz) и очищен от почти-дублей.
-Инструкция для teacher-модели выбрана — v3. Дальше: дополнительный
-дедуп по тексту (см. предупреждение выше), генерация parallel-пар по
-инструкции v3, fine-tuning mT5-small.
+Инструкция для teacher-модели выбрана — v2. Дальше: генерация parallel-пар по
+инструкции v2, fine-tuning mT5-small.
