@@ -1,0 +1,1423 @@
+2026-08-01 11:28:40 [INFO] Checking whether Ollama is running...
+2026-08-01 11:28:42 [INFO] Ollama is running.
+2026-08-01 11:28:45 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-01 11:28:45 [INFO] Loading input file 'lexuz_acts_text_part1_filtered.csv'.
+2026-08-01 11:28:45 [INFO] Total rows: 1458 | Already simplified: 0 | Remaining: 1458
+2026-08-01 11:29:44 [INFO] Text is long (20098 chars) -- split into 2 chunks.
+2026-08-01 11:31:23 [INFO] Text is long (20829 chars) -- split into 2 chunks.
+2026-08-01 11:33:16 [INFO] Text is long (21542 chars) -- split into 2 chunks.
+2026-08-01 11:36:32 [INFO] Text is long (14843 chars) -- split into 2 chunks.
+2026-08-01 11:38:07 [INFO] Text is long (20901 chars) -- split into 2 chunks.
+2026-08-01 11:39:21 [INFO] Text is long (19159 chars) -- split into 2 chunks.
+2026-08-01 11:40:24 [INFO] Text is long (25460 chars) -- split into 3 chunks.
+2026-08-01 11:42:56 [INFO] Text is long (19575 chars) -- split into 2 chunks.
+2026-08-01 11:44:06 [INFO] Text is long (19801 chars) -- split into 2 chunks.
+2026-08-01 11:46:20 [INFO] Text is long (20529 chars) -- split into 2 chunks.
+2026-08-01 11:49:29 [INFO] Text is long (30772 chars) -- split into 3 chunks.
+2026-08-01 11:52:47 [INFO] Text is long (17330 chars) -- split into 2 chunks.
+2026-08-01 11:53:42 [INFO] Text is long (26911 chars) -- split into 3 chunks.
+2026-08-01 11:55:24 [INFO] Text is long (29075 chars) -- split into 3 chunks.
+2026-08-01 11:57:54 [INFO] Text is long (20401 chars) -- split into 2 chunks.
+2026-08-01 12:00:13 [INFO] Text is long (39481 chars) -- split into 4 chunks.
+2026-08-01 12:03:46 [INFO] Text is long (31017 chars) -- split into 3 chunks.
+2026-08-01 12:04:57 [INFO] Text is long (13327 chars) -- split into 2 chunks.
+2026-08-01 12:05:35 [INFO] Text is long (31536 chars) -- split into 3 chunks.
+2026-08-01 12:08:38 [INFO] Text is long (14991 chars) -- split into 2 chunks.
+2026-08-01 12:09:12 [INFO] Text is long (23764 chars) -- split into 3 chunks.
+2026-08-01 12:10:38 [INFO] Text is long (25727 chars) -- split into 3 chunks.
+2026-08-01 12:14:50 [INFO] Text is long (22286 chars) -- split into 2 chunks.
+2026-08-01 12:15:33 [INFO] Text is long (13767 chars) -- split into 2 chunks.
+2026-08-01 12:16:08 [INFO] Text is long (14828 chars) -- split into 2 chunks.
+2026-08-01 12:17:21 [INFO] Text is long (31298 chars) -- split into 3 chunks.
+2026-08-01 12:19:12 [INFO] Text is long (21414 chars) -- split into 2 chunks.
+2026-08-01 12:21:59 [INFO] Text is long (21573 chars) -- split into 2 chunks.
+2026-08-01 12:23:20 [INFO] Text is long (27478 chars) -- split into 3 chunks.
+2026-08-01 12:26:21 [INFO] Text is long (13082 chars) -- split into 2 chunks.
+2026-08-01 12:26:51 [INFO] Text is long (29018 chars) -- split into 3 chunks.
+2026-08-01 12:31:05 [INFO] Checking whether Ollama is running...
+2026-08-01 12:31:07 [INFO] Ollama is running.
+2026-08-01 12:31:09 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-01 12:31:09 [INFO] Found existing output file 'output.csv'. Resuming from it.
+2026-08-01 12:31:09 [INFO] Total rows: 1458 | Already simplified: 64 | Remaining: 1394 | Workers: 3
+2026-08-01 12:31:09 [INFO] Text is long (29018 chars) -- split into 3 chunks.
+2026-08-01 12:31:09 [INFO] Text is long (23986 chars) -- split into 3 chunks.
+2026-08-01 12:31:54 [INFO] Text is long (25427 chars) -- split into 3 chunks.
+2026-08-01 12:40:39 [INFO] Checking whether Ollama is running...
+2026-08-01 12:40:41 [INFO] Ollama is running.
+2026-08-01 12:40:43 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-01 12:40:43 [INFO] Found existing output file 'output.csv'. Resuming from it.
+2026-08-01 12:40:43 [INFO] Total rows: 1458 | Already simplified: 65 | Remaining: 1393 | Workers: 3
+2026-08-01 12:40:43 [INFO] Text is long (29018 chars) -- split into 3 chunks.
+2026-08-01 12:40:43 [INFO] Text is long (23986 chars) -- split into 3 chunks.
+2026-08-01 12:40:43 [INFO] Text is long (25427 chars) -- split into 3 chunks.
+2026-08-01 12:42:19 [INFO] Text is long (13493 chars) -- split into 2 chunks.
+2026-08-01 12:42:51 [INFO] Text is long (17252 chars) -- split into 2 chunks.
+2026-08-01 12:44:10 [INFO] Text is long (29918 chars) -- split into 3 chunks.
+2026-08-01 12:44:34 [INFO] Text is long (16624 chars) -- split into 2 chunks.
+2026-08-01 12:44:47 [INFO] Text is long (13362 chars) -- split into 2 chunks.
+2026-08-01 12:46:01 [INFO] Text is long (12070 chars) -- split into 2 chunks.
+2026-08-01 12:46:24 [WARNING] Attempt 1/3 failed: Server disconnected without sending a response.
+2026-08-01 12:46:24 [WARNING] Attempt 1/3 failed: Server disconnected without sending a response.
+2026-08-01 12:46:24 [WARNING] Attempt 1/3 failed: Server disconnected without sending a response.
+2026-08-01 12:46:28 [WARNING] Attempt 2/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:28 [WARNING] Attempt 2/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:28 [WARNING] Attempt 2/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:34 [WARNING] Attempt 3/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:34 [WARNING] Attempt 3/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:34 [WARNING] Attempt 3/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:34 [ERROR] All 3 attempts failed. Last error: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:34 [ERROR] All 3 attempts failed. Last error: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:34 [ERROR] All 3 attempts failed. Last error: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:34 [ERROR] Chunk 2/2 failed -- row will be retried later.
+2026-08-01 12:46:34 [ERROR] Chunk 2/2 failed -- row will be retried later.
+2026-08-01 12:46:34 [ERROR] Chunk 2/2 failed -- row will be retried later.
+2026-08-01 12:46:34 [INFO] Text is long (24418 chars) -- split into 3 chunks.
+2026-08-01 12:46:34 [INFO] Text is long (16484 chars) -- split into 2 chunks.
+2026-08-01 12:46:34 [INFO] Text is long (27776 chars) -- split into 3 chunks.
+2026-08-01 12:46:36 [WARNING] Attempt 1/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:36 [WARNING] Attempt 1/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:36 [WARNING] Attempt 1/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:40 [WARNING] Attempt 2/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:40 [WARNING] Attempt 2/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:46:40 [WARNING] Attempt 2/3 failed: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-08-01 12:48:14 [INFO] Checking whether Ollama is running...
+2026-08-01 12:48:16 [INFO] Ollama is running.
+2026-08-01 12:48:18 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-01 12:48:18 [INFO] Found existing output file 'output.csv'. Resuming from it.
+2026-08-01 12:48:18 [INFO] Total rows: 1458 | Already simplified: 72 | Remaining: 1386 | Workers: 4
+2026-08-01 12:48:18 [INFO] Text is long (29918 chars) -- split into 3 chunks.
+2026-08-01 12:48:18 [INFO] Text is long (16624 chars) -- split into 2 chunks.
+2026-08-01 12:48:18 [INFO] Text is long (13362 chars) -- split into 2 chunks.
+2026-08-01 12:48:18 [INFO] Text is long (12070 chars) -- split into 2 chunks.
+2026-08-01 12:49:25 [INFO] Text is long (24418 chars) -- split into 3 chunks.
+2026-08-01 12:50:48 [INFO] Text is long (16484 chars) -- split into 2 chunks.
+2026-08-01 12:50:54 [INFO] Text is long (27776 chars) -- split into 3 chunks.
+2026-08-01 12:52:20 [INFO] Text is long (23240 chars) -- split into 2 chunks.
+2026-08-01 12:52:33 [INFO] Text is long (22515 chars) -- split into 2 chunks.
+2026-08-01 12:54:22 [INFO] Text is long (26012 chars) -- split into 3 chunks.
+2026-08-01 12:55:00 [INFO] Text is long (26165 chars) -- split into 3 chunks.
+2026-08-01 12:55:16 [INFO] Text is long (22329 chars) -- split into 2 chunks.
+2026-08-01 12:56:10 [INFO] Text is long (18041 chars) -- split into 2 chunks.
+2026-08-01 12:57:10 [INFO] Text is long (25996 chars) -- split into 3 chunks.
+2026-08-01 12:57:23 [INFO] Text is long (18730 chars) -- split into 2 chunks.
+2026-08-01 12:58:04 [INFO] Text is long (21411 chars) -- split into 2 chunks.
+2026-08-01 12:58:31 [INFO] Text is long (15341 chars) -- split into 2 chunks.
+2026-08-01 12:59:08 [INFO] Text is long (20019 chars) -- split into 2 chunks.
+2026-08-01 13:00:01 [INFO] Text is long (24514 chars) -- split into 3 chunks.
+2026-08-01 13:00:07 [INFO] Text is long (26790 chars) -- split into 3 chunks.
+2026-08-01 13:00:41 [INFO] Text is long (23306 chars) -- split into 2 chunks.
+2026-08-01 13:01:17 [INFO] Text is long (20854 chars) -- split into 2 chunks.
+2026-08-01 13:02:18 [INFO] Text is long (12272 chars) -- split into 2 chunks.
+2026-08-01 13:02:39 [INFO] Text is long (25437 chars) -- split into 3 chunks.
+2026-08-01 13:02:48 [INFO] Text is long (17694 chars) -- split into 2 chunks.
+2026-08-01 13:02:57 [INFO] Text is long (21370 chars) -- split into 2 chunks.
+2026-08-01 13:04:15 [INFO] Text is long (23577 chars) -- split into 3 chunks.
+2026-08-01 13:04:42 [INFO] Text is long (16605 chars) -- split into 2 chunks.
+2026-08-01 13:06:30 [INFO] Text is long (12846 chars) -- split into 2 chunks.
+2026-08-01 13:06:30 [INFO] Text is long (21735 chars) -- split into 2 chunks.
+2026-08-01 13:06:38 [INFO] Text is long (16294 chars) -- split into 2 chunks.
+2026-08-01 13:07:18 [INFO] Text is long (29002 chars) -- split into 3 chunks.
+2026-08-01 13:08:12 [INFO] Text is long (15070 chars) -- split into 2 chunks.
+2026-08-01 13:09:27 [INFO] Text is long (16595 chars) -- split into 2 chunks.
+2026-08-01 13:09:50 [INFO] Text is long (15325 chars) -- split into 2 chunks.
+2026-08-01 13:10:44 [INFO] Text is long (21471 chars) -- split into 2 chunks.
+2026-08-01 13:10:51 [INFO] Text is long (14031 chars) -- split into 2 chunks.
+2026-08-01 13:10:57 [INFO] Text is long (27003 chars) -- split into 3 chunks.
+2026-08-01 13:11:49 [INFO] Text is long (20441 chars) -- split into 2 chunks.
+2026-08-01 13:12:36 [INFO] Text is long (27527 chars) -- split into 3 chunks.
+2026-08-01 13:12:47 [INFO] Text is long (14583 chars) -- split into 2 chunks.
+2026-08-01 13:13:22 [INFO] Text is long (22326 chars) -- split into 2 chunks.
+2026-08-01 13:13:31 [INFO] Text is long (14659 chars) -- split into 2 chunks.
+2026-08-01 13:15:20 [INFO] Text is long (24685 chars) -- split into 3 chunks.
+2026-08-01 13:15:34 [INFO] Text is long (24549 chars) -- split into 3 chunks.
+2026-08-01 13:15:51 [INFO] Text is long (12530 chars) -- split into 2 chunks.
+2026-08-01 13:15:59 [INFO] Text is long (28992 chars) -- split into 3 chunks.
+2026-08-01 13:17:22 [INFO] Text is long (31322 chars) -- split into 3 chunks.
+2026-08-01 13:18:31 [INFO] Text is long (18865 chars) -- split into 2 chunks.
+2026-08-01 13:18:58 [INFO] Text is long (12055 chars) -- split into 2 chunks.
+2026-08-01 13:19:12 [INFO] Text is long (24476 chars) -- split into 3 chunks.
+2026-08-01 13:19:39 [INFO] Text is long (14994 chars) -- split into 2 chunks.
+2026-08-01 13:19:52 [INFO] Text is long (25467 chars) -- split into 3 chunks.
+2026-08-01 13:20:03 [INFO] Text is long (11861 chars) -- split into 2 chunks.
+2026-08-01 13:21:35 [INFO] Text is long (27084 chars) -- split into 3 chunks.
+2026-08-01 13:22:25 [INFO] Text is long (15405 chars) -- split into 2 chunks.
+2026-08-01 13:22:42 [INFO] Text is long (17865 chars) -- split into 2 chunks.
+2026-08-01 13:22:48 [INFO] Text is long (16992 chars) -- split into 2 chunks.
+2026-08-01 13:23:22 [INFO] Text is long (27045 chars) -- split into 3 chunks.
+2026-08-01 13:24:16 [INFO] Text is long (17728 chars) -- split into 2 chunks.
+2026-08-01 13:25:04 [INFO] Text is long (15662 chars) -- split into 2 chunks.
+2026-08-01 13:25:12 [INFO] Text is long (22408 chars) -- split into 2 chunks.
+2026-08-01 13:25:56 [INFO] Text is long (31138 chars) -- split into 3 chunks.
+2026-08-01 13:27:02 [INFO] Text is long (32351 chars) -- split into 3 chunks.
+2026-08-01 13:27:35 [INFO] Text is long (27579 chars) -- split into 3 chunks.
+2026-08-01 13:30:26 [INFO] Text is long (12700 chars) -- split into 2 chunks.
+2026-08-01 13:30:40 [INFO] Text is long (23198 chars) -- split into 2 chunks.
+2026-08-01 13:30:59 [INFO] Text is long (19486 chars) -- split into 2 chunks.
+2026-08-01 13:31:03 [INFO] Text is long (13525 chars) -- split into 2 chunks.
+2026-08-01 13:31:42 [INFO] Text is long (27210 chars) -- split into 3 chunks.
+2026-08-01 13:32:54 [INFO] Text is long (13159 chars) -- split into 2 chunks.
+2026-08-01 13:33:34 [INFO] Text is long (29416 chars) -- split into 3 chunks.
+2026-08-01 13:33:44 [INFO] Text is long (12978 chars) -- split into 2 chunks.
+2026-08-01 13:34:22 [INFO] Text is long (21818 chars) -- split into 2 chunks.
+2026-08-01 13:35:08 [INFO] Text is long (29092 chars) -- split into 3 chunks.
+2026-08-01 13:35:47 [INFO] Text is long (15586 chars) -- split into 2 chunks.
+2026-08-01 13:36:01 [INFO] Text is long (25458 chars) -- split into 3 chunks.
+2026-08-01 13:38:16 [INFO] Text is long (13461 chars) -- split into 2 chunks.
+2026-08-01 13:38:39 [INFO] Text is long (25155 chars) -- split into 3 chunks.
+2026-08-01 13:39:00 [INFO] Text is long (26472 chars) -- split into 3 chunks.
+2026-08-01 13:39:48 [INFO] Text is long (28517 chars) -- split into 3 chunks.
+2026-08-01 13:41:50 [INFO] Text is long (18467 chars) -- split into 2 chunks.
+2026-08-01 13:42:01 [INFO] Text is long (15390 chars) -- split into 2 chunks.
+2026-08-01 13:42:38 [INFO] Text is long (15648 chars) -- split into 2 chunks.
+2026-08-01 13:43:03 [INFO] Text is long (28194 chars) -- split into 3 chunks.
+2026-08-01 13:43:37 [INFO] Text is long (28522 chars) -- split into 3 chunks.
+2026-08-01 13:43:54 [INFO] Text is long (16666 chars) -- split into 2 chunks.
+2026-08-01 13:45:22 [INFO] Text is long (15892 chars) -- split into 2 chunks.
+2026-08-01 13:47:02 [INFO] Text is long (14270 chars) -- split into 2 chunks.
+2026-08-01 13:47:11 [INFO] Text is long (16895 chars) -- split into 2 chunks.
+2026-08-01 13:47:49 [INFO] Text is long (29121 chars) -- split into 3 chunks.
+2026-08-01 13:48:48 [INFO] Text is long (16103 chars) -- split into 2 chunks.
+2026-08-01 13:49:51 [INFO] Text is long (29826 chars) -- split into 3 chunks.
+2026-08-01 13:50:01 [INFO] Text is long (19167 chars) -- split into 2 chunks.
+2026-08-01 13:50:46 [INFO] Text is long (19998 chars) -- split into 2 chunks.
+2026-08-01 13:51:14 [INFO] Text is long (12553 chars) -- split into 2 chunks.
+2026-08-01 13:52:49 [INFO] Text is long (26655 chars) -- split into 3 chunks.
+2026-08-01 13:52:55 [INFO] Text is long (33304 chars) -- split into 3 chunks.
+2026-08-01 13:52:59 [INFO] Text is long (20496 chars) -- split into 2 chunks.
+2026-08-01 13:53:03 [INFO] Text is long (13612 chars) -- split into 2 chunks.
+2026-08-01 13:54:38 [INFO] Text is long (22328 chars) -- split into 2 chunks.
+2026-08-01 13:55:59 [INFO] Text is long (19857 chars) -- split into 2 chunks.
+2026-08-01 13:56:41 [INFO] Text is long (30743 chars) -- split into 3 chunks.
+2026-08-01 13:56:41 [INFO] Text is long (32298 chars) -- split into 3 chunks.
+2026-08-01 13:56:58 [INFO] Text is long (28480 chars) -- split into 3 chunks.
+2026-08-01 13:57:09 [INFO] Text is long (17158 chars) -- split into 2 chunks.
+2026-08-01 13:58:17 [INFO] Text is long (16034 chars) -- split into 2 chunks.
+2026-08-01 13:58:49 [INFO] Text is long (28610 chars) -- split into 3 chunks.
+2026-08-01 13:59:54 [INFO] Text is long (27272 chars) -- split into 3 chunks.
+2026-08-01 14:00:05 [INFO] Text is long (14113 chars) -- split into 2 chunks.
+2026-08-01 14:00:54 [INFO] Text is long (26095 chars) -- split into 3 chunks.
+2026-08-01 14:02:13 [INFO] Text is long (13444 chars) -- split into 2 chunks.
+2026-08-01 14:02:31 [INFO] Text is long (20317 chars) -- split into 2 chunks.
+2026-08-01 14:02:35 [INFO] Text is long (13411 chars) -- split into 2 chunks.
+2026-08-01 14:03:24 [INFO] Text is long (20090 chars) -- split into 2 chunks.
+2026-08-01 14:03:55 [INFO] Text is long (19495 chars) -- split into 2 chunks.
+2026-08-01 14:04:29 [INFO] Text is long (25508 chars) -- split into 3 chunks.
+2026-08-01 14:04:51 [INFO] Text is long (24872 chars) -- split into 3 chunks.
+2026-08-01 14:05:17 [INFO] Text is long (20562 chars) -- split into 2 chunks.
+2026-08-01 14:06:13 [INFO] Text is long (37507 chars) -- split into 4 chunks.
+2026-08-01 14:07:40 [INFO] Text is long (30360 chars) -- split into 3 chunks.
+2026-08-01 14:07:44 [INFO] Text is long (13146 chars) -- split into 2 chunks.
+2026-08-01 14:08:30 [INFO] Text is long (15712 chars) -- split into 2 chunks.
+2026-08-01 14:09:09 [INFO] Text is long (15004 chars) -- split into 2 chunks.
+2026-08-01 14:09:24 [INFO] Text is long (13036 chars) -- split into 2 chunks.
+2026-08-01 14:09:50 [INFO] Text is long (17151 chars) -- split into 2 chunks.
+2026-08-01 14:10:46 [INFO] Text is long (20465 chars) -- split into 2 chunks.
+2026-08-01 14:11:18 [INFO] Text is long (29029 chars) -- split into 3 chunks.
+2026-08-01 14:11:25 [INFO] Text is long (13553 chars) -- split into 2 chunks.
+2026-08-01 14:11:57 [INFO] Text is long (20397 chars) -- split into 2 chunks.
+2026-08-01 14:13:02 [INFO] Text is long (20691 chars) -- split into 2 chunks.
+2026-08-01 14:14:08 [INFO] Text is long (23669 chars) -- split into 3 chunks.
+2026-08-01 14:14:53 [INFO] Text is long (15979 chars) -- split into 2 chunks.
+2026-08-01 14:15:12 [INFO] Text is long (26524 chars) -- split into 3 chunks.
+2026-08-01 14:17:17 [INFO] Text is long (19720 chars) -- split into 2 chunks.
+2026-08-01 14:18:02 [INFO] Text is long (20655 chars) -- split into 2 chunks.
+2026-08-01 14:19:02 [INFO] Text is long (18072 chars) -- split into 2 chunks.
+2026-08-01 14:21:01 [INFO] Text is long (26883 chars) -- split into 3 chunks.
+2026-08-01 14:21:15 [INFO] Text is long (26428 chars) -- split into 3 chunks.
+2026-08-01 14:22:00 [INFO] Text is long (17350 chars) -- split into 2 chunks.
+2026-08-01 14:22:18 [INFO] Text is long (19534 chars) -- split into 2 chunks.
+2026-08-01 14:23:08 [INFO] Text is long (29047 chars) -- split into 3 chunks.
+2026-08-01 14:23:29 [INFO] Text is long (22349 chars) -- split into 2 chunks.
+2026-08-01 14:23:34 [INFO] Text is long (30340 chars) -- split into 3 chunks.
+2026-08-01 14:25:56 [INFO] Text is long (17280 chars) -- split into 2 chunks.
+2026-08-01 14:26:13 [INFO] Text is long (15258 chars) -- split into 2 chunks.
+2026-08-01 14:26:16 [INFO] Text is long (16697 chars) -- split into 2 chunks.
+2026-08-01 14:27:28 [INFO] Text is long (15294 chars) -- split into 2 chunks.
+2026-08-01 14:27:30 [INFO] Text is long (15931 chars) -- split into 2 chunks.
+2026-08-01 14:27:34 [INFO] Text is long (22971 chars) -- split into 2 chunks.
+2026-08-01 14:28:32 [INFO] Text is long (26866 chars) -- split into 3 chunks.
+2026-08-01 14:30:09 [INFO] Text is long (23825 chars) -- split into 3 chunks.
+2026-08-01 14:30:18 [INFO] Text is long (26592 chars) -- split into 3 chunks.
+2026-08-01 14:30:42 [INFO] Text is long (17720 chars) -- split into 2 chunks.
+2026-08-01 14:31:03 [INFO] Text is long (26437 chars) -- split into 3 chunks.
+2026-08-01 14:31:30 [INFO] Text is long (16242 chars) -- split into 2 chunks.
+2026-08-01 14:32:26 [INFO] Text is long (16368 chars) -- split into 2 chunks.
+2026-08-01 14:32:46 [INFO] Text is long (33479 chars) -- split into 3 chunks.
+2026-08-01 14:33:31 [INFO] Text is long (18372 chars) -- split into 2 chunks.
+2026-08-01 14:34:22 [INFO] Text is long (23138 chars) -- split into 2 chunks.
+2026-08-01 14:35:16 [INFO] Text is long (16569 chars) -- split into 2 chunks.
+2026-08-01 14:35:58 [INFO] Text is long (21958 chars) -- split into 2 chunks.
+2026-08-01 14:36:55 [INFO] Text is long (22488 chars) -- split into 2 chunks.
+2026-08-01 14:37:56 [INFO] Text is long (25497 chars) -- split into 3 chunks.
+2026-08-01 14:38:00 [INFO] Text is long (28165 chars) -- split into 3 chunks.
+2026-08-01 14:38:18 [INFO] Text is long (25623 chars) -- split into 3 chunks.
+2026-08-01 14:39:43 [INFO] Text is long (12426 chars) -- split into 2 chunks.
+2026-08-01 14:40:22 [INFO] Text is long (14239 chars) -- split into 2 chunks.
+2026-08-01 14:40:46 [INFO] Text is long (23571 chars) -- split into 3 chunks.
+2026-08-01 14:41:05 [INFO] Text is long (16160 chars) -- split into 2 chunks.
+2026-08-01 14:42:00 [INFO] Text is long (16965 chars) -- split into 2 chunks.
+2026-08-01 14:42:32 [INFO] Text is long (30133 chars) -- split into 3 chunks.
+2026-08-01 14:42:46 [INFO] Text is long (22368 chars) -- split into 2 chunks.
+2026-08-01 14:44:01 [INFO] Text is long (24368 chars) -- split into 3 chunks.
+2026-08-01 14:45:01 [INFO] Text is long (22500 chars) -- split into 2 chunks.
+2026-08-01 14:45:21 [INFO] Text is long (24150 chars) -- split into 3 chunks.
+2026-08-01 14:45:43 [INFO] Text is long (20560 chars) -- split into 2 chunks.
+2026-08-01 14:47:50 [INFO] Text is long (23330 chars) -- split into 2 chunks.
+2026-08-01 14:47:56 [INFO] Text is long (14301 chars) -- split into 2 chunks.
+2026-08-01 14:48:49 [INFO] Text is long (22631 chars) -- split into 2 chunks.
+2026-08-01 14:49:17 [INFO] Text is long (15354 chars) -- split into 2 chunks.
+2026-08-01 14:49:29 [INFO] Text is long (33026 chars) -- split into 3 chunks.
+2026-08-01 14:50:10 [INFO] Text is long (27307 chars) -- split into 3 chunks.
+2026-08-01 14:51:00 [INFO] Text is long (25461 chars) -- split into 3 chunks.
+2026-08-01 14:51:17 [INFO] Text is long (21357 chars) -- split into 2 chunks.
+2026-08-01 14:51:58 [INFO] Text is long (22269 chars) -- split into 2 chunks.
+2026-08-01 14:52:40 [INFO] Text is long (24300 chars) -- split into 3 chunks.
+2026-08-01 14:53:21 [INFO] Text is long (12401 chars) -- split into 2 chunks.
+2026-08-01 14:53:51 [INFO] Text is long (22541 chars) -- split into 2 chunks.
+2026-08-01 14:54:39 [INFO] Text is long (31421 chars) -- split into 3 chunks.
+2026-08-01 14:55:31 [INFO] Text is long (28071 chars) -- split into 3 chunks.
+2026-08-01 14:56:24 [INFO] Text is long (12065 chars) -- split into 2 chunks.
+2026-08-01 14:56:38 [INFO] Text is long (31092 chars) -- split into 3 chunks.
+2026-08-01 14:57:01 [INFO] Text is long (12208 chars) -- split into 2 chunks.
+2026-08-01 14:57:16 [INFO] Text is long (29516 chars) -- split into 3 chunks.
+2026-08-01 14:58:20 [INFO] Text is long (22460 chars) -- split into 2 chunks.
+2026-08-01 14:59:12 [INFO] Text is long (17301 chars) -- split into 2 chunks.
+2026-08-01 14:59:16 [INFO] Text is long (12014 chars) -- split into 2 chunks.
+2026-08-01 14:59:34 [INFO] Text is long (16190 chars) -- split into 2 chunks.
+2026-08-01 15:01:32 [INFO] Text is long (27540 chars) -- split into 3 chunks.
+2026-08-01 15:03:19 [INFO] Text is long (25471 chars) -- split into 3 chunks.
+2026-08-01 15:03:31 [INFO] Text is long (18027 chars) -- split into 2 chunks.
+2026-08-01 15:04:09 [INFO] Text is long (26518 chars) -- split into 3 chunks.
+2026-08-01 15:04:23 [INFO] Text is long (22112 chars) -- split into 2 chunks.
+2026-08-01 15:05:40 [INFO] Text is long (21643 chars) -- split into 2 chunks.
+2026-08-01 15:05:49 [INFO] Text is long (15209 chars) -- split into 2 chunks.
+2026-08-01 15:07:05 [INFO] Text is long (25342 chars) -- split into 3 chunks.
+2026-08-01 15:07:16 [INFO] Text is long (16857 chars) -- split into 2 chunks.
+2026-08-01 15:08:04 [INFO] Text is long (19604 chars) -- split into 2 chunks.
+2026-08-01 15:09:10 [INFO] Text is long (18311 chars) -- split into 2 chunks.
+2026-08-01 15:09:15 [INFO] Text is long (14500 chars) -- split into 2 chunks.
+2026-08-01 15:09:29 [INFO] Text is long (18222 chars) -- split into 2 chunks.
+2026-08-01 15:09:32 [INFO] Text is long (30804 chars) -- split into 3 chunks.
+2026-08-01 15:12:35 [INFO] Text is long (26492 chars) -- split into 3 chunks.
+2026-08-01 15:12:46 [INFO] Text is long (26676 chars) -- split into 3 chunks.
+2026-08-01 15:13:22 [INFO] Text is long (26775 chars) -- split into 3 chunks.
+2026-08-01 15:14:43 [INFO] Text is long (26561 chars) -- split into 3 chunks.
+2026-08-01 15:15:04 [INFO] Text is long (18445 chars) -- split into 2 chunks.
+2026-08-01 15:16:06 [INFO] Text is long (17016 chars) -- split into 2 chunks.
+2026-08-01 15:16:19 [INFO] Text is long (18990 chars) -- split into 2 chunks.
+2026-08-01 15:17:06 [INFO] Text is long (15258 chars) -- split into 2 chunks.
+2026-08-01 15:17:51 [INFO] Text is long (28730 chars) -- split into 3 chunks.
+2026-08-01 15:17:56 [INFO] Text is long (17662 chars) -- split into 2 chunks.
+2026-08-01 15:18:08 [INFO] Text is long (15534 chars) -- split into 2 chunks.
+2026-08-01 15:19:24 [INFO] Text is long (14126 chars) -- split into 2 chunks.
+2026-08-01 15:20:17 [INFO] Text is long (17772 chars) -- split into 2 chunks.
+2026-08-01 15:20:29 [INFO] Text is long (23636 chars) -- split into 3 chunks.
+2026-08-01 15:22:43 [INFO] Text is long (14451 chars) -- split into 2 chunks.
+2026-08-01 15:23:17 [INFO] Text is long (20834 chars) -- split into 2 chunks.
+2026-08-01 15:23:30 [INFO] Text is long (12040 chars) -- split into 2 chunks.
+2026-08-01 15:24:07 [INFO] Text is long (26792 chars) -- split into 3 chunks.
+2026-08-01 15:24:15 [INFO] Text is long (17511 chars) -- split into 2 chunks.
+2026-08-01 15:25:08 [INFO] Text is long (12884 chars) -- split into 2 chunks.
+2026-08-01 15:26:31 [INFO] Text is long (17948 chars) -- split into 2 chunks.
+2026-08-01 15:26:42 [INFO] Text is long (13086 chars) -- split into 2 chunks.
+2026-08-01 15:27:37 [INFO] Text is long (18287 chars) -- split into 2 chunks.
+2026-08-01 15:28:04 [INFO] Text is long (20022 chars) -- split into 2 chunks.
+2026-08-01 15:29:17 [INFO] Text is long (29297 chars) -- split into 3 chunks.
+2026-08-01 15:29:36 [INFO] Text is long (23562 chars) -- split into 3 chunks.
+2026-08-01 15:30:54 [INFO] Text is long (19715 chars) -- split into 2 chunks.
+2026-08-01 15:31:27 [INFO] Text is long (21989 chars) -- split into 2 chunks.
+2026-08-01 15:31:33 [INFO] Text is long (28306 chars) -- split into 3 chunks.
+2026-08-01 15:32:33 [INFO] Text is long (28698 chars) -- split into 3 chunks.
+2026-08-01 15:32:50 [INFO] Text is long (16375 chars) -- split into 2 chunks.
+2026-08-01 15:33:47 [INFO] Text is long (20023 chars) -- split into 2 chunks.
+2026-08-01 15:34:44 [INFO] Text is long (28234 chars) -- split into 3 chunks.
+2026-08-01 15:34:53 [INFO] Text is long (13645 chars) -- split into 2 chunks.
+2026-08-01 15:35:40 [INFO] Text is long (24302 chars) -- split into 3 chunks.
+2026-08-01 15:37:03 [INFO] Text is long (20202 chars) -- split into 2 chunks.
+2026-08-01 15:37:25 [INFO] Text is long (13485 chars) -- split into 2 chunks.
+2026-08-01 15:37:56 [INFO] Text is long (13164 chars) -- split into 2 chunks.
+2026-08-01 15:38:37 [INFO] Text is long (24554 chars) -- split into 3 chunks.
+2026-08-01 15:38:51 [INFO] Text is long (11806 chars) -- split into 2 chunks.
+2026-08-01 15:39:04 [INFO] Text is long (14183 chars) -- split into 2 chunks.
+2026-08-01 15:39:47 [INFO] Text is long (24254 chars) -- split into 3 chunks.
+2026-08-01 15:40:21 [INFO] Text is long (19936 chars) -- split into 2 chunks.
+2026-08-01 15:40:32 [INFO] Text is long (30440 chars) -- split into 3 chunks.
+2026-08-01 15:43:17 [INFO] Text is long (14565 chars) -- split into 2 chunks.
+2026-08-01 15:43:38 [INFO] Text is long (23832 chars) -- split into 3 chunks.
+2026-08-01 15:43:51 [INFO] Text is long (29476 chars) -- split into 3 chunks.
+2026-08-01 15:44:17 [INFO] Text is long (19277 chars) -- split into 2 chunks.
+2026-08-01 15:46:14 [INFO] Text is long (12739 chars) -- split into 2 chunks.
+2026-08-01 15:46:17 [INFO] Text is long (14992 chars) -- split into 2 chunks.
+2026-08-01 15:46:21 [INFO] Text is long (18582 chars) -- split into 2 chunks.
+2026-08-01 15:47:06 [INFO] Text is long (33975 chars) -- split into 3 chunks.
+2026-08-01 15:47:12 [INFO] Text is long (24951 chars) -- split into 3 chunks.
+2026-08-01 15:47:25 [INFO] Text is long (20946 chars) -- split into 2 chunks.
+2026-08-01 15:48:53 [INFO] Text is long (23137 chars) -- split into 3 chunks.
+2026-08-01 15:49:00 [INFO] Text is long (29597 chars) -- split into 3 chunks.
+2026-08-01 15:49:20 [INFO] Text is long (14645 chars) -- split into 2 chunks.
+2026-08-01 15:49:44 [INFO] Text is long (17150 chars) -- split into 2 chunks.
+2026-08-01 15:50:15 [INFO] Text is long (13776 chars) -- split into 2 chunks.
+2026-08-01 15:51:42 [INFO] Text is long (28097 chars) -- split into 3 chunks.
+2026-08-01 15:52:24 [INFO] Text is long (25191 chars) -- split into 3 chunks.
+2026-08-01 15:52:37 [INFO] Text is long (29794 chars) -- split into 3 chunks.
+2026-08-01 15:53:01 [INFO] Text is long (11916 chars) -- split into 2 chunks.
+2026-08-01 15:54:31 [INFO] Text is long (20239 chars) -- split into 2 chunks.
+2026-08-01 15:54:49 [INFO] Text is long (17826 chars) -- split into 2 chunks.
+2026-08-01 15:55:14 [INFO] Text is long (16738 chars) -- split into 2 chunks.
+2026-08-01 15:55:26 [INFO] Text is long (25292 chars) -- split into 3 chunks.
+2026-08-01 15:56:39 [INFO] Text is long (14351 chars) -- split into 2 chunks.
+2026-08-01 15:57:08 [INFO] Text is long (20792 chars) -- split into 2 chunks.
+2026-08-01 15:57:08 [INFO] Text is long (16484 chars) -- split into 2 chunks.
+2026-08-01 15:58:09 [INFO] Text is long (26041 chars) -- split into 3 chunks.
+2026-08-01 15:58:45 [INFO] Text is long (15694 chars) -- split into 2 chunks.
+2026-08-01 15:58:58 [INFO] Text is long (14058 chars) -- split into 2 chunks.
+2026-08-01 16:00:15 [INFO] Text is long (16668 chars) -- split into 2 chunks.
+2026-08-01 16:00:49 [INFO] Text is long (14293 chars) -- split into 2 chunks.
+2026-08-01 16:01:38 [INFO] Text is long (21416 chars) -- split into 2 chunks.
+2026-08-01 16:01:46 [INFO] Text is long (29779 chars) -- split into 3 chunks.
+2026-08-01 16:01:47 [INFO] Text is long (25676 chars) -- split into 3 chunks.
+2026-08-01 16:02:38 [INFO] Text is long (16086 chars) -- split into 2 chunks.
+2026-08-01 16:03:47 [INFO] Text is long (20234 chars) -- split into 2 chunks.
+2026-08-01 16:03:59 [INFO] Text is long (26393 chars) -- split into 3 chunks.
+2026-08-01 16:04:30 [INFO] Text is long (35089 chars) -- split into 4 chunks.
+2026-08-01 16:06:34 [INFO] Text is long (25690 chars) -- split into 3 chunks.
+2026-08-01 16:06:47 [INFO] Text is long (29160 chars) -- split into 3 chunks.
+2026-08-01 16:06:48 [INFO] Text is long (29042 chars) -- split into 3 chunks.
+2026-08-01 16:06:53 [INFO] Text is long (17880 chars) -- split into 2 chunks.
+2026-08-01 16:08:30 [INFO] Text is long (17566 chars) -- split into 2 chunks.
+2026-08-01 16:10:05 [INFO] Text is long (26577 chars) -- split into 3 chunks.
+2026-08-01 16:10:40 [INFO] Text is long (19417 chars) -- split into 2 chunks.
+2026-08-01 16:11:16 [INFO] Text is long (27539 chars) -- split into 3 chunks.
+2026-08-01 16:12:31 [INFO] Text is long (23407 chars) -- split into 3 chunks.
+2026-08-01 16:12:35 [INFO] Text is long (13939 chars) -- split into 2 chunks.
+2026-08-01 16:13:00 [INFO] Text is long (13758 chars) -- split into 2 chunks.
+2026-08-01 16:13:50 [INFO] Text is long (13301 chars) -- split into 2 chunks.
+2026-08-01 16:14:33 [INFO] Text is long (12473 chars) -- split into 2 chunks.
+2026-08-01 16:15:05 [INFO] Text is long (24517 chars) -- split into 3 chunks.
+2026-08-01 16:15:10 [INFO] Text is long (22709 chars) -- split into 2 chunks.
+2026-08-01 16:15:42 [INFO] Text is long (33877 chars) -- split into 3 chunks.
+2026-08-01 16:16:23 [INFO] Text is long (23358 chars) -- split into 2 chunks.
+2026-08-01 16:17:11 [INFO] Text is long (23399 chars) -- split into 3 chunks.
+2026-08-01 16:18:29 [INFO] Text is long (23015 chars) -- split into 2 chunks.
+2026-08-01 16:20:18 [INFO] Text is long (25181 chars) -- split into 3 chunks.
+2026-08-01 16:20:27 [INFO] Text is long (15841 chars) -- split into 2 chunks.
+2026-08-01 16:20:52 [INFO] Text is long (15997 chars) -- split into 2 chunks.
+2026-08-01 16:22:41 [INFO] Text is long (21827 chars) -- split into 2 chunks.
+2026-08-01 16:23:33 [INFO] Text is long (20189 chars) -- split into 2 chunks.
+2026-08-01 16:24:02 [INFO] Text is long (15803 chars) -- split into 2 chunks.
+2026-08-01 16:24:25 [INFO] Text is long (16224 chars) -- split into 2 chunks.
+2026-08-01 16:24:38 [INFO] Text is long (28206 chars) -- split into 3 chunks.
+2026-08-01 16:25:52 [INFO] Text is long (22396 chars) -- split into 2 chunks.
+2026-08-01 16:26:00 [INFO] Text is long (22054 chars) -- split into 2 chunks.
+2026-08-01 16:26:19 [INFO] Text is long (21067 chars) -- split into 2 chunks.
+2026-08-01 16:26:27 [INFO] Text is long (15062 chars) -- split into 2 chunks.
+2026-08-01 16:26:42 [INFO] Text is long (13545 chars) -- split into 2 chunks.
+2026-08-01 16:29:09 [INFO] Text is long (29949 chars) -- split into 3 chunks.
+2026-08-01 16:30:11 [INFO] Text is long (25750 chars) -- split into 3 chunks.
+2026-08-01 16:31:42 [INFO] Text is long (15478 chars) -- split into 2 chunks.
+2026-08-01 16:33:19 [INFO] Checking whether Ollama is running...
+2026-08-01 16:33:21 [INFO] Ollama is running.
+2026-08-01 16:33:23 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-01 16:33:23 [INFO] Found existing output file 'output.csv'. Resuming from it.
+2026-08-01 16:33:23 [INFO] Total rows: 1458 | Already simplified: 536 | Remaining: 922 | Workers: 4
+2026-08-01 16:33:23 [INFO] Text is long (29949 chars) -- split into 2 chunks.
+2026-08-01 16:33:23 [INFO] Text is long (25750 chars) -- split into 2 chunks.
+2026-08-01 16:35:03 [INFO] Text is long (30355 chars) -- split into 2 chunks.
+2026-08-01 16:35:52 [INFO] Text is long (18900 chars) -- split into 2 chunks.
+2026-08-01 16:36:18 [INFO] Text is long (24808 chars) -- split into 2 chunks.
+2026-08-01 16:36:26 [INFO] Text is long (26773 chars) -- split into 2 chunks.
+2026-08-01 16:37:05 [INFO] Text is long (25182 chars) -- split into 2 chunks.
+2026-08-01 16:37:13 [INFO] Text is long (19647 chars) -- split into 2 chunks.
+2026-08-01 16:37:54 [INFO] Text is long (19637 chars) -- split into 2 chunks.
+2026-08-01 16:38:02 [INFO] Text is long (18653 chars) -- split into 2 chunks.
+2026-08-01 16:38:26 [INFO] Text is long (30658 chars) -- split into 2 chunks.
+2026-08-01 16:38:34 [INFO] Text is long (28951 chars) -- split into 2 chunks.
+2026-08-01 16:38:44 [WARNING] Weak compression: simplified chunk is 76% of original length (target ~40%).
+2026-08-01 16:38:55 [INFO] Text is long (25654 chars) -- split into 2 chunks.
+2026-08-01 16:39:27 [INFO] Text is long (28689 chars) -- split into 2 chunks.
+2026-08-01 16:39:45 [INFO] Text is long (17190 chars) -- split into 2 chunks.
+2026-08-01 16:40:01 [INFO] Text is long (31839 chars) -- split into 2 chunks.
+2026-08-01 16:40:26 [INFO] Text is long (25688 chars) -- split into 2 chunks.
+2026-08-01 16:40:33 [INFO] Text is long (28199 chars) -- split into 2 chunks.
+2026-08-01 16:40:58 [INFO] Text is long (18849 chars) -- split into 2 chunks.
+2026-08-01 16:41:34 [INFO] Text is long (33087 chars) -- split into 2 chunks.
+2026-08-01 16:41:50 [INFO] Text is long (26741 chars) -- split into 2 chunks.
+2026-08-01 16:41:50 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-01 16:41:50 [INFO] Text is long (20927 chars) -- split into 2 chunks.
+2026-08-01 16:42:38 [INFO] Text is long (23111 chars) -- split into 2 chunks.
+2026-08-01 16:43:11 [INFO] Text is long (25852 chars) -- split into 2 chunks.
+2026-08-01 16:43:37 [INFO] Text is long (25710 chars) -- split into 2 chunks.
+2026-08-01 16:43:50 [INFO] Text is long (22232 chars) -- split into 2 chunks.
+2026-08-01 16:44:33 [INFO] Text is long (22962 chars) -- split into 2 chunks.
+2026-08-01 16:44:47 [INFO] Text is long (22655 chars) -- split into 2 chunks.
+2026-08-01 16:45:13 [INFO] Text is long (33019 chars) -- split into 2 chunks.
+2026-08-01 16:45:49 [WARNING] Weak compression: simplified chunk is 127% of original length (target ~40%).
+2026-08-01 16:45:49 [INFO] Text is long (19686 chars) -- split into 2 chunks.
+2026-08-01 16:46:16 [INFO] Text is long (28398 chars) -- split into 2 chunks.
+2026-08-01 16:46:22 [INFO] Text is long (25408 chars) -- split into 2 chunks.
+2026-08-01 16:46:47 [INFO] Text is long (24550 chars) -- split into 2 chunks.
+2026-08-01 16:46:55 [INFO] Text is long (17531 chars) -- split into 2 chunks.
+2026-08-01 16:47:04 [INFO] Text is long (17530 chars) -- split into 2 chunks.
+2026-08-01 16:47:17 [INFO] Text is long (31499 chars) -- split into 2 chunks.
+2026-08-01 16:48:01 [INFO] Text is long (17469 chars) -- split into 2 chunks.
+2026-08-01 16:48:17 [INFO] Text is long (19884 chars) -- split into 2 chunks.
+2026-08-01 16:48:44 [WARNING] Weak compression: simplified chunk is 95% of original length (target ~40%).
+2026-08-01 16:48:44 [INFO] Text is long (26540 chars) -- split into 2 chunks.
+2026-08-01 16:48:55 [WARNING] Weak compression: simplified chunk is 85% of original length (target ~40%).
+2026-08-01 16:48:59 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-01 16:49:08 [INFO] Text is long (32903 chars) -- split into 2 chunks.
+2026-08-01 16:49:16 [INFO] Text is long (31026 chars) -- split into 2 chunks.
+2026-08-01 16:49:27 [INFO] Text is long (22864 chars) -- split into 2 chunks.
+2026-08-01 16:50:03 [INFO] Text is long (21373 chars) -- split into 2 chunks.
+2026-08-01 16:50:09 [INFO] Text is long (23536 chars) -- split into 2 chunks.
+2026-08-01 16:50:14 [INFO] Text is long (17568 chars) -- split into 2 chunks.
+2026-08-01 16:50:52 [INFO] Text is long (19764 chars) -- split into 2 chunks.
+2026-08-01 16:50:54 [INFO] Text is long (23591 chars) -- split into 2 chunks.
+2026-08-01 16:51:01 [WARNING] Weak compression: simplified chunk is 72% of original length (target ~40%).
+2026-08-01 16:51:36 [INFO] Text is long (19838 chars) -- split into 2 chunks.
+2026-08-01 16:51:45 [INFO] Text is long (24408 chars) -- split into 2 chunks.
+2026-08-01 16:52:03 [WARNING] Weak compression: simplified chunk is 105% of original length (target ~40%).
+2026-08-01 16:52:30 [INFO] Text is long (31934 chars) -- split into 2 chunks.
+2026-08-01 16:52:52 [INFO] Text is long (18092 chars) -- split into 2 chunks.
+2026-08-01 16:53:12 [INFO] Text is long (30138 chars) -- split into 2 chunks.
+2026-08-01 16:54:19 [INFO] Text is long (30339 chars) -- split into 2 chunks.
+2026-08-01 16:54:30 [INFO] Text is long (19792 chars) -- split into 2 chunks.
+2026-08-01 16:55:16 [INFO] Text is long (16908 chars) -- split into 2 chunks.
+2026-08-01 16:55:52 [INFO] Text is long (28408 chars) -- split into 2 chunks.
+2026-08-01 16:56:42 [INFO] Text is long (18694 chars) -- split into 2 chunks.
+2026-08-01 16:56:42 [INFO] Text is long (24813 chars) -- split into 2 chunks.
+2026-08-01 16:56:51 [INFO] Text is long (22108 chars) -- split into 2 chunks.
+2026-08-01 16:57:11 [WARNING] Weak compression: simplified chunk is 99% of original length (target ~40%).
+2026-08-01 16:57:11 [INFO] Text is long (31268 chars) -- split into 2 chunks.
+2026-08-01 16:57:25 [INFO] Text is long (25330 chars) -- split into 2 chunks.
+2026-08-01 16:58:23 [INFO] Text is long (18011 chars) -- split into 2 chunks.
+2026-08-01 16:58:34 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-01 16:58:47 [INFO] Text is long (21786 chars) -- split into 2 chunks.
+2026-08-01 16:59:03 [INFO] Text is long (17197 chars) -- split into 2 chunks.
+2026-08-01 16:59:18 [INFO] Text is long (16946 chars) -- split into 2 chunks.
+2026-08-01 16:59:34 [INFO] Text is long (26838 chars) -- split into 2 chunks.
+2026-08-01 16:59:45 [WARNING] Weak compression: simplified chunk is 87% of original length (target ~40%).
+2026-08-01 17:00:13 [WARNING] Weak compression: simplified chunk is 133% of original length (target ~40%).
+2026-08-01 17:00:13 [INFO] Text is long (17595 chars) -- split into 2 chunks.
+2026-08-01 17:00:35 [INFO] Text is long (26454 chars) -- split into 2 chunks.
+2026-08-01 17:00:40 [WARNING] Weak compression: simplified chunk is 97% of original length (target ~40%).
+2026-08-01 17:00:43 [INFO] Text is long (21881 chars) -- split into 2 chunks.
+2026-08-01 17:00:55 [INFO] Text is long (24252 chars) -- split into 2 chunks.
+2026-08-01 17:01:15 [INFO] Text is long (23629 chars) -- split into 2 chunks.
+2026-08-01 17:01:29 [INFO] Text is long (28992 chars) -- split into 2 chunks.
+2026-08-01 17:01:40 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-01 17:01:46 [INFO] Text is long (30457 chars) -- split into 2 chunks.
+2026-08-01 17:02:51 [INFO] Text is long (27801 chars) -- split into 2 chunks.
+2026-08-01 17:03:21 [INFO] Text is long (22723 chars) -- split into 2 chunks.
+2026-08-01 17:03:43 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-01 17:03:43 [INFO] Text is long (20457 chars) -- split into 2 chunks.
+2026-08-01 17:05:03 [INFO] Text is long (21143 chars) -- split into 2 chunks.
+2026-08-01 17:05:15 [WARNING] Weak compression: simplified chunk is 125% of original length (target ~40%).
+2026-08-01 17:05:15 [INFO] Text is long (18146 chars) -- split into 2 chunks.
+2026-08-01 17:05:34 [INFO] Text is long (25475 chars) -- split into 2 chunks.
+2026-08-01 17:05:40 [INFO] Text is long (23614 chars) -- split into 2 chunks.
+2026-08-01 17:05:41 [INFO] Text is long (19277 chars) -- split into 2 chunks.
+2026-08-01 17:06:08 [INFO] Text is long (32769 chars) -- split into 2 chunks.
+2026-08-01 17:06:17 [INFO] Text is long (26269 chars) -- split into 2 chunks.
+2026-08-01 17:06:24 [INFO] Text is long (28917 chars) -- split into 2 chunks.
+2026-08-01 17:06:41 [INFO] Text is long (27922 chars) -- split into 2 chunks.
+2026-08-01 17:06:52 [INFO] Text is long (27364 chars) -- split into 2 chunks.
+2026-08-01 17:06:52 [INFO] Text is long (22165 chars) -- split into 2 chunks.
+2026-08-01 17:07:49 [INFO] Text is long (22854 chars) -- split into 2 chunks.
+2026-08-01 17:08:24 [INFO] Text is long (26351 chars) -- split into 2 chunks.
+2026-08-01 17:08:43 [WARNING] Weak compression: simplified chunk is 72% of original length (target ~40%).
+2026-08-01 17:08:43 [INFO] Text is long (18336 chars) -- split into 2 chunks.
+2026-08-01 17:08:58 [INFO] Text is long (29067 chars) -- split into 2 chunks.
+2026-08-01 17:09:29 [INFO] Text is long (19320 chars) -- split into 2 chunks.
+2026-08-01 17:09:36 [INFO] Text is long (20938 chars) -- split into 2 chunks.
+2026-08-01 17:10:06 [INFO] Text is long (16932 chars) -- split into 2 chunks.
+2026-08-01 17:10:21 [INFO] Text is long (24501 chars) -- split into 2 chunks.
+2026-08-01 17:10:57 [INFO] Text is long (28002 chars) -- split into 2 chunks.
+2026-08-01 17:11:40 [WARNING] Weak compression: simplified chunk is 151% of original length (target ~40%).
+2026-08-01 17:11:49 [INFO] Text is long (23667 chars) -- split into 2 chunks.
+2026-08-01 17:11:55 [INFO] Text is long (18699 chars) -- split into 2 chunks.
+2026-08-01 17:12:13 [INFO] Text is long (24389 chars) -- split into 2 chunks.
+2026-08-01 17:12:27 [INFO] Text is long (32469 chars) -- split into 2 chunks.
+2026-08-01 17:13:28 [WARNING] Weak compression: simplified chunk is 69% of original length (target ~40%).
+2026-08-01 17:13:43 [INFO] Text is long (30477 chars) -- split into 2 chunks.
+2026-08-01 17:14:07 [INFO] Text is long (27574 chars) -- split into 2 chunks.
+2026-08-01 17:15:06 [INFO] Text is long (31416 chars) -- split into 2 chunks.
+2026-08-01 17:16:04 [WARNING] Weak compression: simplified chunk is 60% of original length (target ~40%).
+2026-08-01 17:16:05 [INFO] Text is long (21148 chars) -- split into 2 chunks.
+2026-08-01 17:16:19 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-01 17:16:25 [INFO] Text is long (31793 chars) -- split into 2 chunks.
+2026-08-01 17:16:36 [INFO] Text is long (17441 chars) -- split into 2 chunks.
+2026-08-01 17:17:17 [INFO] Text is long (27706 chars) -- split into 2 chunks.
+2026-08-01 17:17:17 [INFO] Text is long (27684 chars) -- split into 2 chunks.
+2026-08-01 17:17:27 [WARNING] Weak compression: simplified chunk is 72% of original length (target ~40%).
+2026-08-01 17:17:27 [INFO] Text is long (25676 chars) -- split into 2 chunks.
+2026-08-01 17:17:52 [INFO] Text is long (29144 chars) -- split into 2 chunks.
+2026-08-01 17:18:11 [INFO] Text is long (25730 chars) -- split into 2 chunks.
+2026-08-01 17:18:28 [INFO] Text is long (30744 chars) -- split into 2 chunks.
+2026-08-01 17:18:29 [WARNING] Attempt 1/3 failed: Server disconnected without sending a response.
+2026-08-01 17:18:29 [WARNING] Attempt 1/3 failed: Server disconnected without sending a response.
+2026-08-01 17:18:29 [WARNING] Attempt 1/3 failed: Server disconnected without sending a response.
+2026-08-01 17:18:29 [WARNING] Attempt 1/3 failed: Server disconnected without sending a response.
+2026-08-01 18:21:09 [INFO] Checking whether Ollama is running...
+2026-08-01 18:21:11 [INFO] Ollama is running.
+2026-08-01 18:21:13 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-01 18:21:13 [INFO] Found existing output file 'output.csv'. Resuming from it.
+2026-08-01 18:21:13 [INFO] Total rows: 1458 | Already simplified: 772 | Remaining: 686 | Workers: 4
+2026-08-01 18:21:13 [INFO] Text is long (17441 chars) -- split into 2 chunks.
+2026-08-01 18:21:13 [INFO] Text is long (27684 chars) -- split into 2 chunks.
+2026-08-01 18:21:13 [INFO] Text is long (29144 chars) -- split into 2 chunks.
+2026-08-01 18:21:13 [INFO] Text is long (25730 chars) -- split into 2 chunks.
+2026-08-01 18:22:21 [INFO] Text is long (30744 chars) -- split into 2 chunks.
+2026-08-01 18:22:22 [INFO] Text is long (19852 chars) -- split into 2 chunks.
+2026-08-01 18:22:30 [INFO] Text is long (34537 chars) -- split into 3 chunks.
+2026-08-01 18:24:31 [INFO] Text is long (27185 chars) -- split into 2 chunks.
+2026-08-01 18:25:27 [INFO] Text is long (21922 chars) -- split into 2 chunks.
+2026-08-01 18:25:59 [INFO] Text is long (32458 chars) -- split into 2 chunks.
+2026-08-01 18:26:17 [WARNING] Weak compression: simplified chunk is 81% of original length (target ~40%).
+2026-08-01 18:26:44 [INFO] Text is long (23510 chars) -- split into 2 chunks.
+2026-08-01 18:27:09 [INFO] Text is long (23774 chars) -- split into 2 chunks.
+2026-08-01 18:28:00 [WARNING] Weak compression: simplified chunk is 135% of original length (target ~40%).
+2026-08-01 18:28:00 [INFO] Text is long (22758 chars) -- split into 2 chunks.
+2026-08-01 18:29:03 [INFO] Text is long (22749 chars) -- split into 2 chunks.
+2026-08-01 18:30:42 [INFO] Text is long (33538 chars) -- split into 2 chunks.
+2026-08-01 18:30:55 [INFO] Text is long (24429 chars) -- split into 2 chunks.
+2026-08-01 18:31:00 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-01 18:32:56 [INFO] Text is long (21334 chars) -- split into 2 chunks.
+2026-08-01 18:33:02 [INFO] Text is long (26941 chars) -- split into 2 chunks.
+2026-08-01 18:33:58 [INFO] Text is long (31302 chars) -- split into 2 chunks.
+2026-08-01 18:34:01 [INFO] Text is long (33505 chars) -- split into 3 chunks.
+2026-08-01 18:35:49 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-01 18:35:49 [INFO] Text is long (29844 chars) -- split into 2 chunks.
+2026-08-01 18:36:32 [INFO] Text is long (24516 chars) -- split into 2 chunks.
+2026-08-01 18:36:54 [INFO] Text is long (29554 chars) -- split into 2 chunks.
+2026-08-01 18:36:59 [INFO] Text is long (28636 chars) -- split into 2 chunks.
+2026-08-01 18:38:45 [INFO] Text is long (19994 chars) -- split into 2 chunks.
+2026-08-01 18:38:54 [INFO] Text is long (18501 chars) -- split into 2 chunks.
+2026-08-01 18:39:19 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-01 18:40:04 [WARNING] Weak compression: simplified chunk is 87% of original length (target ~40%).
+2026-08-01 18:41:57 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-01 18:41:57 [INFO] Text is long (21567 chars) -- split into 2 chunks.
+2026-08-01 18:42:02 [INFO] Text is long (25669 chars) -- split into 2 chunks.
+2026-08-01 18:43:45 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-01 18:44:00 [INFO] Text is long (17648 chars) -- split into 2 chunks.
+2026-08-01 18:45:34 [INFO] Text is long (41924 chars) -- split into 3 chunks.
+2026-08-01 18:45:40 [WARNING] Weak compression: simplified chunk is 88% of original length (target ~40%).
+2026-08-01 18:45:40 [INFO] Text is long (23572 chars) -- split into 2 chunks.
+2026-08-01 18:46:12 [INFO] Text is long (20660 chars) -- split into 2 chunks.
+2026-08-01 18:47:11 [INFO] Text is long (27773 chars) -- split into 2 chunks.
+2026-08-01 18:47:26 [INFO] Text is long (27005 chars) -- split into 2 chunks.
+2026-08-01 18:48:49 [INFO] Text is long (20109 chars) -- split into 2 chunks.
+2026-08-01 18:48:56 [INFO] Text is long (18645 chars) -- split into 2 chunks.
+2026-08-01 18:49:49 [INFO] Text is long (17309 chars) -- split into 2 chunks.
+2026-08-01 18:50:09 [WARNING] Weak compression: simplified chunk is 91% of original length (target ~40%).
+2026-08-01 18:50:09 [INFO] Text is long (36642 chars) -- split into 3 chunks.
+2026-08-01 18:50:12 [INFO] Text is long (36027 chars) -- split into 3 chunks.
+2026-08-01 18:51:05 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-01 18:51:11 [INFO] Text is long (28712 chars) -- split into 2 chunks.
+2026-08-01 18:52:29 [INFO] Text is long (20659 chars) -- split into 2 chunks.
+2026-08-01 18:52:31 [INFO] Text is long (16904 chars) -- split into 2 chunks.
+2026-08-01 18:53:13 [INFO] Text is long (17973 chars) -- split into 2 chunks.
+2026-08-01 18:53:34 [INFO] Text is long (22533 chars) -- split into 2 chunks.
+2026-08-01 18:53:35 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-01 18:54:32 [WARNING] Weak compression: simplified chunk is 87% of original length (target ~40%).
+2026-08-01 18:54:33 [INFO] Text is long (35663 chars) -- split into 3 chunks.
+2026-08-01 18:54:42 [INFO] Text is long (20230 chars) -- split into 2 chunks.
+2026-08-01 18:54:52 [INFO] Text is long (19363 chars) -- split into 2 chunks.
+2026-08-01 18:55:01 [INFO] Text is long (20062 chars) -- split into 2 chunks.
+2026-08-01 18:56:12 [INFO] Text is long (20908 chars) -- split into 2 chunks.
+2026-08-01 18:56:27 [INFO] Text is long (33162 chars) -- split into 2 chunks.
+2026-08-01 18:56:34 [INFO] Text is long (25050 chars) -- split into 2 chunks.
+2026-08-01 18:57:41 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-01 18:57:47 [INFO] Text is long (18724 chars) -- split into 2 chunks.
+2026-08-01 18:57:59 [INFO] Text is long (25366 chars) -- split into 2 chunks.
+2026-08-01 18:58:56 [INFO] Text is long (21720 chars) -- split into 2 chunks.
+2026-08-01 19:00:33 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-01 19:00:33 [INFO] Text is long (19790 chars) -- split into 2 chunks.
+2026-08-01 19:01:18 [WARNING] Weak compression: simplified chunk is 85% of original length (target ~40%).
+2026-08-01 19:01:18 [INFO] Text is long (25166 chars) -- split into 2 chunks.
+2026-08-01 19:01:43 [INFO] Text is long (18553 chars) -- split into 2 chunks.
+2026-08-01 19:01:50 [INFO] Text is long (25109 chars) -- split into 2 chunks.
+2026-08-01 19:03:18 [WARNING] Weak compression: simplified chunk is 76% of original length (target ~40%).
+2026-08-01 19:03:18 [INFO] Text is long (28941 chars) -- split into 2 chunks.
+2026-08-01 19:04:17 [WARNING] Weak compression: simplified chunk is 78% of original length (target ~40%).
+2026-08-01 19:04:43 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-01 19:05:44 [INFO] Text is long (20021 chars) -- split into 2 chunks.
+2026-08-01 19:06:31 [INFO] Text is long (16931 chars) -- split into 2 chunks.
+2026-08-01 19:07:17 [INFO] Text is long (22168 chars) -- split into 2 chunks.
+2026-08-01 19:07:18 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-01 19:08:09 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-01 19:09:02 [WARNING] Weak compression: simplified chunk is 104% of original length (target ~40%).
+2026-08-01 19:10:32 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-01 19:10:47 [INFO] Text is long (24343 chars) -- split into 2 chunks.
+2026-08-01 19:11:22 [INFO] Text is long (32500 chars) -- split into 2 chunks.
+2026-08-01 19:11:28 [INFO] Text is long (23556 chars) -- split into 2 chunks.
+2026-08-01 19:12:19 [WARNING] Weak compression: simplified chunk is 60% of original length (target ~40%).
+2026-08-01 19:12:19 [INFO] Text is long (30248 chars) -- split into 2 chunks.
+2026-08-01 19:14:49 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-01 19:16:29 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-01 19:16:29 [INFO] Text is long (17834 chars) -- split into 2 chunks.
+2026-08-01 19:17:26 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-01 19:18:42 [INFO] Text is long (39290 chars) -- split into 3 chunks.
+2026-08-01 19:18:51 [INFO] Text is long (20601 chars) -- split into 2 chunks.
+2026-08-01 19:21:13 [INFO] Text is long (18701 chars) -- split into 2 chunks.
+2026-08-01 19:21:49 [INFO] Text is long (26226 chars) -- split into 2 chunks.
+2026-08-01 19:22:30 [INFO] Text is long (22703 chars) -- split into 2 chunks.
+2026-08-01 19:22:46 [WARNING] Weak compression: simplified chunk is 85% of original length (target ~40%).
+2026-08-01 19:22:46 [INFO] Text is long (21162 chars) -- split into 2 chunks.
+2026-08-01 19:24:06 [WARNING] Weak compression: simplified chunk is 92% of original length (target ~40%).
+2026-08-01 19:25:10 [INFO] Text is long (31414 chars) -- split into 2 chunks.
+2026-08-01 19:26:11 [INFO] Text is long (18550 chars) -- split into 2 chunks.
+2026-08-01 19:26:20 [INFO] Text is long (29109 chars) -- split into 2 chunks.
+2026-08-01 19:27:01 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-01 19:27:01 [INFO] Text is long (25571 chars) -- split into 2 chunks.
+2026-08-01 19:27:13 [INFO] Text is long (23174 chars) -- split into 2 chunks.
+2026-08-01 19:27:22 [INFO] Text is long (26827 chars) -- split into 2 chunks.
+2026-08-01 19:29:54 [INFO] Text is long (24294 chars) -- split into 2 chunks.
+2026-08-01 19:31:23 [INFO] Text is long (29171 chars) -- split into 2 chunks.
+2026-08-01 19:32:08 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-01 19:32:13 [INFO] Text is long (32159 chars) -- split into 2 chunks.
+2026-08-01 19:32:17 [INFO] Text is long (30865 chars) -- split into 2 chunks.
+2026-08-01 19:34:23 [INFO] Text is long (18644 chars) -- split into 2 chunks.
+2026-08-01 19:35:13 [WARNING] Weak compression: simplified chunk is 518% of original length (target ~40%).
+2026-08-01 19:35:51 [INFO] Text is long (24911 chars) -- split into 2 chunks.
+2026-08-01 19:35:55 [INFO] Text is long (35411 chars) -- split into 3 chunks.
+2026-08-01 19:37:13 [INFO] Text is long (31210 chars) -- split into 2 chunks.
+2026-08-01 19:37:22 [INFO] Text is long (34579 chars) -- split into 3 chunks.
+2026-08-01 19:37:42 [INFO] Text is long (17712 chars) -- split into 2 chunks.
+2026-08-01 19:39:29 [INFO] Text is long (21851 chars) -- split into 2 chunks.
+2026-08-01 19:41:22 [WARNING] Weak compression: simplified chunk is 87% of original length (target ~40%).
+2026-08-01 19:41:22 [INFO] Text is long (24356 chars) -- split into 2 chunks.
+2026-08-01 19:42:21 [WARNING] Weak compression: simplified chunk is 114% of original length (target ~40%).
+2026-08-01 19:43:05 [WARNING] Weak compression: simplified chunk is 97% of original length (target ~40%).
+2026-08-01 19:43:43 [INFO] Text is long (19041 chars) -- split into 2 chunks.
+2026-08-01 19:44:33 [WARNING] Weak compression: simplified chunk is 79% of original length (target ~40%).
+2026-08-01 19:45:06 [INFO] Text is long (17832 chars) -- split into 2 chunks.
+2026-08-01 19:46:21 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-01 19:46:21 [INFO] Text is long (22731 chars) -- split into 2 chunks.
+2026-08-01 19:47:09 [WARNING] Weak compression: simplified chunk is 70% of original length (target ~40%).
+2026-08-01 19:47:11 [INFO] Text is long (39846 chars) -- split into 3 chunks.
+2026-08-01 19:48:17 [WARNING] Weak compression: simplified chunk is 73% of original length (target ~40%).
+2026-08-01 19:48:21 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-01 19:48:46 [WARNING] Weak compression: simplified chunk is 71% of original length (target ~40%).
+2026-08-01 19:48:46 [INFO] Text is long (35186 chars) -- split into 3 chunks.
+2026-08-01 19:49:32 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-01 19:50:08 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-01 19:51:00 [WARNING] Weak compression: simplified chunk is 73% of original length (target ~40%).
+2026-08-01 19:51:09 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-01 19:51:20 [INFO] Text is long (21922 chars) -- split into 2 chunks.
+2026-08-01 19:52:06 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-01 19:52:49 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-01 19:53:00 [INFO] Text is long (18039 chars) -- split into 2 chunks.
+2026-08-01 19:54:27 [WARNING] Weak compression: simplified chunk is 70% of original length (target ~40%).
+2026-08-01 19:54:37 [INFO] Text is long (31432 chars) -- split into 2 chunks.
+2026-08-01 19:54:46 [INFO] Text is long (28970 chars) -- split into 2 chunks.
+2026-08-01 19:57:35 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-01 19:58:07 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-01 19:58:07 [INFO] Text is long (18670 chars) -- split into 2 chunks.
+2026-08-01 19:59:32 [WARNING] Weak compression: simplified chunk is 90% of original length (target ~40%).
+2026-08-01 19:59:32 [INFO] Text is long (20023 chars) -- split into 2 chunks.
+2026-08-01 20:01:40 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-01 20:02:14 [INFO] Text is long (21532 chars) -- split into 2 chunks.
+2026-08-01 20:02:37 [INFO] Text is long (23509 chars) -- split into 2 chunks.
+2026-08-01 20:03:04 [WARNING] Weak compression: simplified chunk is 88% of original length (target ~40%).
+2026-08-01 20:04:35 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-01 20:05:12 [INFO] Text is long (32588 chars) -- split into 2 chunks.
+2026-08-01 20:07:38 [INFO] Text is long (29142 chars) -- split into 2 chunks.
+2026-08-01 20:08:08 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-01 20:09:54 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-01 20:10:24 [INFO] Text is long (19954 chars) -- split into 2 chunks.
+2026-08-01 20:10:45 [INFO] Text is long (18114 chars) -- split into 2 chunks.
+2026-08-01 20:10:51 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-01 20:10:51 [INFO] Text is long (24160 chars) -- split into 2 chunks.
+2026-08-01 20:11:10 [INFO] Text is long (21277 chars) -- split into 2 chunks.
+2026-08-01 20:11:42 [WARNING] Weak compression: simplified chunk is 78% of original length (target ~40%).
+2026-08-01 20:11:43 [INFO] Text is long (17479 chars) -- split into 2 chunks.
+2026-08-01 20:14:05 [INFO] Text is long (29446 chars) -- split into 2 chunks.
+2026-08-01 20:16:58 [INFO] Text is long (28592 chars) -- split into 2 chunks.
+2026-08-01 20:17:49 [INFO] Text is long (21417 chars) -- split into 2 chunks.
+2026-08-01 20:18:53 [INFO] Text is long (31605 chars) -- split into 2 chunks.
+2026-08-01 20:20:19 [INFO] Text is long (27967 chars) -- split into 2 chunks.
+2026-08-01 20:22:09 [INFO] Text is long (28632 chars) -- split into 2 chunks.
+2026-08-01 20:22:35 [INFO] Text is long (17139 chars) -- split into 2 chunks.
+2026-08-02 10:40:28 [INFO] Checking whether Ollama is running...
+2026-08-02 10:40:30 [INFO] Ollama is running.
+2026-08-02 10:40:32 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-02 10:40:32 [INFO] Found existing output file 'output.csv'. Resuming from it.
+2026-08-02 10:40:33 [INFO] Total rows: 1458 | Already simplified: 1242 | Remaining: 216 | Workers: 4
+2026-08-02 10:40:33 [INFO] Text is long (28632 chars) -- split into 2 chunks.
+2026-08-02 10:40:33 [INFO] Text is long (17139 chars) -- split into 2 chunks.
+2026-08-02 10:41:44 [INFO] Text is long (25396 chars) -- split into 2 chunks.
+2026-08-02 10:41:46 [WARNING] Weak compression: simplified chunk is 89% of original length (target ~40%).
+2026-08-02 10:41:46 [INFO] Text is long (26251 chars) -- split into 2 chunks.
+2026-08-02 10:42:00 [INFO] Text is long (22465 chars) -- split into 2 chunks.
+2026-08-02 10:42:06 [INFO] Text is long (33682 chars) -- split into 3 chunks.
+2026-08-02 10:43:19 [INFO] Text is long (19077 chars) -- split into 2 chunks.
+2026-08-02 10:43:43 [INFO] Text is long (36322 chars) -- split into 3 chunks.
+2026-08-02 10:44:24 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 10:44:24 [INFO] Text is long (24085 chars) -- split into 2 chunks.
+2026-08-02 10:44:26 [WARNING] Weak compression: simplified chunk is 103% of original length (target ~40%).
+2026-08-02 10:44:32 [INFO] Text is long (19146 chars) -- split into 2 chunks.
+2026-08-02 10:46:25 [INFO] Checking whether Ollama is running...
+2026-08-02 10:46:27 [INFO] Ollama is running.
+2026-08-02 10:46:29 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-02 10:46:29 [INFO] Found existing output file 'output.csv'. Resuming from it.
+2026-08-02 10:46:29 [INFO] Total rows: 1458 | Already simplified: 1257 | Remaining: 201 | Workers: 4
+2026-08-02 10:46:29 [INFO] Text is long (36322 chars) -- split into 3 chunks.
+2026-08-02 10:46:29 [INFO] Text is long (24085 chars) -- split into 2 chunks.
+2026-08-02 10:46:29 [INFO] Text is long (19146 chars) -- split into 2 chunks.
+2026-08-02 10:47:07 [INFO] Text is long (18864 chars) -- split into 2 chunks.
+2026-08-02 10:47:22 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-02 10:47:22 [INFO] Text is long (17221 chars) -- split into 2 chunks.
+2026-08-02 10:47:39 [INFO] Text is long (22313 chars) -- split into 2 chunks.
+2026-08-02 10:47:43 [INFO] Text is long (27996 chars) -- split into 2 chunks.
+2026-08-02 10:48:08 [WARNING] Weak compression: simplified chunk is 82% of original length (target ~40%).
+2026-08-02 10:48:08 [INFO] Text is long (18156 chars) -- split into 2 chunks.
+2026-08-02 10:49:24 [INFO] Text is long (25925 chars) -- split into 2 chunks.
+2026-08-02 10:49:40 [INFO] Text is long (30872 chars) -- split into 2 chunks.
+2026-08-02 10:49:58 [INFO] Text is long (18918 chars) -- split into 2 chunks.
+2026-08-02 10:51:02 [WARNING] Weak compression: simplified chunk is 135% of original length (target ~40%).
+2026-08-02 10:51:02 [INFO] Text is long (19451 chars) -- split into 2 chunks.
+2026-08-02 10:51:05 [INFO] Text is long (27830 chars) -- split into 2 chunks.
+2026-08-02 10:51:46 [INFO] Text is long (37547 chars) -- split into 3 chunks.
+2026-08-02 10:51:59 [INFO] Text is long (28652 chars) -- split into 2 chunks.
+2026-08-02 10:52:10 [WARNING] Weak compression: simplified chunk is 81% of original length (target ~40%).
+2026-08-02 10:52:10 [INFO] Text is long (24472 chars) -- split into 2 chunks.
+2026-08-02 10:52:15 [INFO] Text is long (18311 chars) -- split into 2 chunks.
+2026-08-02 10:52:44 [INFO] Text is long (24894 chars) -- split into 2 chunks.
+2026-08-02 10:53:35 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 10:53:35 [INFO] Text is long (22127 chars) -- split into 2 chunks.
+2026-08-02 10:53:41 [WARNING] Weak compression: simplified chunk is 60% of original length (target ~40%).
+2026-08-02 10:53:48 [INFO] Text is long (29686 chars) -- split into 2 chunks.
+2026-08-02 10:54:23 [INFO] Text is long (25786 chars) -- split into 2 chunks.
+2026-08-02 10:54:52 [INFO] Text is long (26491 chars) -- split into 2 chunks.
+2026-08-02 10:54:59 [INFO] Text is long (18359 chars) -- split into 2 chunks.
+2026-08-02 10:55:07 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 10:55:35 [INFO] Text is long (18208 chars) -- split into 2 chunks.
+2026-08-02 10:55:51 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-02 10:56:14 [INFO] Text is long (21681 chars) -- split into 2 chunks.
+2026-08-02 10:56:14 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-02 10:56:14 [INFO] Text is long (20899 chars) -- split into 2 chunks.
+2026-08-02 10:56:52 [INFO] Text is long (26936 chars) -- split into 2 chunks.
+2026-08-02 10:56:53 [INFO] Text is long (27709 chars) -- split into 2 chunks.
+2026-08-02 10:57:07 [INFO] Text is long (30572 chars) -- split into 2 chunks.
+2026-08-02 10:57:43 [INFO] Text is long (28534 chars) -- split into 2 chunks.
+2026-08-02 10:57:49 [INFO] Text is long (28069 chars) -- split into 2 chunks.
+2026-08-02 10:58:55 [WARNING] Weak compression: simplified chunk is 71% of original length (target ~40%).
+2026-08-02 10:58:55 [INFO] Text is long (29310 chars) -- split into 2 chunks.
+2026-08-02 10:59:49 [INFO] Text is long (20865 chars) -- split into 2 chunks.
+2026-08-02 11:00:02 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 11:00:15 [INFO] Text is long (18953 chars) -- split into 2 chunks.
+2026-08-02 11:00:29 [INFO] Text is long (21951 chars) -- split into 2 chunks.
+2026-08-02 11:00:48 [INFO] Text is long (23958 chars) -- split into 2 chunks.
+2026-08-02 11:01:06 [INFO] Text is long (24526 chars) -- split into 2 chunks.
+2026-08-02 11:01:45 [INFO] Text is long (32265 chars) -- split into 2 chunks.
+2026-08-02 11:01:53 [INFO] Text is long (32554 chars) -- split into 2 chunks.
+2026-08-02 11:02:25 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 11:02:26 [INFO] Text is long (22751 chars) -- split into 2 chunks.
+2026-08-02 11:03:05 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-02 11:03:17 [INFO] Text is long (24585 chars) -- split into 2 chunks.
+2026-08-02 11:03:51 [INFO] Text is long (21855 chars) -- split into 2 chunks.
+2026-08-02 11:04:14 [WARNING] Weak compression: simplified chunk is 91% of original length (target ~40%).
+2026-08-02 11:04:14 [INFO] Text is long (17418 chars) -- split into 2 chunks.
+2026-08-02 11:04:50 [WARNING] Weak compression: simplified chunk is 70% of original length (target ~40%).
+2026-08-02 11:04:50 [INFO] Text is long (20733 chars) -- split into 2 chunks.
+2026-08-02 11:05:18 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-02 11:05:38 [INFO] Text is long (18339 chars) -- split into 2 chunks.
+2026-08-02 11:05:51 [INFO] Text is long (23114 chars) -- split into 2 chunks.
+2026-08-02 11:06:39 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-02 11:06:39 [INFO] Text is long (17277 chars) -- split into 2 chunks.
+2026-08-02 11:07:02 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-02 11:07:02 [INFO] Text is long (24804 chars) -- split into 2 chunks.
+2026-08-02 11:07:15 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 11:07:20 [INFO] Text is long (29641 chars) -- split into 2 chunks.
+2026-08-02 11:07:38 [INFO] Text is long (23406 chars) -- split into 2 chunks.
+2026-08-02 11:07:54 [INFO] Text is long (19988 chars) -- split into 2 chunks.
+2026-08-02 11:08:30 [INFO] Text is long (22199 chars) -- split into 2 chunks.
+2026-08-02 11:08:47 [INFO] Text is long (24382 chars) -- split into 2 chunks.
+2026-08-02 11:08:50 [INFO] Text is long (27373 chars) -- split into 2 chunks.
+2026-08-02 11:09:28 [INFO] Text is long (21302 chars) -- split into 2 chunks.
+2026-08-02 11:09:43 [INFO] Text is long (23684 chars) -- split into 2 chunks.
+2026-08-02 11:10:22 [INFO] Text is long (27846 chars) -- split into 2 chunks.
+2026-08-02 11:10:50 [INFO] Text is long (22560 chars) -- split into 2 chunks.
+2026-08-02 11:11:15 [INFO] Text is long (25014 chars) -- split into 2 chunks.
+2026-08-02 11:11:34 [INFO] Text is long (30265 chars) -- split into 2 chunks.
+2026-08-02 11:11:40 [WARNING] Weak compression: simplified chunk is 94% of original length (target ~40%).
+2026-08-02 11:11:40 [INFO] Text is long (18999 chars) -- split into 2 chunks.
+2026-08-02 11:13:22 [INFO] Text is long (19120 chars) -- split into 2 chunks.
+2026-08-02 11:13:32 [INFO] Text is long (23544 chars) -- split into 2 chunks.
+2026-08-02 11:13:36 [WARNING] Weak compression: simplified chunk is 205% of original length (target ~40%).
+2026-08-02 11:14:15 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 11:14:15 [INFO] Text is long (20841 chars) -- split into 2 chunks.
+2026-08-02 11:15:03 [INFO] Text is long (22361 chars) -- split into 2 chunks.
+2026-08-02 11:15:34 [INFO] Text is long (28836 chars) -- split into 2 chunks.
+2026-08-02 11:16:41 [INFO] Text is long (17705 chars) -- split into 2 chunks.
+2026-08-02 11:16:46 [INFO] Text is long (19569 chars) -- split into 2 chunks.
+2026-08-02 11:17:28 [INFO] Text is long (26419 chars) -- split into 2 chunks.
+2026-08-02 11:17:31 [INFO] Text is long (28694 chars) -- split into 2 chunks.
+2026-08-02 11:17:40 [INFO] Text is long (24751 chars) -- split into 2 chunks.
+2026-08-02 11:19:13 [INFO] Text is long (25454 chars) -- split into 2 chunks.
+2026-08-02 11:19:16 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-02 11:19:20 [WARNING] Weak compression: simplified chunk is 456% of original length (target ~40%).
+2026-08-02 11:19:20 [INFO] Text is long (17336 chars) -- split into 2 chunks.
+2026-08-02 11:20:03 [INFO] Text is long (23529 chars) -- split into 2 chunks.
+2026-08-02 11:20:13 [INFO] Text is long (21488 chars) -- split into 2 chunks.
+2026-08-02 11:20:47 [INFO] Text is long (27385 chars) -- split into 2 chunks.
+2026-08-02 11:20:56 [INFO] Text is long (33930 chars) -- split into 3 chunks.
+2026-08-02 11:21:33 [INFO] Text is long (21400 chars) -- split into 2 chunks.
+2026-08-02 11:22:20 [INFO] Text is long (17165 chars) -- split into 2 chunks.
+2026-08-02 11:22:35 [INFO] Text is long (22259 chars) -- split into 2 chunks.
+2026-08-02 11:23:01 [INFO] Text is long (29134 chars) -- split into 2 chunks.
+2026-08-02 11:23:09 [INFO] Text is long (17870 chars) -- split into 2 chunks.
+2026-08-02 11:23:15 [INFO] Text is long (23023 chars) -- split into 2 chunks.
+2026-08-02 11:23:57 [WARNING] Weak compression: simplified chunk is 85% of original length (target ~40%).
+2026-08-02 11:24:04 [INFO] Text is long (18252 chars) -- split into 2 chunks.
+2026-08-02 11:24:14 [INFO] Text is long (18392 chars) -- split into 2 chunks.
+2026-08-02 11:24:25 [WARNING] Weak compression: simplified chunk is 78% of original length (target ~40%).
+2026-08-02 11:24:30 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-02 11:24:30 [INFO] Text is long (21056 chars) -- split into 2 chunks.
+2026-08-02 11:24:52 [INFO] Text is long (23022 chars) -- split into 2 chunks.
+2026-08-02 11:24:57 [WARNING] Weak compression: simplified chunk is 80% of original length (target ~40%).
+2026-08-02 11:25:05 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-02 11:25:05 [INFO] Text is long (19968 chars) -- split into 2 chunks.
+2026-08-02 11:26:47 [WARNING] Weak compression: simplified chunk is 81% of original length (target ~40%).
+2026-08-02 11:26:47 [INFO] Text is long (23892 chars) -- split into 2 chunks.
+2026-08-02 11:26:54 [INFO] Text is long (26980 chars) -- split into 2 chunks.
+2026-08-02 11:27:07 [WARNING] Weak compression: simplified chunk is 66% of original length (target ~40%).
+2026-08-02 11:27:13 [INFO] Text is long (17851 chars) -- split into 2 chunks.
+2026-08-02 11:27:43 [INFO] Text is long (24359 chars) -- split into 2 chunks.
+2026-08-02 11:28:24 [WARNING] Weak compression: simplified chunk is 128% of original length (target ~40%).
+2026-08-02 11:28:25 [INFO] Finished this run. Success: 201 | Failed: 0 | Total elapsed: 41m55s
+2026-08-02 11:28:25 [INFO] Done. Output written to 'output.csv'.
+2026-08-02 11:43:25 [INFO] Checking whether Ollama is running...
+2026-08-02 11:43:27 [INFO] Ollama is running.
+2026-08-02 11:43:29 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-02 11:43:29 [INFO] Found existing output file 'output.csv'. Resuming from it.
+2026-08-02 11:43:29 [INFO] Total rows: 1458 | Already simplified: 1458 | Remaining: 0 | Workers: 4
+2026-08-02 11:43:29 [INFO] Nothing to do. All rows are already simplified.
+2026-08-02 11:43:29 [INFO] Done. Output written to 'output.csv'.
+2026-08-02 11:47:18 [INFO] Checking whether Ollama is running...
+2026-08-02 11:47:20 [INFO] Ollama is running.
+2026-08-02 11:47:22 [INFO] Model 'qwen2.5:3b-instruct' is available.
+2026-08-02 11:47:22 [INFO] Loading input file 'lexuz_acts_text_part2_filtered.csv'.
+2026-08-02 11:47:22 [INFO] Total rows: 1595 | Already simplified: 0 | Remaining: 1595 | Workers: 4
+2026-08-02 11:47:22 [INFO] Text is long (33108 chars) -- split into 2 chunks.
+2026-08-02 11:47:22 [INFO] Text is long (26597 chars) -- split into 2 chunks.
+2026-08-02 11:47:22 [INFO] Text is long (25436 chars) -- split into 2 chunks.
+2026-08-02 11:49:11 [INFO] Text is long (18921 chars) -- split into 2 chunks.
+2026-08-02 11:49:30 [INFO] Text is long (26135 chars) -- split into 2 chunks.
+2026-08-02 11:49:32 [INFO] Text is long (28541 chars) -- split into 2 chunks.
+2026-08-02 11:49:55 [INFO] Text is long (27231 chars) -- split into 2 chunks.
+2026-08-02 11:50:23 [INFO] Text is long (24854 chars) -- split into 2 chunks.
+2026-08-02 11:50:25 [INFO] Text is long (26720 chars) -- split into 2 chunks.
+2026-08-02 11:51:25 [INFO] Text is long (24836 chars) -- split into 2 chunks.
+2026-08-02 11:51:31 [WARNING] Weak compression: simplified chunk is 96% of original length (target ~40%).
+2026-08-02 11:51:51 [INFO] Text is long (24167 chars) -- split into 2 chunks.
+2026-08-02 11:52:11 [WARNING] Weak compression: simplified chunk is 95% of original length (target ~40%).
+2026-08-02 11:52:29 [INFO] Text is long (26699 chars) -- split into 2 chunks.
+2026-08-02 11:52:42 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-02 11:52:42 [INFO] Text is long (26453 chars) -- split into 2 chunks.
+2026-08-02 11:52:54 [INFO] Text is long (28840 chars) -- split into 2 chunks.
+2026-08-02 11:53:20 [INFO] Text is long (23061 chars) -- split into 2 chunks.
+2026-08-02 11:53:38 [INFO] Text is long (23440 chars) -- split into 2 chunks.
+2026-08-02 11:54:40 [INFO] Text is long (21975 chars) -- split into 2 chunks.
+2026-08-02 11:54:48 [INFO] Text is long (19403 chars) -- split into 2 chunks.
+2026-08-02 11:55:13 [WARNING] Weak compression: simplified chunk is 82% of original length (target ~40%).
+2026-08-02 11:55:13 [INFO] Text is long (17235 chars) -- split into 2 chunks.
+2026-08-02 11:55:30 [WARNING] Weak compression: simplified chunk is 82% of original length (target ~40%).
+2026-08-02 11:55:30 [INFO] Text is long (18164 chars) -- split into 2 chunks.
+2026-08-02 11:55:33 [INFO] Text is long (19139 chars) -- split into 2 chunks.
+2026-08-02 11:56:15 [WARNING] Weak compression: simplified chunk is 70% of original length (target ~40%).
+2026-08-02 11:56:15 [INFO] Text is long (16878 chars) -- split into 2 chunks.
+2026-08-02 11:56:30 [INFO] Text is long (26837 chars) -- split into 2 chunks.
+2026-08-02 11:56:41 [INFO] Text is long (26389 chars) -- split into 2 chunks.
+2026-08-02 11:57:15 [WARNING] Weak compression: simplified chunk is 73% of original length (target ~40%).
+2026-08-02 11:57:24 [INFO] Text is long (18243 chars) -- split into 2 chunks.
+2026-08-02 11:57:47 [INFO] Text is long (24454 chars) -- split into 2 chunks.
+2026-08-02 11:57:55 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-02 11:57:55 [INFO] Text is long (31722 chars) -- split into 2 chunks.
+2026-08-02 11:58:27 [INFO] Text is long (17649 chars) -- split into 2 chunks.
+2026-08-02 11:58:38 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-02 11:58:44 [WARNING] Weak compression: simplified chunk is 66% of original length (target ~40%).
+2026-08-02 11:58:52 [INFO] Text is long (24254 chars) -- split into 2 chunks.
+2026-08-02 11:58:55 [WARNING] Weak compression: simplified chunk is 72% of original length (target ~40%).
+2026-08-02 11:59:17 [INFO] Text is long (28135 chars) -- split into 2 chunks.
+2026-08-02 11:59:23 [INFO] Text is long (31928 chars) -- split into 2 chunks.
+2026-08-02 11:59:46 [INFO] Text is long (31486 chars) -- split into 2 chunks.
+2026-08-02 12:00:17 [INFO] Text is long (23267 chars) -- split into 2 chunks.
+2026-08-02 12:00:21 [INFO] Text is long (23950 chars) -- split into 2 chunks.
+2026-08-02 12:02:02 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-02 12:02:09 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-02 12:02:10 [INFO] Text is long (20851 chars) -- split into 2 chunks.
+2026-08-02 12:02:26 [INFO] Text is long (24597 chars) -- split into 2 chunks.
+2026-08-02 12:02:36 [WARNING] Weak compression: simplified chunk is 154% of original length (target ~40%).
+2026-08-02 12:02:50 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 12:02:50 [INFO] Text is long (17217 chars) -- split into 2 chunks.
+2026-08-02 12:02:53 [INFO] Text is long (32965 chars) -- split into 2 chunks.
+2026-08-02 12:02:54 [INFO] Text is long (25807 chars) -- split into 2 chunks.
+2026-08-02 12:03:08 [INFO] Text is long (28581 chars) -- split into 2 chunks.
+2026-08-02 12:03:25 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 12:03:41 [INFO] Text is long (29835 chars) -- split into 2 chunks.
+2026-08-02 12:03:50 [INFO] Text is long (31045 chars) -- split into 2 chunks.
+2026-08-02 12:04:38 [INFO] Text is long (17379 chars) -- split into 2 chunks.
+2026-08-02 12:06:22 [INFO] Text is long (28362 chars) -- split into 2 chunks.
+2026-08-02 12:06:37 [INFO] Text is long (17845 chars) -- split into 2 chunks.
+2026-08-02 12:07:37 [INFO] Text is long (19990 chars) -- split into 2 chunks.
+2026-08-02 12:08:48 [INFO] Text is long (20409 chars) -- split into 2 chunks.
+2026-08-02 12:08:55 [WARNING] Weak compression: simplified chunk is 81% of original length (target ~40%).
+2026-08-02 12:09:08 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-02 12:09:08 [INFO] Text is long (19461 chars) -- split into 2 chunks.
+2026-08-02 12:09:38 [INFO] Text is long (21131 chars) -- split into 2 chunks.
+2026-08-02 12:09:50 [WARNING] Weak compression: simplified chunk is 88% of original length (target ~40%).
+2026-08-02 12:09:55 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 12:10:03 [INFO] Text is long (29972 chars) -- split into 2 chunks.
+2026-08-02 12:10:36 [INFO] Text is long (21784 chars) -- split into 2 chunks.
+2026-08-02 12:10:42 [INFO] Text is long (19274 chars) -- split into 2 chunks.
+2026-08-02 12:11:13 [INFO] Text is long (24998 chars) -- split into 2 chunks.
+2026-08-02 12:11:34 [INFO] Text is long (18807 chars) -- split into 2 chunks.
+2026-08-02 12:11:44 [INFO] Text is long (21104 chars) -- split into 2 chunks.
+2026-08-02 12:12:21 [INFO] Text is long (29210 chars) -- split into 2 chunks.
+2026-08-02 12:12:23 [INFO] Text is long (28155 chars) -- split into 2 chunks.
+2026-08-02 12:12:33 [INFO] Text is long (28577 chars) -- split into 2 chunks.
+2026-08-02 12:12:38 [INFO] Text is long (18944 chars) -- split into 2 chunks.
+2026-08-02 12:13:34 [INFO] Text is long (18267 chars) -- split into 2 chunks.
+2026-08-02 12:13:40 [WARNING] Weak compression: simplified chunk is 95% of original length (target ~40%).
+2026-08-02 12:13:40 [INFO] Text is long (27320 chars) -- split into 2 chunks.
+2026-08-02 12:13:53 [INFO] Text is long (25208 chars) -- split into 2 chunks.
+2026-08-02 12:14:30 [INFO] Text is long (21330 chars) -- split into 2 chunks.
+2026-08-02 12:14:46 [INFO] Text is long (29109 chars) -- split into 2 chunks.
+2026-08-02 12:14:50 [INFO] Text is long (24138 chars) -- split into 2 chunks.
+2026-08-02 12:15:32 [INFO] Text is long (31212 chars) -- split into 2 chunks.
+2026-08-02 12:15:38 [INFO] Text is long (19035 chars) -- split into 2 chunks.
+2026-08-02 12:16:04 [INFO] Text is long (29899 chars) -- split into 2 chunks.
+2026-08-02 12:17:06 [INFO] Text is long (16934 chars) -- split into 2 chunks.
+2026-08-02 12:17:18 [WARNING] Weak compression: simplified chunk is 79% of original length (target ~40%).
+2026-08-02 12:17:18 [INFO] Text is long (22290 chars) -- split into 2 chunks.
+2026-08-02 12:17:47 [WARNING] Weak compression: simplified chunk is 90% of original length (target ~40%).
+2026-08-02 12:18:04 [INFO] Text is long (20267 chars) -- split into 2 chunks.
+2026-08-02 12:18:47 [INFO] Text is long (17542 chars) -- split into 2 chunks.
+2026-08-02 12:19:00 [INFO] Text is long (22871 chars) -- split into 2 chunks.
+2026-08-02 12:19:07 [WARNING] Weak compression: simplified chunk is 129% of original length (target ~40%).
+2026-08-02 12:19:07 [INFO] Text is long (23035 chars) -- split into 2 chunks.
+2026-08-02 12:19:40 [INFO] Text is long (27814 chars) -- split into 2 chunks.
+2026-08-02 12:19:47 [INFO] Text is long (23458 chars) -- split into 2 chunks.
+2026-08-02 12:20:13 [INFO] Text is long (17889 chars) -- split into 2 chunks.
+2026-08-02 12:20:17 [INFO] Text is long (18029 chars) -- split into 2 chunks.
+2026-08-02 12:20:35 [INFO] Text is long (17218 chars) -- split into 2 chunks.
+2026-08-02 12:21:15 [INFO] Text is long (20611 chars) -- split into 2 chunks.
+2026-08-02 12:21:54 [WARNING] Weak compression: simplified chunk is 70% of original length (target ~40%).
+2026-08-02 12:22:12 [WARNING] Weak compression: simplified chunk is 118% of original length (target ~40%).
+2026-08-02 12:22:22 [INFO] Text is long (28283 chars) -- split into 2 chunks.
+2026-08-02 12:22:53 [INFO] Text is long (23142 chars) -- split into 2 chunks.
+2026-08-02 12:24:10 [INFO] Text is long (24204 chars) -- split into 2 chunks.
+2026-08-02 12:24:20 [WARNING] Weak compression: simplified chunk is 66% of original length (target ~40%).
+2026-08-02 12:24:20 [INFO] Text is long (29946 chars) -- split into 2 chunks.
+2026-08-02 12:24:45 [INFO] Text is long (24322 chars) -- split into 2 chunks.
+2026-08-02 12:25:16 [INFO] Text is long (21858 chars) -- split into 2 chunks.
+2026-08-02 12:25:56 [INFO] Text is long (30156 chars) -- split into 2 chunks.
+2026-08-02 12:25:57 [WARNING] Weak compression: simplified chunk is 115% of original length (target ~40%).
+2026-08-02 12:26:05 [INFO] Text is long (24209 chars) -- split into 2 chunks.
+2026-08-02 12:26:43 [INFO] Text is long (21019 chars) -- split into 2 chunks.
+2026-08-02 12:26:59 [INFO] Text is long (19763 chars) -- split into 2 chunks.
+2026-08-02 12:28:22 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 12:28:28 [INFO] Text is long (17612 chars) -- split into 2 chunks.
+2026-08-02 12:28:45 [INFO] Text is long (17198 chars) -- split into 2 chunks.
+2026-08-02 12:28:52 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 12:29:54 [WARNING] Weak compression: simplified chunk is 90% of original length (target ~40%).
+2026-08-02 12:30:01 [INFO] Text is long (16804 chars) -- split into 2 chunks.
+2026-08-02 12:30:13 [WARNING] Weak compression: simplified chunk is 79% of original length (target ~40%).
+2026-08-02 12:30:24 [INFO] Text is long (25170 chars) -- split into 2 chunks.
+2026-08-02 12:30:30 [INFO] Text is long (21087 chars) -- split into 2 chunks.
+2026-08-02 12:31:09 [INFO] Text is long (26679 chars) -- split into 2 chunks.
+2026-08-02 12:31:45 [INFO] Text is long (25393 chars) -- split into 2 chunks.
+2026-08-02 12:32:30 [INFO] Text is long (28838 chars) -- split into 2 chunks.
+2026-08-02 12:33:10 [INFO] Text is long (28967 chars) -- split into 2 chunks.
+2026-08-02 12:33:17 [INFO] Text is long (20145 chars) -- split into 2 chunks.
+2026-08-02 12:34:16 [INFO] Text is long (29766 chars) -- split into 2 chunks.
+2026-08-02 12:34:48 [INFO] Text is long (28517 chars) -- split into 2 chunks.
+2026-08-02 12:34:50 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 12:35:07 [INFO] Text is long (26138 chars) -- split into 2 chunks.
+2026-08-02 12:35:35 [INFO] Text is long (23345 chars) -- split into 2 chunks.
+2026-08-02 12:36:10 [INFO] Text is long (21243 chars) -- split into 2 chunks.
+2026-08-02 12:37:05 [INFO] Text is long (24158 chars) -- split into 2 chunks.
+2026-08-02 12:37:24 [INFO] Text is long (17071 chars) -- split into 2 chunks.
+2026-08-02 12:37:35 [INFO] Text is long (27432 chars) -- split into 2 chunks.
+2026-08-02 12:37:41 [INFO] Text is long (20902 chars) -- split into 2 chunks.
+2026-08-02 12:37:59 [WARNING] Weak compression: simplified chunk is 89% of original length (target ~40%).
+2026-08-02 12:38:02 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 12:38:10 [INFO] Text is long (21216 chars) -- split into 2 chunks.
+2026-08-02 12:38:59 [INFO] Text is long (24537 chars) -- split into 2 chunks.
+2026-08-02 12:39:22 [INFO] Text is long (30415 chars) -- split into 2 chunks.
+2026-08-02 12:40:00 [INFO] Text is long (26678 chars) -- split into 2 chunks.
+2026-08-02 12:40:59 [INFO] Text is long (22885 chars) -- split into 2 chunks.
+2026-08-02 12:41:09 [WARNING] Weak compression: simplified chunk is 289% of original length (target ~40%).
+2026-08-02 12:41:09 [INFO] Text is long (31881 chars) -- split into 2 chunks.
+2026-08-02 12:41:40 [INFO] Text is long (20287 chars) -- split into 2 chunks.
+2026-08-02 12:42:44 [INFO] Text is long (26622 chars) -- split into 2 chunks.
+2026-08-02 12:43:14 [INFO] Text is long (25653 chars) -- split into 2 chunks.
+2026-08-02 12:43:44 [WARNING] Weak compression: simplified chunk is 161% of original length (target ~40%).
+2026-08-02 12:43:51 [INFO] Text is long (26970 chars) -- split into 2 chunks.
+2026-08-02 12:43:57 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-02 12:44:02 [INFO] Text is long (21047 chars) -- split into 2 chunks.
+2026-08-02 12:44:38 [INFO] Text is long (20790 chars) -- split into 2 chunks.
+2026-08-02 12:44:43 [INFO] Text is long (21228 chars) -- split into 2 chunks.
+2026-08-02 12:45:10 [INFO] Text is long (16911 chars) -- split into 2 chunks.
+2026-08-02 12:45:26 [INFO] Text is long (32584 chars) -- split into 2 chunks.
+2026-08-02 12:45:30 [INFO] Text is long (17233 chars) -- split into 2 chunks.
+2026-08-02 12:45:43 [INFO] Text is long (29233 chars) -- split into 2 chunks.
+2026-08-02 12:45:55 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-02 12:46:39 [INFO] Text is long (27566 chars) -- split into 2 chunks.
+2026-08-02 12:46:53 [INFO] Text is long (34944 chars) -- split into 3 chunks.
+2026-08-02 12:47:10 [INFO] Text is long (23416 chars) -- split into 2 chunks.
+2026-08-02 12:47:31 [INFO] Text is long (23115 chars) -- split into 2 chunks.
+2026-08-02 12:48:04 [INFO] Text is long (27096 chars) -- split into 2 chunks.
+2026-08-02 12:48:32 [INFO] Text is long (27708 chars) -- split into 2 chunks.
+2026-08-02 12:48:53 [INFO] Text is long (23464 chars) -- split into 2 chunks.
+2026-08-02 12:49:56 [INFO] Text is long (21358 chars) -- split into 2 chunks.
+2026-08-02 12:50:09 [INFO] Text is long (20197 chars) -- split into 2 chunks.
+2026-08-02 12:50:28 [INFO] Text is long (17244 chars) -- split into 2 chunks.
+2026-08-02 12:50:54 [INFO] Text is long (30048 chars) -- split into 2 chunks.
+2026-08-02 12:51:09 [INFO] Text is long (26987 chars) -- split into 2 chunks.
+2026-08-02 12:51:12 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-02 12:51:45 [INFO] Text is long (26813 chars) -- split into 2 chunks.
+2026-08-02 12:51:56 [WARNING] Weak compression: simplified chunk is 78% of original length (target ~40%).
+2026-08-02 12:51:56 [INFO] Text is long (17949 chars) -- split into 2 chunks.
+2026-08-02 12:52:07 [INFO] Text is long (24071 chars) -- split into 2 chunks.
+2026-08-02 12:52:31 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 12:52:37 [INFO] Text is long (20365 chars) -- split into 2 chunks.
+2026-08-02 12:52:48 [INFO] Text is long (22256 chars) -- split into 2 chunks.
+2026-08-02 12:53:11 [INFO] Text is long (18496 chars) -- split into 2 chunks.
+2026-08-02 12:53:49 [INFO] Text is long (20952 chars) -- split into 2 chunks.
+2026-08-02 12:53:53 [INFO] Text is long (20554 chars) -- split into 2 chunks.
+2026-08-02 12:54:25 [INFO] Text is long (20543 chars) -- split into 2 chunks.
+2026-08-02 12:54:59 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 12:55:30 [INFO] Text is long (17803 chars) -- split into 2 chunks.
+2026-08-02 12:56:13 [INFO] Text is long (22165 chars) -- split into 2 chunks.
+2026-08-02 12:56:29 [INFO] Text is long (17970 chars) -- split into 2 chunks.
+2026-08-02 12:57:13 [INFO] Text is long (20329 chars) -- split into 2 chunks.
+2026-08-02 12:57:34 [WARNING] Weak compression: simplified chunk is 71% of original length (target ~40%).
+2026-08-02 12:57:58 [INFO] Text is long (18854 chars) -- split into 2 chunks.
+2026-08-02 12:58:11 [WARNING] Weak compression: simplified chunk is 80% of original length (target ~40%).
+2026-08-02 12:58:58 [WARNING] Weak compression: simplified chunk is 115% of original length (target ~40%).
+2026-08-02 12:59:21 [INFO] Text is long (20586 chars) -- split into 2 chunks.
+2026-08-02 13:00:08 [INFO] Text is long (17899 chars) -- split into 2 chunks.
+2026-08-02 13:01:25 [INFO] Text is long (30503 chars) -- split into 2 chunks.
+2026-08-02 13:01:30 [INFO] Text is long (25640 chars) -- split into 2 chunks.
+2026-08-02 13:01:54 [INFO] Text is long (28268 chars) -- split into 2 chunks.
+2026-08-02 13:02:25 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 13:02:28 [INFO] Text is long (28002 chars) -- split into 2 chunks.
+2026-08-02 13:04:16 [INFO] Text is long (24474 chars) -- split into 2 chunks.
+2026-08-02 13:05:27 [INFO] Text is long (21830 chars) -- split into 2 chunks.
+2026-08-02 13:05:30 [INFO] Text is long (19024 chars) -- split into 2 chunks.
+2026-08-02 13:05:33 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-02 13:05:33 [INFO] Text is long (22980 chars) -- split into 2 chunks.
+2026-08-02 13:05:58 [INFO] Text is long (26892 chars) -- split into 2 chunks.
+2026-08-02 13:06:24 [INFO] Text is long (30723 chars) -- split into 2 chunks.
+2026-08-02 13:06:34 [INFO] Text is long (27111 chars) -- split into 2 chunks.
+2026-08-02 13:06:56 [WARNING] Weak compression: simplified chunk is 80% of original length (target ~40%).
+2026-08-02 13:06:56 [INFO] Text is long (19475 chars) -- split into 2 chunks.
+2026-08-02 13:08:27 [INFO] Text is long (19442 chars) -- split into 2 chunks.
+2026-08-02 13:08:29 [INFO] Text is long (28629 chars) -- split into 2 chunks.
+2026-08-02 13:09:04 [WARNING] Weak compression: simplified chunk is 85% of original length (target ~40%).
+2026-08-02 13:09:39 [INFO] Text is long (23853 chars) -- split into 2 chunks.
+2026-08-02 13:10:05 [INFO] Text is long (18162 chars) -- split into 2 chunks.
+2026-08-02 13:11:22 [INFO] Text is long (25059 chars) -- split into 2 chunks.
+2026-08-02 13:11:34 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-02 13:11:34 [INFO] Text is long (23474 chars) -- split into 2 chunks.
+2026-08-02 13:11:34 [INFO] Text is long (28256 chars) -- split into 2 chunks.
+2026-08-02 13:12:01 [INFO] Text is long (19511 chars) -- split into 2 chunks.
+2026-08-02 13:13:03 [INFO] Text is long (23416 chars) -- split into 2 chunks.
+2026-08-02 13:13:17 [INFO] Text is long (19970 chars) -- split into 2 chunks.
+2026-08-02 13:13:24 [INFO] Text is long (26567 chars) -- split into 2 chunks.
+2026-08-02 13:13:55 [INFO] Text is long (18486 chars) -- split into 2 chunks.
+2026-08-02 13:13:58 [INFO] Text is long (28869 chars) -- split into 2 chunks.
+2026-08-02 13:14:06 [INFO] Text is long (30754 chars) -- split into 2 chunks.
+2026-08-02 13:14:34 [INFO] Text is long (25365 chars) -- split into 2 chunks.
+2026-08-02 13:16:45 [INFO] Text is long (27172 chars) -- split into 2 chunks.
+2026-08-02 13:16:50 [WARNING] Weak compression: simplified chunk is 246% of original length (target ~40%).
+2026-08-02 13:16:50 [INFO] Text is long (26912 chars) -- split into 2 chunks.
+2026-08-02 13:16:53 [INFO] Text is long (21706 chars) -- split into 2 chunks.
+2026-08-02 13:17:53 [INFO] Text is long (25160 chars) -- split into 2 chunks.
+2026-08-02 13:18:08 [INFO] Text is long (25267 chars) -- split into 2 chunks.
+2026-08-02 13:18:29 [INFO] Text is long (25558 chars) -- split into 2 chunks.
+2026-08-02 13:19:29 [INFO] Text is long (22257 chars) -- split into 2 chunks.
+2026-08-02 13:19:43 [INFO] Text is long (28861 chars) -- split into 2 chunks.
+2026-08-02 13:20:13 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 13:22:31 [INFO] Text is long (29009 chars) -- split into 2 chunks.
+2026-08-02 13:22:36 [INFO] Text is long (18423 chars) -- split into 2 chunks.
+2026-08-02 13:23:00 [INFO] Text is long (17420 chars) -- split into 2 chunks.
+2026-08-02 13:23:07 [INFO] Text is long (17518 chars) -- split into 2 chunks.
+2026-08-02 13:23:35 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 13:23:42 [INFO] Text is long (19717 chars) -- split into 2 chunks.
+2026-08-02 13:24:03 [INFO] Text is long (19847 chars) -- split into 2 chunks.
+2026-08-02 13:24:30 [INFO] Text is long (20089 chars) -- split into 2 chunks.
+2026-08-02 13:24:36 [INFO] Text is long (25991 chars) -- split into 2 chunks.
+2026-08-02 13:24:45 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-02 13:24:54 [INFO] Text is long (27307 chars) -- split into 2 chunks.
+2026-08-02 13:25:17 [INFO] Text is long (30308 chars) -- split into 2 chunks.
+2026-08-02 13:27:21 [INFO] Text is long (23397 chars) -- split into 2 chunks.
+2026-08-02 13:27:55 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-02 13:28:04 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-02 13:28:39 [INFO] Text is long (17445 chars) -- split into 2 chunks.
+2026-08-02 13:29:03 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 13:29:08 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-02 13:29:25 [INFO] Text is long (27559 chars) -- split into 2 chunks.
+2026-08-02 13:29:33 [INFO] Text is long (17026 chars) -- split into 2 chunks.
+2026-08-02 13:29:55 [INFO] Text is long (19659 chars) -- split into 2 chunks.
+2026-08-02 13:30:01 [INFO] Text is long (18021 chars) -- split into 2 chunks.
+2026-08-02 13:30:22 [INFO] Text is long (19391 chars) -- split into 2 chunks.
+2026-08-02 13:30:49 [INFO] Text is long (18131 chars) -- split into 2 chunks.
+2026-08-02 13:31:37 [WARNING] Weak compression: simplified chunk is 97% of original length (target ~40%).
+2026-08-02 13:31:37 [INFO] Text is long (22078 chars) -- split into 2 chunks.
+2026-08-02 13:32:08 [INFO] Text is long (25768 chars) -- split into 2 chunks.
+2026-08-02 13:32:14 [INFO] Text is long (27789 chars) -- split into 2 chunks.
+2026-08-02 13:32:46 [INFO] Text is long (24339 chars) -- split into 2 chunks.
+2026-08-02 13:33:07 [INFO] Text is long (25200 chars) -- split into 2 chunks.
+2026-08-02 13:33:09 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-02 13:33:41 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-02 13:33:47 [INFO] Text is long (28784 chars) -- split into 2 chunks.
+2026-08-02 13:33:52 [INFO] Text is long (27232 chars) -- split into 2 chunks.
+2026-08-02 13:34:54 [WARNING] Weak compression: simplified chunk is 66% of original length (target ~40%).
+2026-08-02 13:34:54 [INFO] Text is long (29105 chars) -- split into 2 chunks.
+2026-08-02 13:35:36 [WARNING] Weak compression: simplified chunk is 130% of original length (target ~40%).
+2026-08-02 13:37:16 [INFO] Text is long (24107 chars) -- split into 2 chunks.
+2026-08-02 13:37:29 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-02 13:39:08 [INFO] Text is long (21350 chars) -- split into 2 chunks.
+2026-08-02 13:39:21 [WARNING] Weak compression: simplified chunk is 92% of original length (target ~40%).
+2026-08-02 13:40:00 [INFO] Text is long (27814 chars) -- split into 2 chunks.
+2026-08-02 13:41:18 [INFO] Text is long (23178 chars) -- split into 2 chunks.
+2026-08-02 13:42:08 [INFO] Text is long (20849 chars) -- split into 2 chunks.
+2026-08-02 13:43:24 [INFO] Text is long (23326 chars) -- split into 2 chunks.
+2026-08-02 13:44:47 [INFO] Text is long (25719 chars) -- split into 2 chunks.
+2026-08-02 13:44:51 [INFO] Text is long (33116 chars) -- split into 2 chunks.
+2026-08-02 13:45:32 [INFO] Text is long (28950 chars) -- split into 2 chunks.
+2026-08-02 13:46:13 [INFO] Text is long (17808 chars) -- split into 2 chunks.
+2026-08-02 13:47:21 [INFO] Text is long (17263 chars) -- split into 2 chunks.
+2026-08-02 13:48:09 [WARNING] Weak compression: simplified chunk is 92% of original length (target ~40%).
+2026-08-02 13:48:15 [INFO] Text is long (33820 chars) -- split into 3 chunks.
+2026-08-02 13:48:50 [WARNING] Weak compression: simplified chunk is 81% of original length (target ~40%).
+2026-08-02 13:49:13 [WARNING] Weak compression: simplified chunk is 102% of original length (target ~40%).
+2026-08-02 13:49:39 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-02 13:49:42 [INFO] Text is long (17683 chars) -- split into 2 chunks.
+2026-08-02 13:49:48 [INFO] Text is long (22531 chars) -- split into 2 chunks.
+2026-08-02 13:50:21 [WARNING] Weak compression: simplified chunk is 73% of original length (target ~40%).
+2026-08-02 13:50:27 [INFO] Text is long (18977 chars) -- split into 2 chunks.
+2026-08-02 13:51:45 [INFO] Text is long (20483 chars) -- split into 2 chunks.
+2026-08-02 13:51:50 [WARNING] Weak compression: simplified chunk is 73% of original length (target ~40%).
+2026-08-02 13:51:55 [INFO] Text is long (22525 chars) -- split into 2 chunks.
+2026-08-02 13:52:03 [INFO] Text is long (21961 chars) -- split into 2 chunks.
+2026-08-02 13:52:35 [INFO] Text is long (20753 chars) -- split into 2 chunks.
+2026-08-02 13:53:01 [WARNING] Weak compression: simplified chunk is 116% of original length (target ~40%).
+2026-08-02 13:54:01 [INFO] Text is long (16896 chars) -- split into 2 chunks.
+2026-08-02 13:54:04 [INFO] Text is long (29063 chars) -- split into 2 chunks.
+2026-08-02 13:54:21 [WARNING] Weak compression: simplified chunk is 121% of original length (target ~40%).
+2026-08-02 13:54:29 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-02 13:54:29 [INFO] Text is long (22092 chars) -- split into 2 chunks.
+2026-08-02 13:54:31 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-02 13:55:17 [WARNING] Weak compression: simplified chunk is 66% of original length (target ~40%).
+2026-08-02 13:55:23 [INFO] Text is long (17987 chars) -- split into 2 chunks.
+2026-08-02 13:55:51 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 13:56:45 [INFO] Text is long (16821 chars) -- split into 2 chunks.
+2026-08-02 13:56:47 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 13:57:19 [WARNING] Weak compression: simplified chunk is 91% of original length (target ~40%).
+2026-08-02 13:57:19 [INFO] Text is long (25305 chars) -- split into 2 chunks.
+2026-08-02 13:57:37 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-02 13:58:18 [INFO] Text is long (17031 chars) -- split into 2 chunks.
+2026-08-02 13:58:30 [INFO] Text is long (29720 chars) -- split into 2 chunks.
+2026-08-02 13:58:54 [INFO] Text is long (30942 chars) -- split into 2 chunks.
+2026-08-02 13:59:00 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-02 13:59:19 [INFO] Text is long (23857 chars) -- split into 2 chunks.
+2026-08-02 14:00:29 [INFO] Text is long (27894 chars) -- split into 2 chunks.
+2026-08-02 14:00:31 [INFO] Text is long (27558 chars) -- split into 2 chunks.
+2026-08-02 14:00:47 [WARNING] Weak compression: simplified chunk is 86% of original length (target ~40%).
+2026-08-02 14:01:03 [INFO] Text is long (23180 chars) -- split into 2 chunks.
+2026-08-02 14:01:54 [INFO] Text is long (37205 chars) -- split into 3 chunks.
+2026-08-02 14:01:58 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-02 14:03:14 [INFO] Text is long (19285 chars) -- split into 2 chunks.
+2026-08-02 14:03:34 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 14:04:35 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-02 14:04:35 [INFO] Text is long (20074 chars) -- split into 2 chunks.
+2026-08-02 14:04:40 [INFO] Text is long (26665 chars) -- split into 2 chunks.
+2026-08-02 14:04:49 [INFO] Text is long (26980 chars) -- split into 2 chunks.
+2026-08-02 14:04:59 [INFO] Text is long (29112 chars) -- split into 2 chunks.
+2026-08-02 14:05:26 [INFO] Text is long (20101 chars) -- split into 2 chunks.
+2026-08-02 14:05:32 [INFO] Text is long (18077 chars) -- split into 2 chunks.
+2026-08-02 14:05:36 [INFO] Text is long (19899 chars) -- split into 2 chunks.
+2026-08-02 14:06:00 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-02 14:06:15 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 14:06:15 [INFO] Text is long (28122 chars) -- split into 2 chunks.
+2026-08-02 14:07:07 [INFO] Text is long (22397 chars) -- split into 2 chunks.
+2026-08-02 14:07:11 [INFO] Text is long (18764 chars) -- split into 2 chunks.
+2026-08-02 14:07:24 [INFO] Text is long (26109 chars) -- split into 2 chunks.
+2026-08-02 14:08:08 [INFO] Text is long (22559 chars) -- split into 2 chunks.
+2026-08-02 14:08:54 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-02 14:08:54 [INFO] Text is long (19078 chars) -- split into 2 chunks.
+2026-08-02 14:08:58 [INFO] Text is long (25308 chars) -- split into 2 chunks.
+2026-08-02 14:09:33 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 14:09:41 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-02 14:10:01 [WARNING] Weak compression: simplified chunk is 223% of original length (target ~40%).
+2026-08-02 14:10:05 [INFO] Text is long (24403 chars) -- split into 2 chunks.
+2026-08-02 14:10:19 [INFO] Text is long (28167 chars) -- split into 2 chunks.
+2026-08-02 14:10:55 [INFO] Text is long (16975 chars) -- split into 2 chunks.
+2026-08-02 14:11:10 [INFO] Text is long (25635 chars) -- split into 2 chunks.
+2026-08-02 14:11:24 [WARNING] Weak compression: simplified chunk is 69% of original length (target ~40%).
+2026-08-02 14:11:50 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-02 14:12:23 [INFO] Text is long (17392 chars) -- split into 2 chunks.
+2026-08-02 14:13:26 [WARNING] Weak compression: simplified chunk is 108% of original length (target ~40%).
+2026-08-02 14:13:29 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-02 14:14:01 [INFO] Text is long (22497 chars) -- split into 2 chunks.
+2026-08-02 14:14:10 [INFO] Text is long (24384 chars) -- split into 2 chunks.
+2026-08-02 14:14:17 [INFO] Text is long (21259 chars) -- split into 2 chunks.
+2026-08-02 14:14:40 [INFO] Text is long (21234 chars) -- split into 2 chunks.
+2026-08-02 14:14:50 [INFO] Text is long (30803 chars) -- split into 2 chunks.
+2026-08-02 14:15:39 [INFO] Text is long (33759 chars) -- split into 3 chunks.
+2026-08-02 14:15:44 [INFO] Text is long (23120 chars) -- split into 2 chunks.
+2026-08-02 14:15:49 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-02 14:16:39 [WARNING] Weak compression: simplified chunk is 83% of original length (target ~40%).
+2026-08-02 14:16:39 [INFO] Text is long (27462 chars) -- split into 2 chunks.
+2026-08-02 14:16:42 [WARNING] Weak compression: simplified chunk is 123% of original length (target ~40%).
+2026-08-02 14:17:08 [INFO] Text is long (20529 chars) -- split into 2 chunks.
+2026-08-02 14:17:36 [INFO] Text is long (26667 chars) -- split into 2 chunks.
+2026-08-02 14:17:43 [WARNING] Weak compression: simplified chunk is 226% of original length (target ~40%).
+2026-08-02 14:17:46 [INFO] Text is long (30831 chars) -- split into 2 chunks.
+2026-08-02 14:18:13 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-02 14:18:13 [INFO] Text is long (18278 chars) -- split into 2 chunks.
+2026-08-02 14:18:38 [INFO] Text is long (27802 chars) -- split into 2 chunks.
+2026-08-02 14:19:01 [INFO] Text is long (19232 chars) -- split into 2 chunks.
+2026-08-02 14:19:54 [INFO] Text is long (34393 chars) -- split into 3 chunks.
+2026-08-02 14:19:56 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-02 14:20:01 [INFO] Text is long (21367 chars) -- split into 2 chunks.
+2026-08-02 14:21:00 [INFO] Text is long (20670 chars) -- split into 2 chunks.
+2026-08-02 14:21:28 [INFO] Text is long (23397 chars) -- split into 2 chunks.
+2026-08-02 14:22:25 [INFO] Text is long (25461 chars) -- split into 2 chunks.
+2026-08-02 14:22:54 [INFO] Text is long (17815 chars) -- split into 2 chunks.
+2026-08-02 14:23:06 [INFO] Text is long (33056 chars) -- split into 2 chunks.
+2026-08-02 14:23:20 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-02 14:23:24 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-02 14:23:24 [INFO] Text is long (27358 chars) -- split into 2 chunks.
+2026-08-02 14:24:19 [INFO] Text is long (24487 chars) -- split into 2 chunks.
+2026-08-02 14:24:51 [WARNING] Weak compression: simplified chunk is 198% of original length (target ~40%).
+2026-08-02 14:25:00 [INFO] Text is long (22794 chars) -- split into 2 chunks.
+2026-08-02 14:25:39 [WARNING] Weak compression: simplified chunk is 81% of original length (target ~40%).
+2026-08-02 14:25:47 [WARNING] Weak compression: simplified chunk is 67% of original length (target ~40%).
+2026-08-02 14:25:48 [WARNING] Weak compression: simplified chunk is 66% of original length (target ~40%).
+2026-08-02 14:25:50 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 14:25:50 [INFO] Text is long (32604 chars) -- split into 2 chunks.
+2026-08-02 14:25:57 [WARNING] Weak compression: simplified chunk is 92% of original length (target ~40%).
+2026-08-02 14:26:02 [INFO] Text is long (26767 chars) -- split into 2 chunks.
+2026-08-02 14:26:31 [INFO] Text is long (22613 chars) -- split into 2 chunks.
+2026-08-02 14:26:39 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 14:26:39 [INFO] Text is long (27191 chars) -- split into 2 chunks.
+2026-08-02 14:27:03 [INFO] Text is long (24683 chars) -- split into 2 chunks.
+2026-08-02 14:27:19 [INFO] Text is long (20242 chars) -- split into 2 chunks.
+2026-08-02 14:28:42 [WARNING] Weak compression: simplified chunk is 68% of original length (target ~40%).
+2026-08-02 14:28:46 [INFO] Text is long (22757 chars) -- split into 2 chunks.
+2026-08-02 14:28:50 [INFO] Text is long (18062 chars) -- split into 2 chunks.
+2026-08-02 14:30:19 [INFO] Text is long (28108 chars) -- split into 2 chunks.
+2026-08-02 14:30:37 [INFO] Text is long (21314 chars) -- split into 2 chunks.
+2026-08-02 14:30:48 [WARNING] Weak compression: simplified chunk is 81% of original length (target ~40%).
+2026-08-02 14:31:46 [INFO] Text is long (28678 chars) -- split into 2 chunks.
+2026-08-02 14:33:04 [INFO] Text is long (25656 chars) -- split into 2 chunks.
+2026-08-02 14:34:47 [WARNING] Weak compression: simplified chunk is 72% of original length (target ~40%).
+2026-08-02 14:34:47 [INFO] Text is long (24014 chars) -- split into 2 chunks.
+2026-08-02 14:35:26 [WARNING] Weak compression: simplified chunk is 64% of original length (target ~40%).
+2026-08-02 14:35:58 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 14:36:02 [INFO] Text is long (16837 chars) -- split into 2 chunks.
+2026-08-02 14:36:21 [INFO] Text is long (29461 chars) -- split into 2 chunks.
+2026-08-02 14:36:27 [WARNING] Weak compression: simplified chunk is 104% of original length (target ~40%).
+2026-08-02 14:36:31 [INFO] Text is long (17904 chars) -- split into 2 chunks.
+2026-08-02 14:36:59 [INFO] Text is long (16929 chars) -- split into 2 chunks.
+2026-08-02 14:37:01 [INFO] Text is long (17255 chars) -- split into 2 chunks.
+2026-08-02 14:37:12 [INFO] Text is long (23603 chars) -- split into 2 chunks.
+2026-08-02 14:37:46 [INFO] Text is long (31188 chars) -- split into 2 chunks.
+2026-08-02 14:38:02 [WARNING] Weak compression: simplified chunk is 96% of original length (target ~40%).
+2026-08-02 14:38:15 [INFO] Text is long (18358 chars) -- split into 2 chunks.
+2026-08-02 14:38:30 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-02 14:38:31 [INFO] Text is long (24813 chars) -- split into 2 chunks.
+2026-08-02 14:39:00 [WARNING] Weak compression: simplified chunk is 74% of original length (target ~40%).
+2026-08-02 14:39:00 [INFO] Text is long (22867 chars) -- split into 2 chunks.
+2026-08-02 14:40:08 [INFO] Text is long (30806 chars) -- split into 2 chunks.
+2026-08-02 14:40:25 [WARNING] Weak compression: simplified chunk is 77% of original length (target ~40%).
+2026-08-02 14:40:27 [WARNING] Weak compression: simplified chunk is 66% of original length (target ~40%).
+2026-08-02 14:41:56 [WARNING] Weak compression: simplified chunk is 71% of original length (target ~40%).
+2026-08-02 14:41:57 [INFO] Text is long (24134 chars) -- split into 2 chunks.
+2026-08-02 14:42:06 [INFO] Text is long (21229 chars) -- split into 2 chunks.
+2026-08-02 14:42:17 [INFO] Text is long (26527 chars) -- split into 2 chunks.
+2026-08-02 14:42:58 [INFO] Text is long (31872 chars) -- split into 2 chunks.
+2026-08-02 14:42:58 [INFO] Text is long (29076 chars) -- split into 2 chunks.
+2026-08-02 14:43:35 [INFO] Text is long (33368 chars) -- split into 2 chunks.
+2026-08-02 14:43:53 [INFO] Text is long (24103 chars) -- split into 2 chunks.
+2026-08-02 14:44:48 [INFO] Text is long (20807 chars) -- split into 2 chunks.
+2026-08-02 14:45:05 [INFO] Text is long (18569 chars) -- split into 2 chunks.
+2026-08-02 14:45:08 [INFO] Text is long (18843 chars) -- split into 2 chunks.
+2026-08-02 14:45:42 [INFO] Text is long (29668 chars) -- split into 2 chunks.
+2026-08-02 14:46:02 [WARNING] Weak compression: simplified chunk is 85% of original length (target ~40%).
+2026-08-02 14:46:02 [INFO] Text is long (31856 chars) -- split into 2 chunks.
+2026-08-02 14:46:19 [INFO] Text is long (21717 chars) -- split into 2 chunks.
+2026-08-02 14:46:29 [INFO] Text is long (27226 chars) -- split into 2 chunks.
+2026-08-02 14:47:35 [INFO] Text is long (33682 chars) -- split into 3 chunks.
+2026-08-02 14:48:05 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 14:48:05 [INFO] Text is long (19798 chars) -- split into 2 chunks.
+2026-08-02 14:48:17 [INFO] Text is long (22295 chars) -- split into 2 chunks.
+2026-08-02 14:48:35 [INFO] Text is long (20948 chars) -- split into 2 chunks.
+2026-08-02 14:48:54 [INFO] Text is long (20281 chars) -- split into 2 chunks.
+2026-08-02 14:50:15 [INFO] Text is long (22443 chars) -- split into 2 chunks.
+2026-08-02 14:50:31 [INFO] Text is long (25022 chars) -- split into 2 chunks.
+2026-08-02 14:50:49 [INFO] Text is long (28791 chars) -- split into 2 chunks.
+2026-08-02 14:51:04 [WARNING] Weak compression: simplified chunk is 108% of original length (target ~40%).
+2026-08-02 14:51:07 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-02 14:51:07 [INFO] Text is long (21098 chars) -- split into 2 chunks.
+2026-08-02 14:51:58 [WARNING] Weak compression: simplified chunk is 63% of original length (target ~40%).
+2026-08-02 14:51:58 [INFO] Text is long (20889 chars) -- split into 2 chunks.
+2026-08-02 14:53:25 [INFO] Text is long (21636 chars) -- split into 2 chunks.
+2026-08-02 14:53:38 [INFO] Text is long (27942 chars) -- split into 2 chunks.
+2026-08-02 14:54:06 [WARNING] Weak compression: simplified chunk is 71% of original length (target ~40%).
+2026-08-02 14:54:09 [WARNING] Weak compression: simplified chunk is 65% of original length (target ~40%).
+2026-08-02 14:55:02 [INFO] Text is long (17798 chars) -- split into 2 chunks.
+2026-08-02 14:55:09 [INFO] Text is long (18890 chars) -- split into 2 chunks.
+2026-08-02 14:55:36 [WARNING] Weak compression: simplified chunk is 96% of original length (target ~40%).
+2026-08-02 14:55:46 [WARNING] Weak compression: simplified chunk is 87% of original length (target ~40%).
+2026-08-02 14:55:48 [INFO] Text is long (17135 chars) -- split into 2 chunks.
+2026-08-02 14:55:52 [INFO] Text is long (19273 chars) -- split into 2 chunks.
+2026-08-02 14:55:58 [INFO] Text is long (17236 chars) -- split into 2 chunks.
+2026-08-02 14:56:06 [WARNING] Weak compression: simplified chunk is 82% of original length (target ~40%).
+2026-08-02 14:56:41 [INFO] Text is long (19000 chars) -- split into 2 chunks.
+2026-08-02 14:57:00 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 14:57:21 [INFO] Text is long (24352 chars) -- split into 2 chunks.
+2026-08-02 14:57:21 [WARNING] Weak compression: simplified chunk is 80% of original length (target ~40%).
+2026-08-02 14:57:21 [INFO] Text is long (24207 chars) -- split into 2 chunks.
+2026-08-02 14:57:42 [INFO] Text is long (25652 chars) -- split into 2 chunks.
+2026-08-02 14:58:10 [WARNING] Weak compression: simplified chunk is 84% of original length (target ~40%).
+2026-08-02 14:58:15 [INFO] Text is long (26793 chars) -- split into 2 chunks.
+2026-08-02 14:58:36 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 14:59:28 [WARNING] Weak compression: simplified chunk is 102% of original length (target ~40%).
+2026-08-02 14:59:55 [WARNING] Weak compression: simplified chunk is 69% of original length (target ~40%).
+2026-08-02 14:59:59 [WARNING] Weak compression: simplified chunk is 82% of original length (target ~40%).
+2026-08-02 15:02:56 [WARNING] Weak compression: simplified chunk is 75% of original length (target ~40%).
+2026-08-02 15:03:21 [WARNING] Weak compression: simplified chunk is 84% of original length (target ~40%).
+2026-08-02 15:03:34 [WARNING] Weak compression: simplified chunk is 98% of original length (target ~40%).
+2026-08-02 15:03:43 [WARNING] Weak compression: simplified chunk is 80% of original length (target ~40%).
+2026-08-02 15:03:56 [WARNING] Weak compression: simplified chunk is 93% of original length (target ~40%).
+2026-08-02 15:03:58 [WARNING] Weak compression: simplified chunk is 95% of original length (target ~40%).
+2026-08-02 15:04:08 [WARNING] Weak compression: simplified chunk is 85% of original length (target ~40%).
+2026-08-02 15:04:21 [WARNING] Weak compression: simplified chunk is 107% of original length (target ~40%).
+2026-08-02 15:04:24 [WARNING] Weak compression: simplified chunk is 72% of original length (target ~40%).
+2026-08-02 15:04:46 [WARNING] Weak compression: simplified chunk is 80% of original length (target ~40%).
+2026-08-02 15:04:57 [WARNING] Weak compression: simplified chunk is 80% of original length (target ~40%).
+2026-08-02 15:05:05 [WARNING] Weak compression: simplified chunk is 66% of original length (target ~40%).
+2026-08-02 15:05:50 [WARNING] Weak compression: simplified chunk is 88% of original length (target ~40%).
+2026-08-02 15:05:52 [WARNING] Weak compression: simplified chunk is 79% of original length (target ~40%).
+2026-08-02 15:06:12 [WARNING] Weak compression: simplified chunk is 69% of original length (target ~40%).
+2026-08-02 15:06:14 [INFO] Text is long (26467 chars) -- split into 2 chunks.
+2026-08-02 15:06:46 [WARNING] Weak compression: simplified chunk is 90% of original length (target ~40%).
+2026-08-02 15:06:59 [INFO] Text is long (30170 chars) -- split into 2 chunks.
+2026-08-02 15:07:33 [WARNING] Weak compression: simplified chunk is 82% of original length (target ~40%).
+2026-08-02 15:07:40 [INFO] Text is long (22261 chars) -- split into 2 chunks.
+2026-08-02 15:08:39 [WARNING] Weak compression: simplified chunk is 93% of original length (target ~40%).
+2026-08-02 15:08:44 [WARNING] Weak compression: simplified chunk is 61% of original length (target ~40%).
+2026-08-02 15:08:58 [WARNING] Weak compression: simplified chunk is 90% of original length (target ~40%).
+2026-08-02 15:09:24 [INFO] Text is long (35050 chars) -- split into 3 chunks.
+2026-08-02 15:09:58 [WARNING] Weak compression: simplified chunk is 62% of original length (target ~40%).
+2026-08-02 15:11:09 [WARNING] Weak compression: simplified chunk is 103% of original length (target ~40%).
+2026-08-02 15:11:35 [WARNING] Weak compression: simplified chunk is 85% of original length (target ~40%).
+2026-08-02 15:12:17 [INFO] Finished this run. Success: 1595 | Failed: 0 | Total elapsed: 3h24m54s
+2026-08-02 15:12:17 [INFO] Done. Output written to 'output2.csv'.
