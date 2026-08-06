@@ -27,8 +27,8 @@ MAX_NEW_TOKENS = 256
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 print(f"Loading model {MODEL_ID} on {device}...")
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
-model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_ID).to(device)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, subfolder="model")
+model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_ID, subfolder="model").to(device)
 model.eval()
 print("Model loaded.")
 
