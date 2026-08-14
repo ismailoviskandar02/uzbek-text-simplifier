@@ -29,6 +29,11 @@ try:
 except ImportError:
     _DOCX_AVAILABLE = False
 
+# Детерминированный, чисто-скриптованный (regex + словарь) конвертер
+# упрощённого текста в Markdown. НЕ модель, НЕ API — обычная функция
+# строка -> строка, выполняется мгновенно и синхронно.
+from markdown_formatter import to_markdown
+
 MODEL_ID = "ismailoviskandar02/uzbek-text-simplifier"  # твой репозиторий модели на HF
 PREFIX = "simplify: "
 MAX_INPUT_LEN = 256
@@ -72,6 +77,11 @@ LANGS = {
         "error_no_output": "Сначала получите упрощённый текст.",
         "error_docx_lib": "Для сохранения в .docx нужна библиотека python-docx (pip install python-docx).",
         "saved_ok": "Файл сохранён",
+        "to_markdown": "📝 В Markdown",
+        "markdown_window_title": "Предпросмотр Markdown",
+        "markdown_copy": "📋 Копировать",
+        "markdown_copied": "Скопировано в буфер обмена",
+        "markdown_close": "Закрыть",
     },
     "uz": {
         "flag": "🇺🇿",
@@ -106,6 +116,11 @@ LANGS = {
         "error_no_output": "Avval soddalashtirilgan matnni oling.",
         "error_docx_lib": ".docx saqlash uchun python-docx kutubxonasi kerak (pip install python-docx).",
         "saved_ok": "Fayl saqlandi",
+        "to_markdown": "📝 Markdown'ga",
+        "markdown_window_title": "Markdown ko'rinishi",
+        "markdown_copy": "📋 Nusxalash",
+        "markdown_copied": "Xotiraga nusxalandi",
+        "markdown_close": "Yopish",
     },
     "en": {
         "flag": "🇬🇧",
@@ -140,6 +155,11 @@ LANGS = {
         "error_no_output": "Simplify some text first.",
         "error_docx_lib": "Saving .docx requires the python-docx package (pip install python-docx).",
         "saved_ok": "File saved",
+        "to_markdown": "📝 To Markdown",
+        "markdown_window_title": "Markdown preview",
+        "markdown_copy": "📋 Copy",
+        "markdown_copied": "Copied to clipboard",
+        "markdown_close": "Close",
     },
 }
 
@@ -468,10 +488,18 @@ class SimplifierApp(_BaseTk):
         )
         self.output_text.pack(fill="both", expand=True, pady=(4, 8))
 
-        self.download_btn = ttk.Button(
-            right, text="", style="Secondary.TButton", command=self._on_download_docx
+        output_btn_row = ttk.Frame(right, style="TFrame")
+        output_btn_row.pack(anchor="e")
+
+        self.markdown_btn = ttk.Button(
+            output_btn_row, text="", style="Secondary.TButton", command=self._on_to_markdown
         )
-        self.download_btn.pack(anchor="e")
+        self.markdown_btn.pack(side="left", padx=(0, 8))
+
+        self.download_btn = ttk.Button(
+            output_btn_row, text="", style="Secondary.TButton", command=self._on_download_docx
+        )
+        self.download_btn.pack(side="left")
 
         # Status + footer
         self.status_var = tk.StringVar(value="")
@@ -505,6 +533,7 @@ class SimplifierApp(_BaseTk):
         self.open_file_btn.config(text=t["open_file"])
         self.dnd_hint_label.config(text=t["dnd_hint"])
         self.download_btn.config(text=t["download_docx"])
+        self.markdown_btn.config(text=t["to_markdown"])
         self.output_label.config(text=t["output_label"])
         self.examples_label.config(text=t["examples_label"])
         self.footer_label.config(text=t["footer"])
@@ -631,6 +660,62 @@ class SimplifierApp(_BaseTk):
             messagebox.showerror(t["title"], f"{t['error_file_read']}: {e}")
             return
         self.status_var.set(f"{t['saved_ok']}: {os.path.basename(path)}")
+
+    # ------------------------------------------------------------------
+    # "В Markdown": детерминированное regex/словарное преобразование,
+    # без модели и без API — выполняется мгновенно, синхронно.
+    # ------------------------------------------------------------------
+    def _on_to_markdown(self):
+        t = LANGS[self.lang_code]
+        text = self.output_text.get("1.0", "end-1c").strip()
+        if not text:
+            messagebox.showwarning(t["title"], t["error_no_output"])
+            return
+
+        markdown_text = to_markdown(text)  # чистая функция строка -> строка
+        self._show_markdown_preview(markdown_text)
+
+    def _show_markdown_preview(self, markdown_text: str):
+        t = LANGS[self.lang_code]
+
+        win = tk.Toplevel(self)
+        win.title(t["markdown_window_title"])
+        win.configure(bg=COLORS["bg"])
+        win.geometry("640x480")
+
+        label = ttk.Label(win, text=t["markdown_window_title"], style="FieldLabel.TLabel")
+        label.pack(anchor="w", padx=12, pady=(12, 4))
+
+        text_widget = tk.Text(
+            win, wrap="word",
+            bg=COLORS["input_bg"], fg=COLORS["text_fg"],
+            insertbackground=COLORS["text_fg"],
+            relief="flat", highlightthickness=1,
+            highlightbackground=COLORS["input_border"],
+            font=("Consolas", 10), padx=10, pady=10,
+        )
+        text_widget.pack(fill="both", expand=True, padx=12, pady=(0, 8))
+        text_widget.insert("1.0", markdown_text)
+        text_widget.config(state="disabled")
+
+        btn_row = ttk.Frame(win, style="TFrame")
+        btn_row.pack(fill="x", padx=12, pady=(0, 12))
+
+        status_var = tk.StringVar(value="")
+        status_label = ttk.Label(btn_row, textvariable=status_var, style="Status.TLabel")
+
+        def _copy():
+            win.clipboard_clear()
+            win.clipboard_append(markdown_text)
+            status_var.set(t["markdown_copied"])
+
+        copy_btn = ttk.Button(btn_row, text=t["markdown_copy"], style="Secondary.TButton", command=_copy)
+        copy_btn.pack(side="left")
+
+        close_btn = ttk.Button(btn_row, text=t["markdown_close"], style="Secondary.TButton", command=win.destroy)
+        close_btn.pack(side="left", padx=(8, 0))
+
+        status_label.pack(side="left", padx=(12, 0))
 
     def _set_output(self, text):
         self.output_text.config(state="normal")
