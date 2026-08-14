@@ -9,7 +9,7 @@ Fine-tuned mT5-small — упрощает сложные (юридические
 
 ```
 app.py
-app_tkinter.py
+
 requirements.txt
 ```
 
@@ -17,8 +17,5 @@ requirements.txt
 
 ```
 pip install -U -r requirements.txt
-python app_tkinter.py
 python app.py
 ```
-
-> **app_tkinter.py предпотчительнее**
