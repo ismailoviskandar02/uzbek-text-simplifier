@@ -5,52 +5,79 @@ markdown_formatter.py — детерминированное, чисто скр�
 ВАЖНО: здесь НЕТ вызовов модели, API или каких-либо ML-компонентов.
 Вся логика — обычные функции на regex/str, работающие как
 чистая функция строка -> строка: to_markdown(text) всегда возвращает
-один и тот же результат для одного и того же входа.
+один и тот же результат для одного и того же входа. Никакой сети,
+файловой системы (кроме статического словаря терминов, объявленного
+как константа модуля) и внешнего состояния.
 
 Используется в app.py как обработчик кнопки "В Markdown".
+
+Порядок применения правил (задокументирован явно, важен):
+    0. Проверка идемпотентности (уже отформатированный markdown -> без изменений)
+    1. Заголовок документа (H1)
+    2. Разбиение на абзацы (короче, чем раньше — для лучшей читаемости)
+    3. Заголовки разделов/статей (##, ###) внутри абзацев
+    4. Предупреждения/примечания -> blockquote с ⚠️
+    5. Определения/цитаты -> blockquote
+    6. Списки: нумерованные, маркированные, вложенные a)/b),
+       альтернативы через "или"/"yoki"/"либо"
+    7. Ссылки на статьи закона -> inline code
+    8. Числа: даты, проценты, суммы -> inline code (не теряются в тексте)
+    9. Аббревиатуры -> расшифровка при первом упоминании
+    10. Термины -> **bold** при первом употреблении в абзаце
+    11. Таблицы (регулярная структура "X — Y" x3+)
+    12. Горизонтальные разделители между top-level разделами
+    13. Финальная сборка блоков с усиленными пустыми строками
 """
 
 from __future__ import annotations
 
 import re
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 # ---------------------------------------------------------------------------
-# 1. Словарь топ-20 юридических терминов (по частоте в data/domain_legal.csv,
-#    колонка text_simplified). Статический список — НЕ модель, просто
-#    таблица "стем -> есть ли термин".
+# 1. Словарь топ-20 юридических терминов (латиница + кириллица — реальный
+#    вывод модели кириллический, но модуль должен работать на обоих).
+#    Статический список — НЕ модель, просто таблица "стем -> термин".
 # ---------------------------------------------------------------------------
-#
-# Порядок важен только для читаемости — при сопоставлении термины всегда
-# сортируются по убыванию длины стема, чтобы "qonunchilik" не "съедался"
-# более коротким "qonun" (см. _build_term_pattern).
 
 LEGAL_TERMS: List[str] = [
-    "qonunchilik",   # законодательство
-    "respublika",    # республика
-    "fuqarolik",     # гражданское (право)
-    "maʼmuriy",       # административный
-    "harbiy",        # военный
-    "qonun",         # закон
-    "davlat",        # государство
-    "xodim",         # работник/сотрудник
-    "mehnat",        # труд
-    "huquq",         # право
-    "shaxs",         # лицо
-    "sudya",         # судья
-    "hujjat",        # документ
-    "shart",         # условие
-    "himoya",        # защита
-    "aliment",       # алименты
-    "bekor",         # отмена/аннулирование
-    "rais",          # председатель
-    "organ",         # орган
-    "zarar",         # ущерб/вред
+    # -- лотин ёзуви (Latin script) --
+    "qonunchilik", "respublika", "fuqarolik", "maʼmuriy", "harbiy",
+    "qonun", "davlat", "xodim", "mehnat", "huquq", "shaxs", "sudya",
+    "hujjat", "shart", "himoya", "aliment", "bekor", "rais", "organ",
+    "zarar",
+    # -- кирилл ёзуви (Cyrillic script) — те же 20 терминов, т.к. модель
+    #    и приложение реально выводят упрощённый текст в кириллице.
+    "қонунчилик", "республика", "фуқаролик", "маъмурий", "ҳарбий",
+    "қонун", "давлат", "ходим", "меҳнат", "ҳуқуқ", "шахс", "судья",
+    "ҳужжат", "шарт", "ҳимоя", "алимент", "бекор", "раис", "орган",
+    "зарар",
 ]
 
-# Символы, которые узбекская латиница использует внутри слова
-# (включая варианты апострофа для oʻ/gʻ/tutuq belgisi): ʻ ʼ ʺ '
-_UZ_WORD_CHARS = "A-Za-zʻʼʺ'"
+# Известные аббревиатуры узбекского законодательства -> расшифровка.
+# Статический словарь: если аббревиатуры нет здесь, мы её не выдумываем.
+# ВАЖНО: каждая аббревиатура дублируется в обоих алфавитах — реальный
+# текст может быть либо кириллическим, либо латинским узбекским, и
+# сокращения кодексов пишутся по-разному в каждом письме.
+ABBREVIATIONS = {
+    # -- кирилл ёзуви --
+    "ЖК": "Жиноят кодекси",
+    "ФК": "Фуқаролик кодекси",
+    "МК": "Маъмурий кодекс",
+    "МЖ": "Меҳнат кодекси",
+    "ИЖК": "Иқтисодий жиноятлар кодекси",
+    # -- лотин ёзуви (те же кодексы, латинская запись) --
+    "JK": "Jinoyat kodeksi",
+    "FK": "Fuqarolik kodeksi",
+    "MK": "Maʼmuriy kodeks",
+    "MJ": "Mehnat kodeksi",
+    "IJK": "Iqtisodiy jinoyatlar kodeksi",
+}
+
+# Символы, которые узбекский текст использует внутри слова — и латиница,
+# и кириллица (включая узбекские буквы ў/қ/ғ/ҳ и варианты апострофа
+# для oʻ/gʻ/tutuq belgisi): ʻ ʼ ʺ '
+_UZ_WORD_CHARS = "A-Za-zʻʼʺ'А-Яа-яЁёЎўҚқҒғҲҳ"
 
 
 def _build_term_pattern() -> re.Pattern:
@@ -80,42 +107,178 @@ def _build_term_pattern() -> re.Pattern:
 _TERM_PATTERN = _build_term_pattern()
 
 
-def bold_legal_terms(text: str) -> str:
-    """Оборачивает найденные словоформы юридических терминов в **bold**."""
+def bold_legal_terms(text: str, seen: Optional[set] = None) -> str:
+    """
+    Оборачивает найденные словоформы юридических терминов в **bold**.
+
+    `seen`, если передан, — множество уже выделенных (в нижнем регистре)
+    словоформ термина в текущем абзаце: повторные вхождения того же
+    термина дальше по тексту не дублируются жирным. Сбрасывается на
+    каждый новый абзац вызывающей стороной (_format_paragraph создаёт
+    новое множество на каждый абзац) — т.е. в одном абзаце термин
+    выделяется один раз, но в следующем абзаце снова один раз.
+    """
     if not text:
         return text
+    if seen is None:
+        seen = set()
 
     def _wrap(match: re.Match) -> str:
         word = match.group(0)
+        key = word.lower()
+        if key in seen:
+            return word
+        seen.add(key)
         return f"**{word}**"
 
     return _TERM_PATTERN.sub(_wrap, text)
 
 
 # ---------------------------------------------------------------------------
-# 2. Разбиение на смысловые блоки (абзацы)
+# 2. Идемпотентность: если текст уже похож на результат to_markdown(),
+#    возвращаем его без изменений. Выбран вариант (b) из ТЗ: функция сама
+#    детектирует "уже markdown" и не форматирует повторно — так кнопка
+#    безопасна независимо от того, что именно хранит вызывающий код.
 # ---------------------------------------------------------------------------
 
-# Простое эвристическое разбиение предложений (по точке/!/?, с учётом
-# сокращений с точкой внутри номера пункта типа "1." — они обрабатываются
-# отдельно в _extract_numbered_items, поэтому здесь не критично).
-_SENTENCE_SPLIT_RE = re.compile(
-    r"(?<=[A-Za-zʻʼʺ'][.!?])\s+(?=[A-ZʼʻʺA-Za-zʻʼʺ0-9])"
+_ALREADY_MARKDOWN_RE = re.compile(
+    r"(^#{1,3}\s+\S)"          # заголовок в начале строки
+    r"|(^\s*[-*]\s+\S)"        # маркированный список
+    r"|(^\s*\d+\.\s+\S)"       # нумерованный список
+    r"|(^\s*>\s*\S)"           # blockquote
+    r"|(\*\*[^*\n]+\*\*)"      # жирный текст
+    r"|(^\s*\|.+\|\s*$)"       # строка таблицы
+    r"|(^\s*---\s*$)",         # горизонтальный разделитель
+    flags=re.MULTILINE,
 )
 
-# Максимум предложений в одном "искусственном" абзаце, если в тексте
-# вообще нет двойных переносов строк (эвристика длины).
-_MAX_SENTENCES_PER_BLOCK = 3
+
+def _looks_like_markdown(text: str) -> bool:
+    """Грубая, но детерминированная эвристика: текст уже содержит
+    характерные markdown-конструкции хотя бы в двух независимых местах —
+    значит, скорее всего, он уже прошёл через to_markdown()."""
+    hits = len(_ALREADY_MARKDOWN_RE.findall(text))
+    return hits >= 2
+
+
+# ---------------------------------------------------------------------------
+# 3. Заголовок документа (H1) и заголовки разделов/статей (H2/H3)
+# ---------------------------------------------------------------------------
+
+_TITLE_LINE_RE = re.compile(
+    r"^[\"«]?[A-ZʼʻʺА-ЯЁЎҚҒҲ][^.!?]{3,79}[\"»]?$"
+)
+
+_CHAPTER_RE = re.compile(
+    r"^(глава|раздел|bob|bo['ʻʼ]lim|боб|бўлим)\s+(\d+)\.?\s*(.*)$",
+    flags=re.IGNORECASE,
+)
+
+# Узбекский (и латиница, и кириллица) чаще пишет номер ПЕРЕД словом:
+# "2-bob", "3-bo'lim", "2-боб", "3-бўлим" — в отличие от русского
+# порядка "Глава 2" / "Раздел 3", который ловит regex выше.
+_CHAPTER_NUM_FIRST_RE = re.compile(
+    r"^(\d+)[-\s](bob|bo['ʻʼ]lim|боб|бўлим)\.?\s*(.*)$",
+    flags=re.IGNORECASE,
+)
+
+_ARTICLE_HEADER_RE = re.compile(
+    r"^(статья\s+(\d+)|(\d+)[-\s]?модда|(\d+)[-\s]?modda)\.?\s*(.*)$",
+    flags=re.IGNORECASE,
+)
+
+
+def extract_title(text: str) -> Tuple[Optional[str], str]:
+    """
+    Если первая строка текста похожа на заголовок документа (короткая,
+    без завершающей точки, начинается с заглавной буквы) и после неё
+    ещё есть текст — выносим её как `# Заголовок`, возвращаем остаток.
+    """
+    if "\n" not in text:
+        return None, text
+
+    parts = text.split("\n", 1)
+    if len(parts) != 2:
+        return None, text
+    first, rest = parts[0].strip(), parts[1]
+    if not rest.strip():
+        return None, text
+    if (
+        _TITLE_LINE_RE.match(first)
+        and len(first.split()) <= 12
+        and not _CHAPTER_RE.match(first)
+        and not _CHAPTER_NUM_FIRST_RE.match(first)
+        and not _ARTICLE_HEADER_RE.match(first)
+        and not _TABLE_ROW_RE.match(first)
+    ):
+        return first.strip("\"«»"), rest
+    return None, text
+
+
+def _format_section_header(paragraph: str) -> Optional[str]:
+    """Детект 'Глава N ...' / 'Раздел N ...' (слово-номер, обычно
+    в кириллице/русской кальке) и 'N-bob ...' / 'N-bo'lim ...'
+    (номер-слово, стандартный узбекский порядок и в латинице,
+    и в кириллице) -> ## заголовок."""
+    stripped = paragraph.strip()
+
+    m = _CHAPTER_RE.match(stripped)
+    if m:
+        kind, num, rest = m.group(1), m.group(2), m.group(3).strip()
+        label = kind.capitalize()
+        title = f"## {label} {num}"
+        if rest:
+            title += f". {rest}"
+        return title
+
+    m = _CHAPTER_NUM_FIRST_RE.match(stripped)
+    if m:
+        num, kind, rest = m.group(1), m.group(2), m.group(3).strip()
+        label = kind.capitalize()
+        title = f"## {num}-{label}"
+        if rest:
+            title += f". {rest}"
+        return title
+
+    return None
+
+
+def _format_article_header(paragraph: str) -> Optional[str]:
+    """
+    Детект 'Статья N ...' / 'N-modda ...' как начало смыслового блока.
+    Если за заголовком следует несколько предложений — это заголовок
+    раздела (### Статья N). Если это короткий одиночный пункт — не
+    трогаем (вернём None, обработается как обычный текст/пункт списка).
+    """
+    m = _ARTICLE_HEADER_RE.match(paragraph.strip())
+    if not m:
+        return None
+    num = m.group(2) or m.group(3) or m.group(4)
+    rest = m.group(5).strip()
+    # Если статья встречается как один короткий пункт внутри перечисления
+    # (в паре с другими "N." маркерами в том же абзаце) — не заголовок,
+    # это обрабатывается списковой логикой ниже по pipeline.
+    if _NUMBERED_ITEM_RE.search(paragraph[m.end(1) :]):
+        return None
+    title = f"### Статья {num}"
+    if rest:
+        return title + "\n\n" + rest
+    return title
+
+
+# ---------------------------------------------------------------------------
+# 4. Разбиение на смысловые блоки (абзацы)
+# ---------------------------------------------------------------------------
+
+_SENTENCE_SPLIT_RE = re.compile(
+    r"(?<=[A-Za-zʻʼʺ'А-Яа-яЁёЎўҚқҒғҲҳ][.!?])\s+"
+    r"(?=[A-ZʼʻʺА-ЯЁЎҚҒҲA-Za-zʻʼʺ'А-Яа-яЁёЎўҚқҒғҲҳ0-9])"
+)
+
+_MAX_SENTENCES_PER_BLOCK = 2  # короче блоки -> больше "воздуха" между ними
 
 
 def split_into_paragraphs(text: str) -> List[str]:
-    """
-    Делит текст на абзацы.
-
-    1) Если есть явные разделители \n\n — используем их.
-    2) Иначе используем эвристику: разбиваем на предложения и группируем
-       их по _MAX_SENTENCES_PER_BLOCK штук в один блок.
-    """
     if not text.strip():
         return []
 
@@ -123,8 +286,6 @@ def split_into_paragraphs(text: str) -> List[str]:
         blocks = [b.strip() for b in text.split("\n\n") if b.strip()]
         return blocks
 
-    # Одиночные переносы строк тоже считаем разделителями абзацев,
-    # если их несколько (например список, вставленный построчно).
     if "\n" in text.strip():
         blocks = [b.strip() for b in text.split("\n") if b.strip()]
         if len(blocks) > 1:
@@ -142,20 +303,75 @@ def split_into_paragraphs(text: str) -> List[str]:
 
 
 # ---------------------------------------------------------------------------
-# 3. Нумерованные списки: "1.", "2)", "3 -" и т.п.
+# 5а. Предупреждения/примечания -> blockquote-callout с ⚠️
+#     (правило добавлено для читаемости: важные пометки не должны
+#     теряться среди обычного текста)
 # ---------------------------------------------------------------------------
 
-_NUMBERED_ITEM_RE = re.compile(
-    r"(?:(?<=^)|(?<=\s))(\d{1,2})[.)]\s+"
+_CALLOUT_MARKERS = [
+    r"эслатма", r"муҳим(?:\s+эслатма)?", r"диққат", r"эътибор беринг",
+    r"eslatma", r"muhim(?:\s+eslatma)?", r"diqqat", r"eʼtibor bering",
+    r"внимание", r"важно", r"примечание", r"обратите внимание",
+]
+_CALLOUT_RE = re.compile(
+    r"^\s*(?:" + "|".join(_CALLOUT_MARKERS) + r")\s*[:!.,—-]*\s*",
+    flags=re.IGNORECASE,
+)
+
+
+def _maybe_callout(paragraph: str) -> Optional[str]:
+    """Если абзац начинается со слова-маркера примечания/предупреждения,
+    оформляем его как blockquote с иконкой — визуально выделяется на
+    фоне остального текста."""
+    m = _CALLOUT_RE.match(paragraph)
+    if not m or not m.group(0).strip():
+        return None
+    rest = paragraph[m.end() :].strip()
+    if not rest:
+        return None
+    return "> ⚠️ " + rest
+
+
+# ---------------------------------------------------------------------------
+# 5б. Определения и цитаты -> blockquote
+# ---------------------------------------------------------------------------
+
+_DEFINITION_MARKERS = [
+    r"deb\s+tushuniladi", r"деб\s+тушунилади",
+    r"deb\s+topiladi", r"деб\s+топилади",
+    r"признаётся", r"признается",
+    r"понимается\s+как", r"означает",
+]
+_DEFINITION_RE = re.compile(
+    r"\b(?:" + "|".join(_DEFINITION_MARKERS) + r")\b", flags=re.IGNORECASE
+)
+
+# Прямая цитата в кавычках длиной больше одного предложения.
+_QUOTED_RE = re.compile(r"[\"«]([^\"»]{20,})[\"»]")
+
+
+def _maybe_blockquote(paragraph: str) -> Optional[str]:
+    if _DEFINITION_RE.search(paragraph):
+        return "> " + paragraph.strip()
+
+    m = _QUOTED_RE.search(paragraph)
+    if m and len(_SENTENCE_SPLIT_RE.split(m.group(1))) > 1:
+        return "> " + paragraph.strip()
+
+    return None
+
+
+# ---------------------------------------------------------------------------
+# 6. Нумерованные списки (с вложенными a)/b) подпунктами)
+# ---------------------------------------------------------------------------
+
+_NUMBERED_ITEM_RE = re.compile(r"(?:(?<=^)|(?<=\s))(\d{1,2})[.)]\s+")
+_SUBLETTER_ITEM_RE = re.compile(
+    r"(?:(?<=^)|(?<=\s))([a-zа-яё])\)\s+", flags=re.IGNORECASE
 )
 
 
 def _extract_numbered_items(paragraph: str) -> Optional[List[str]]:
-    """
-    Если в абзаце встречаются маркеры вида "1. ...", "2) ..." — режем
-    его на пункты нумерованного списка. Возвращает None, если таких
-    маркеров нет (тогда абзац обрабатывается как обычный текст).
-    """
     matches = list(_NUMBERED_ITEM_RE.finditer(paragraph))
     if len(matches) < 1:
         return None
@@ -168,8 +384,6 @@ def _extract_numbered_items(paragraph: str) -> Optional[List[str]]:
         if item_text:
             items.append(item_text)
 
-    # Если нумерация начинается не с самого начала абзаца, текст перед
-    # первым маркером сохраняем как отдельную вводную строку.
     prefix = paragraph[: matches[0].start()].strip()
     if prefix:
         items.insert(0, "__PREFIX__" + prefix)
@@ -177,40 +391,43 @@ def _extract_numbered_items(paragraph: str) -> Optional[List[str]]:
     return items if items else None
 
 
+def _split_subletters(item_text: str) -> Optional[List[str]]:
+    """Если внутри пункта нумерованного списка есть 'a) ... b) ...' —
+    возвращает вложенные подпункты (без вводного текста перед 'a)')."""
+    matches = list(_SUBLETTER_ITEM_RE.finditer(item_text))
+    if len(matches) < 2:
+        return None
+    subs = []
+    for idx, m in enumerate(matches):
+        start = m.end()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(item_text)
+        sub = item_text[start:end].strip().rstrip(";,")
+        if sub:
+            subs.append(sub)
+    return subs if len(subs) >= 2 else None
+
+
 # ---------------------------------------------------------------------------
-# 4. Маркированные списки: перечисления через "во-первых / также / кроме
-#    того / shuningdek / bundan tashqari" и однородные пункты через запятую.
+# 7. Маркированные списки: словесные маркеры и однородные перечисления
 # ---------------------------------------------------------------------------
 
-# Маркеры перечисления (RU + UZ, т.к. итоговый упрощённый текст — узбекский,
-# но модуль может получить и русский текст).
 _ENUM_MARKERS = [
-    r"во[-\s]первых",
-    r"во[-\s]вторых",
-    r"в[-\s]третьих",
-    r"кроме\s+того",
-    r"также",
-    r"birinchidan",
-    r"ikkinchidan",
-    r"uchinchidan",
-    r"shuningdek",
-    r"bundan\s+tashqari",
-    r"shu\s+bilan\s+birga",
+    r"во[-\s]первых", r"во[-\s]вторых", r"в[-\s]третьих",
+    r"кроме\s+того", r"также",
+    r"birinchidan", r"ikkinchidan", r"uchinchidan",
+    r"shuningdek", r"bundan\s+tashqari", r"shu\s+bilan\s+birga",
+    r"биринчидан", r"иккинчидан", r"учинчидан",
+    r"шунингдек", r"бундан\s+ташқари", r"шу\s+билан\s+бирга",
+    # союзы-альтернативы (2+ повтора в абзаце -> явное перечисление
+    # вариантов, тоже становится маркированным списком для читаемости)
+    r"либо", r"или", r"yoki", r"yoxud",
 ]
 _ENUM_MARKER_RE = re.compile(
-    r"\b(?:" + "|".join(_ENUM_MARKERS) + r")\b",
-    flags=re.IGNORECASE,
+    r"\b(?:" + "|".join(_ENUM_MARKERS) + r")\b", flags=re.IGNORECASE
 )
 
-# Однородные пункты через запятую: минимум 3 элемента, разделённых
-# запятой, без союзов внутри — типичный шаблон перечисления в юртексте.
-_COMMA_LIST_RE = re.compile(
-    r"^[^,:;]{1,60}(?:,\s*[^,:;]{1,60}){2,}\.?$"
-)
+_COMMA_LIST_RE = re.compile(r"^[^,:;]{1,60}(?:,\s*[^,:;]{1,60}){2,}\.?$")
 
-# Та же форма, но с вводной фразой до двоеточия перед списком —
-# "Bu huquqlarga quyidagilar kiradi: A, B, C." Вводная часть остаётся
-# отдельной строкой (__PREFIX__), а сам список парсится после ":".
 _COMMA_LIST_WITH_INTRO_RE = re.compile(
     r"^(?P<intro>[^:]{1,120}):\s*"
     r"(?P<items>[^,:;]{1,60}(?:,\s*[^,:;]{1,60}){2,}\.?)$"
@@ -218,7 +435,6 @@ _COMMA_LIST_WITH_INTRO_RE = re.compile(
 
 
 def _split_enum_markers(paragraph: str) -> Optional[List[str]]:
-    """Разбивает абзац на пункты по маркерам "также/кроме того/shuningdek" и т.п."""
     positions = [m.start() for m in _ENUM_MARKER_RE.finditer(paragraph)]
     if len(positions) < 2:
         return None
@@ -237,10 +453,6 @@ def _split_enum_markers(paragraph: str) -> Optional[List[str]]:
 
 
 def _split_comma_enumeration(paragraph: str) -> Optional[List[str]]:
-    """
-    Если весь абзац — это перечисление однородных пунктов через запятую,
-    либо вводная фраза + двоеточие + такое перечисление.
-    """
     stripped = paragraph.strip()
 
     intro_match = _COMMA_LIST_WITH_INTRO_RE.match(stripped)
@@ -263,19 +475,151 @@ def _split_comma_enumeration(paragraph: str) -> Optional[List[str]]:
 
 
 # ---------------------------------------------------------------------------
-# 5. Сборка одного абзаца в Markdown-блок
+# 8. Ссылки на статьи закона -> inline code
+# ---------------------------------------------------------------------------
+
+_ARTICLE_REF_RE = re.compile(
+    r"(часть\s+\d+\s+статьи\s+\d+|статья\s+\d+|статьи\s+\d+"
+    r"|\d+[-\s]?модда|\d+[-\s]?modda|закон\s*№\s*\d+|qonun\s*№\s*\d+)",
+    flags=re.IGNORECASE,
+)
+
+
+def format_article_refs(text: str) -> str:
+    """Оборачивает ссылки на статьи/законы в inline code."""
+
+    def _wrap(m: re.Match) -> str:
+        return f"`{m.group(0)}`"
+
+    return _ARTICLE_REF_RE.sub(_wrap, text)
+
+
+# ---------------------------------------------------------------------------
+# 8а. Числа: даты, проценты, денежные суммы -> inline code
+#     (правило для читаемости: конкретные цифры не должны теряться
+#     в сплошном тексте, их проще заметить моноширинным шрифтом)
+# ---------------------------------------------------------------------------
+
+_NUMBER_RE = re.compile(
+    r"(?<![`\w])"
+    r"(?:"
+    r"\d{1,2}[./]\d{1,2}[./]\d{2,4}"                       # 12.05.2024
+    r"|\d{4}[-\s](?:йил|yil|году?|года)"                    # 2024-yil / 2024 йил
+    r"|\d+(?:[.,]\d+)?\s?%"                                  # 15% / 15,5 %
+    r"|\d[\d\s]{0,12}\d?\s?(?:so['ʻʼ]m|сўм|сум|у\.е\.|доллар|dollar)"
+    r")"
+    r"(?![\w`])",
+    flags=re.IGNORECASE,
+)
+
+
+def format_numbers(text: str) -> str:
+    """Оборачивает даты/проценты/суммы в inline code, чтобы они не
+    сливались с обычным текстом при чтении."""
+
+    def _wrap(m: re.Match) -> str:
+        return f"`{m.group(0).strip()}`"
+
+    return _NUMBER_RE.sub(_wrap, text)
+
+
+# ---------------------------------------------------------------------------
+# 9. Аббревиатуры -> расшифровка при первом упоминании
+# ---------------------------------------------------------------------------
+
+
+def expand_abbreviations(text: str, seen: set) -> str:
+    def _wrap(m: re.Match) -> str:
+        abbr = m.group(0)
+        if abbr in seen:
+            return abbr
+        seen.add(abbr)
+        full = ABBREVIATIONS.get(abbr)
+        if not full:
+            return abbr
+        return f"**{abbr}** ({full})"
+
+    pattern = r"\b(?:" + "|".join(re.escape(a) for a in ABBREVIATIONS) + r")\b"
+    return re.sub(pattern, _wrap, text)
+
+
+# ---------------------------------------------------------------------------
+# 10. Таблицы: регулярная структура "X — Y" (3+ раза подряд)
+# ---------------------------------------------------------------------------
+
+_TABLE_ROW_RE = re.compile(r"^(.{1,60}?)\s*[—–-]\s*(.{1,60})$")
+
+
+def _try_build_table(paragraphs: List[str]) -> Optional[List[str]]:
+    """
+    Если 3+ соседних абзаца выглядят как 'Нарушение — Санкция',
+    склеивает их в одну markdown-таблицу и возвращает НОВЫЙ список
+    абзацев (с таблицей вместо распознанных строк). Иначе — None.
+    """
+    rows = []
+    idxs = []
+    for i, p in enumerate(paragraphs):
+        m = _TABLE_ROW_RE.match(p.strip())
+        if m:
+            rows.append((m.group(1).strip(), m.group(2).strip()))
+            idxs.append(i)
+        else:
+            if len(rows) >= 3:
+                break
+            rows, idxs = [], []
+    if len(rows) < 3:
+        return None
+
+    start, end = idxs[0], idxs[-1]
+    table_lines = ["| Нарушение | Санкция |", "| --- | --- |"]
+    for left, right in rows:
+        table_lines.append(f"| {left} | {right} |")
+    table_block = "\n".join(table_lines)
+
+    return paragraphs[:start] + [table_block] + paragraphs[end + 1 :]
+
+
+# ---------------------------------------------------------------------------
+# 11. Сборка одного абзаца в Markdown-блок
 # ---------------------------------------------------------------------------
 
 
 def _render_list(items: List[str], numbered: bool) -> str:
     lines = []
     counter = 1
+    seen_terms: set = set()
+    seen_abbr: set = set()
     for item in items:
         if item.startswith("__PREFIX__"):
-            lines.append(bold_legal_terms(item[len("__PREFIX__"):]))
+            raw = item[len("__PREFIX__") :]
+            raw = format_article_refs(raw)
+            raw = format_numbers(raw)
+            raw = bold_legal_terms(raw, seen_terms)
+            lines.append(expand_abbreviations(raw, seen_abbr))
             continue
+
+        subs = _split_subletters(item) if numbered else None
         marker = f"{counter}. " if numbered else "- "
-        lines.append(marker + bold_legal_terms(item))
+        if subs is not None:
+            head = _SUBLETTER_ITEM_RE.split(item, maxsplit=1)[0].strip().rstrip(":")
+            head = format_article_refs(head)
+            head = format_numbers(head)
+            head = bold_legal_terms(head, seen_terms)
+            lines.append(marker + expand_abbreviations(head, seen_abbr))
+            letters = "абвгдеж"
+            for j, sub in enumerate(subs):
+                sub = format_article_refs(sub)
+                sub = format_numbers(sub)
+                sub = bold_legal_terms(sub, seen_terms)
+                sub = expand_abbreviations(sub, seen_abbr)
+                indent = "    " if numbered else "  "
+                letter = letters[j] if j < len(letters) else str(j + 1)
+                lines.append(f"{indent}{letter}) " + sub)
+        else:
+            rendered = format_article_refs(item)
+            rendered = format_numbers(rendered)
+            rendered = bold_legal_terms(rendered, seen_terms)
+            lines.append(marker + expand_abbreviations(rendered, seen_abbr))
         if numbered:
             counter += 1
     return "\n".join(lines)
@@ -285,6 +629,32 @@ def _format_paragraph(paragraph: str) -> str:
     paragraph = paragraph.strip()
     if not paragraph:
         return ""
+
+    header = _format_section_header(paragraph)
+    if header:
+        return header
+
+    article_header = _format_article_header(paragraph)
+    if article_header:
+        return article_header
+
+    callout = _maybe_callout(paragraph)
+    if callout:
+        callout_body = callout[len("> ⚠️ ") :]
+        callout_body = format_article_refs(callout_body)
+        callout_body = format_numbers(callout_body)
+        callout_body = bold_legal_terms(callout_body, set())
+        callout_body = expand_abbreviations(callout_body, set())
+        return "> ⚠️ " + callout_body
+
+    quote = _maybe_blockquote(paragraph)
+    if quote:
+        quote_body = quote[2:]
+        quote_body = format_article_refs(quote_body)
+        quote_body = format_numbers(quote_body)
+        quote_body = bold_legal_terms(quote_body, set())
+        quote_body = expand_abbreviations(quote_body, set())
+        return "> " + quote_body
 
     numbered_items = _extract_numbered_items(paragraph)
     if numbered_items:
@@ -298,21 +668,27 @@ def _format_paragraph(paragraph: str) -> str:
     if comma_items:
         return _render_list(comma_items, numbered=False)
 
-    return bold_legal_terms(paragraph)
+    rendered = format_article_refs(paragraph)
+    rendered = format_numbers(rendered)
+    rendered = bold_legal_terms(rendered, set())
+    return expand_abbreviations(rendered, set())
 
 
 # ---------------------------------------------------------------------------
-# 6. Публичная функция
+# 12. Публичная функция
 # ---------------------------------------------------------------------------
 
 
 def to_markdown(text: str) -> str:
     """
     Детерминированно преобразует упрощённый узбекский текст в
-    структурированный Markdown: абзацы, маркированные/нумерованные
-    списки и **выделение** частотных юридических терминов.
+    структурированный Markdown: заголовки, абзацы, списки (в т.ч.
+    вложенные), определения/цитаты, ссылки на статьи, таблицы и
+    **выделение** частотных юридических терминов.
 
     Никаких вызовов модели/API — только regex и словарный поиск.
+    Идемпотентна: повторный вызов на уже отформатированном выводе не
+    меняет текст (см. _looks_like_markdown).
     """
     if text is None:
         return ""
@@ -320,7 +696,36 @@ def to_markdown(text: str) -> str:
     if not text:
         return ""
 
-    paragraphs = split_into_paragraphs(text)
-    blocks = [_format_paragraph(p) for p in paragraphs]
-    blocks = [b for b in blocks if b]
+    if _looks_like_markdown(text):
+        return text
+
+    title, body = extract_title(text)
+
+    paragraphs = split_into_paragraphs(body)
+    if not paragraphs:
+        return ("# " + title) if title else ""
+
+    table_paragraphs = _try_build_table(paragraphs)
+    if table_paragraphs is not None:
+        paragraphs = table_paragraphs
+
+    blocks: List[str] = []
+    for p in paragraphs:
+        if p.startswith("| "):
+            blocks.append(p)
+            continue
+
+        formatted = _format_paragraph(p)
+        if not formatted:
+            continue
+
+        is_section_header = formatted.startswith("## ")
+        if is_section_header and blocks:
+            blocks.append("---")
+
+        blocks.append(formatted)
+
+    if title:
+        blocks.insert(0, f"# {title}")
+
     return "\n\n".join(blocks)

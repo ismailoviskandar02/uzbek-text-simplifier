@@ -11,6 +11,7 @@ Uzbek Text Simplifier — Tkinter desktop app.
 """
 
 import os
+import re
 import threading
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
@@ -62,7 +63,7 @@ LANGS = {
         "submit": "✨ Упростить",
         "clear": "🗑️ Очистить",
         "open_file": "📂 Открыть файл",
-        "download_docx": "⬇️ Скачать .docx",
+        "download_docx": "⬇️ Скачать (.docx / .md)",
         "dnd_hint": "Перетащите .docx или .txt файл сюда, или",
         "output_label": "Упрощённый текст",
         "examples_label": "Примеры",
@@ -78,6 +79,7 @@ LANGS = {
         "error_docx_lib": "Для сохранения в .docx нужна библиотека python-docx (pip install python-docx).",
         "saved_ok": "Файл сохранён",
         "to_markdown": "📝 В Markdown",
+        "to_markdown_undo": "↩️ Обычный текст",
         "markdown_window_title": "Предпросмотр Markdown",
         "markdown_copy": "📋 Копировать",
         "markdown_copied": "Скопировано в буфер обмена",
@@ -101,7 +103,7 @@ LANGS = {
         "submit": "✨ Soddalashtirish",
         "clear": "🗑️ Tozalash",
         "open_file": "📂 Faylni ochish",
-        "download_docx": "⬇️ .docx yuklab olish",
+        "download_docx": "⬇️ Yuklab olish (.docx / .md)",
         "dnd_hint": "Bu yerga .docx yoki .txt faylni tashlang, yoki",
         "output_label": "Soddalashtirilgan matn",
         "examples_label": "Namunalar",
@@ -117,6 +119,7 @@ LANGS = {
         "error_docx_lib": ".docx saqlash uchun python-docx kutubxonasi kerak (pip install python-docx).",
         "saved_ok": "Fayl saqlandi",
         "to_markdown": "📝 Markdown'ga",
+        "to_markdown_undo": "↩️ Oddiy matn",
         "markdown_window_title": "Markdown ko'rinishi",
         "markdown_copy": "📋 Nusxalash",
         "markdown_copied": "Xotiraga nusxalandi",
@@ -140,7 +143,7 @@ LANGS = {
         "submit": "✨ Simplify",
         "clear": "🗑️ Clear",
         "open_file": "📂 Open file",
-        "download_docx": "⬇️ Download .docx",
+        "download_docx": "⬇️ Download (.docx / .md)",
         "dnd_hint": "Drop a .docx or .txt file here, or",
         "output_label": "Simplified text",
         "examples_label": "Examples",
@@ -156,6 +159,7 @@ LANGS = {
         "error_docx_lib": "Saving .docx requires the python-docx package (pip install python-docx).",
         "saved_ok": "File saved",
         "to_markdown": "📝 To Markdown",
+        "to_markdown_undo": "↩️ Plain text",
         "markdown_window_title": "Markdown preview",
         "markdown_copy": "📋 Copy",
         "markdown_copied": "Copied to clipboard",
@@ -260,6 +264,14 @@ class SimplifierApp(_BaseTk):
         self.minsize(760, 560)
 
         self.runner = ModelRunner(on_loaded=self._model_loaded, on_error=self._model_error)
+
+        # Состояние тоггла кнопки "В Markdown": показываем сейчас
+        # Markdown-версию текста в поле вывода или обычную.
+        self._output_markdown_active = False
+        self._output_plain_text = ""
+        # Сырая markdown-строка (с **, #, > и т.д.) для сохранения в .md —
+        # само поле вывода этих символов не хранит, оно рендерит их стилями.
+        self._output_markdown_raw = ""
 
         self._build_style()
         self._build_ui()
@@ -487,6 +499,7 @@ class SimplifierApp(_BaseTk):
             font=("Segoe UI", 11), padx=8, pady=8, state="disabled",
         )
         self.output_text.pack(fill="both", expand=True, pady=(4, 8))
+        self._configure_markdown_tags()
 
         output_btn_row = ttk.Frame(right, style="TFrame")
         output_btn_row.pack(anchor="e")
@@ -533,7 +546,9 @@ class SimplifierApp(_BaseTk):
         self.open_file_btn.config(text=t["open_file"])
         self.dnd_hint_label.config(text=t["dnd_hint"])
         self.download_btn.config(text=t["download_docx"])
-        self.markdown_btn.config(text=t["to_markdown"])
+        self.markdown_btn.config(
+            text=t["to_markdown_undo"] if self._output_markdown_active else t["to_markdown"]
+        )
         self.output_label.config(text=t["output_label"])
         self.examples_label.config(text=t["examples_label"])
         self.footer_label.config(text=t["footer"])
@@ -588,6 +603,7 @@ class SimplifierApp(_BaseTk):
     def _on_clear(self):
         self.input_text.delete("1.0", "end")
         self._set_output("")
+        self._reset_markdown_toggle()
 
     # ------------------------------------------------------------------
     # File import (drag & drop + open dialog)
@@ -633,29 +649,57 @@ class SimplifierApp(_BaseTk):
             self._load_file_into_input(paths[0])
 
     # ------------------------------------------------------------------
-    # File export (.docx)
+    # File export (.docx или .md)
     # ------------------------------------------------------------------
     def _on_download_docx(self):
         t = LANGS[self.lang_code]
-        text = self.output_text.get("1.0", "end-1c").strip()
-        if not text:
+
+        # Источник истины — сохранённые строки, а не содержимое виджета:
+        # в режиме Markdown сам виджет уже не хранит сырые **/`/# символы
+        # (они сняты и заменены визуальными стилями), поэтому для .md
+        # экспорта берём _output_markdown_raw, а для .docx/.txt — всегда
+        # обычный текст без markdown-разметки.
+        if self._output_markdown_active:
+            text_for_md = self._output_markdown_raw.strip()
+        else:
+            text_for_md = self._output_plain_text.strip()
+        text_for_docx = self._output_plain_text.strip()
+
+        if not text_for_md:
             messagebox.showwarning(t["title"], t["error_no_output"])
             return
-        if not _DOCX_AVAILABLE:
-            messagebox.showerror(t["title"], t["error_docx_lib"])
-            return
+
+        # Если сейчас активен режим просмотра Markdown — по умолчанию
+        # предлагаем сохранить именно в .md, иначе — в .docx. Пользователь
+        # в любом случае может выбрать другой тип файла в самом диалоге.
+        default_ext = ".md" if self._output_markdown_active else ".docx"
+        default_name = "simplified.md" if self._output_markdown_active else "simplified.docx"
+
         path = filedialog.asksaveasfilename(
-            defaultextension=".docx",
-            filetypes=[("Word document", "*.docx")],
-            initialfile="simplified.docx",
+            defaultextension=default_ext,
+            filetypes=[
+                ("Markdown", "*.md"),
+                ("Word document", "*.docx"),
+            ],
+            initialfile=default_name,
         )
         if not path:
             return
+
+        ext = os.path.splitext(path)[1].lower()
+
         try:
-            doc = _docx_lib.Document()
-            for line in text.split("\n"):
-                doc.add_paragraph(line)
-            doc.save(path)
+            if ext == ".md":
+                with open(path, "w", encoding="utf-8") as f:
+                    f.write(text_for_md)
+            else:
+                if not _DOCX_AVAILABLE:
+                    messagebox.showerror(t["title"], t["error_docx_lib"])
+                    return
+                doc = _docx_lib.Document()
+                for line in text_for_docx.split("\n"):
+                    doc.add_paragraph(line)
+                doc.save(path)
         except Exception as e:  # noqa: BLE001
             messagebox.showerror(t["title"], f"{t['error_file_read']}: {e}")
             return
@@ -664,64 +708,199 @@ class SimplifierApp(_BaseTk):
     # ------------------------------------------------------------------
     # "В Markdown": детерминированное regex/словарное преобразование,
     # без модели и без API — выполняется мгновенно, синхронно.
+    # Кнопка работает как переключатель (тоггл, "как радиокнопка"):
+    # первый клик заменяет текст в поле вывода на Markdown-версию,
+    # повторный клик возвращает обычный (исходный упрощённый) текст —
+    # новое окно нигде не открывается.
     # ------------------------------------------------------------------
     def _on_to_markdown(self):
         t = LANGS[self.lang_code]
-        text = self.output_text.get("1.0", "end-1c").strip()
+
+        if self._output_markdown_active:
+            # Уже показываем Markdown -> вернуть обычный текст
+            self._set_output(self._output_plain_text)
+            self._output_markdown_active = False
+            self.markdown_btn.config(text=t["to_markdown"])
+            return
+
+        text = self._output_plain_text.strip()
         if not text:
             messagebox.showwarning(t["title"], t["error_no_output"])
             return
 
         markdown_text = to_markdown(text)  # чистая функция строка -> строка
-        self._show_markdown_preview(markdown_text)
+        self._output_markdown_active = True
+        self._set_output(markdown_text, is_markdown=True)
+        self.markdown_btn.config(text=t["to_markdown_undo"])
 
-    def _show_markdown_preview(self, markdown_text: str):
+    def _reset_markdown_toggle(self):
+        """Сбрасывает состояние тоггла Markdown (вызывается при новом
+        упрощении текста, очистке или загрузке нового файла)."""
+        self._output_markdown_active = False
+        self._output_markdown_raw = ""
         t = LANGS[self.lang_code]
+        self.markdown_btn.config(text=t["to_markdown"])
 
-        win = tk.Toplevel(self)
-        win.title(t["markdown_window_title"])
-        win.configure(bg=COLORS["bg"])
-        win.geometry("640x480")
-
-        label = ttk.Label(win, text=t["markdown_window_title"], style="FieldLabel.TLabel")
-        label.pack(anchor="w", padx=12, pady=(12, 4))
-
-        text_widget = tk.Text(
-            win, wrap="word",
-            bg=COLORS["input_bg"], fg=COLORS["text_fg"],
-            insertbackground=COLORS["text_fg"],
-            relief="flat", highlightthickness=1,
-            highlightbackground=COLORS["input_border"],
-            font=("Consolas", 10), padx=10, pady=10,
+    def _configure_markdown_tags(self):
+        """Настраивает визуальные стили для рендера Markdown прямо в
+        поле вывода: заголовки, **bold**, `code`, > blockquote, таблицы
+        и горизонтальные разделители — без показа сырых спецсимволов."""
+        w = self.output_text
+        w.tag_configure(
+            "h1", font=("Segoe UI", 18, "bold"),
+            foreground=COLORS["title_fg"], spacing1=10, spacing3=14,
         )
-        text_widget.pack(fill="both", expand=True, padx=12, pady=(0, 8))
-        text_widget.insert("1.0", markdown_text)
-        text_widget.config(state="disabled")
+        w.tag_configure(
+            "h2", font=("Segoe UI", 15, "bold"),
+            foreground=COLORS["title_fg"], spacing1=16, spacing3=12,
+        )
+        w.tag_configure(
+            "h3", font=("Segoe UI", 12, "bold"),
+            foreground=COLORS["label_fg"], spacing1=12, spacing3=10,
+        )
+        w.tag_configure("bold", font=("Segoe UI", 11, "bold"))
+        w.tag_configure(
+            "code", font=("Consolas", 10),
+            background=COLORS["panel2"], foreground=COLORS["label_fg"],
+        )
+        w.tag_configure(
+            "blockquote", font=("Segoe UI", 11, "italic"),
+            foreground=COLORS["subdued_fg"], lmargin1=16, lmargin2=16,
+            spacing1=6, spacing3=10,
+        )
+        w.tag_configure(
+            "table", font=("Consolas", 10), foreground=COLORS["text_fg"],
+            spacing3=2,
+        )
+        w.tag_configure(
+            "hr", foreground=COLORS["input_border"], font=("Segoe UI", 8),
+            spacing1=8, spacing3=8,
+        )
+        # обычный текст (абзацы)
+        w.tag_configure("para", spacing1=2, spacing2=4, spacing3=14)
+        # пункты списков — заметный отступ снизу между пунктами
+        w.tag_configure("listitem", spacing1=2, spacing2=3, spacing3=8)
+        w.tag_configure("sublistitem", spacing1=1, spacing2=2, spacing3=6)
 
-        btn_row = ttk.Frame(win, style="TFrame")
-        btn_row.pack(fill="x", padx=12, pady=(0, 12))
+    _INLINE_MD_RE = re.compile(r"(\*\*[^*\n]+\*\*|`[^`\n]+`)")
 
-        status_var = tk.StringVar(value="")
-        status_label = ttk.Label(btn_row, textvariable=status_var, style="Status.TLabel")
+    def _insert_inline_markdown(self, text, extra_tags=()):
+        """Вставляет строку в output_text, снимая **bold**/`code`
+        спецсимволы и применяя вместо них визуальные теги."""
+        w = self.output_text
+        for part in self._INLINE_MD_RE.split(text):
+            if not part:
+                continue
+            if part.startswith("**") and part.endswith("**") and len(part) >= 4:
+                w.insert("end", part[2:-2], (*extra_tags, "bold"))
+            elif part.startswith("`") and part.endswith("`") and len(part) >= 2:
+                w.insert("end", part[1:-1], (*extra_tags, "code"))
+            else:
+                w.insert("end", part, extra_tags)
 
-        def _copy():
-            win.clipboard_clear()
-            win.clipboard_append(markdown_text)
-            status_var.set(t["markdown_copied"])
+    def _render_markdown_into_output(self, md_text):
+        """Рисует Markdown в самом поле вывода (не как обычный текст
+        с ** и #, а со стилями): заголовки крупнее/жирным, **bold**,
+        `code`, > цитаты с полосой слева, таблицы моноширинным
+        шрифтом, --- разделителем.
 
-        copy_btn = ttk.Button(btn_row, text=t["markdown_copy"], style="Secondary.TButton", command=_copy)
-        copy_btn.pack(side="left")
+        Для читаемости после КАЖДОГО содержательного элемента (заголовок,
+        цитата, строка таблицы, пункт списка, обычная строка) вставляется
+        настоящая пустая строка — а не только там, где в исходном
+        markdown была пустая строка. Пустые строки самого markdown при
+        этом не дублируются (не копим по 2-3 подряд)."""
+        w = self.output_text
+        w.config(state="normal")
+        w.delete("1.0", "end")
 
-        close_btn = ttk.Button(btn_row, text=t["markdown_close"], style="Secondary.TButton", command=win.destroy)
-        close_btn.pack(side="left", padx=(8, 0))
+        prev_blank = True  # чтобы не начинать текст с пустой строки
 
-        status_label.pack(side="left", padx=(12, 0))
+        def _blank_line():
+            nonlocal prev_blank
+            if not prev_blank:
+                w.insert("end", "\n")
+                prev_blank = True
 
-    def _set_output(self, text):
-        self.output_text.config(state="normal")
-        self.output_text.delete("1.0", "end")
-        self.output_text.insert("1.0", text)
-        self.output_text.config(state="disabled")
+        for raw_line in md_text.split("\n"):
+            line = raw_line.rstrip()
+            s = line.strip()
+
+            if s == "":
+                # исходная пустая строка markdown -> не добавляем лишнего,
+                # просто гарантируем, что разделение уже есть
+                _blank_line()
+                continue
+
+            if s == "---":
+                _blank_line()
+                w.insert("end", "─" * 48 + "\n", ("hr",))
+                _blank_line()
+                continue
+
+            if s.startswith("### "):
+                _blank_line()
+                self._insert_inline_markdown(s[4:], ("h3",))
+                w.insert("end", "\n")
+                _blank_line()
+                continue
+
+            if s.startswith("## "):
+                _blank_line()
+                self._insert_inline_markdown(s[3:], ("h2",))
+                w.insert("end", "\n")
+                _blank_line()
+                continue
+
+            if s.startswith("# "):
+                _blank_line()
+                self._insert_inline_markdown(s[2:], ("h1",))
+                w.insert("end", "\n")
+                _blank_line()
+                continue
+
+            if s.startswith("> "):
+                w.insert("end", "▍ ", ("blockquote",))
+                self._insert_inline_markdown(s[2:], ("blockquote",))
+                w.insert("end", "\n")
+                _blank_line()
+                continue
+
+            if s.startswith("| "):
+                w.insert("end", line + "\n", ("table",))
+                prev_blank = False
+                continue
+
+            # обычная строка / пункт списка / вложенный подпункт —
+            # сохраняем исходный отступ (для a)/b) вложенности)
+            leading = len(line) - len(line.lstrip(" "))
+            is_list_item = bool(re.match(r"^(\d+\.|-)\s", s))
+            is_sub_item = bool(re.match(r"^[a-zа-яё]\)\s", s, flags=re.IGNORECASE))
+            tag = "sublistitem" if (leading and is_sub_item) else (
+                "listitem" if is_list_item else "para"
+            )
+            if leading:
+                w.insert("end", line[:leading])
+            self._insert_inline_markdown(line[leading:], (tag,))
+            w.insert("end", "\n")
+            # между пунктами списка тоже пустая строка — читаемее длинных
+            # плотных перечней
+            _blank_line()
+
+        w.config(state="disabled")
+
+    def _set_output(self, text, is_markdown=False):
+        if is_markdown:
+            self._output_markdown_raw = text
+            self._render_markdown_into_output(text)
+            return
+        self._output_plain_text = text
+        w = self.output_text
+        w.config(state="normal")
+        w.delete("1.0", "end")
+        # Текст не меняем (никаких лишних \n) — визуальный "воздух" между
+        # строками/абзацами даёт тег "para" (spacing3), а не сами символы.
+        w.insert("1.0", text, ("para",))
+        w.config(state="disabled")
 
     def _on_submit(self):
         t = LANGS[self.lang_code]
@@ -738,6 +917,7 @@ class SimplifierApp(_BaseTk):
         self.submit_btn.config(state="disabled")
         self.status_var.set(t["simplifying"])
         self._set_output("")
+        self._reset_markdown_toggle()
 
         def worker():
             try:
