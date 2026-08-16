@@ -39,13 +39,17 @@ from markdown_formatter import to_markdown
 from config import SimplifierConfig, build_prefix
 
 MODEL_ID = "ismailoviskandar02/uzbek-text-simplifier"  # твой репозиторий модели на HF
-MODEL_SUBFOLDER = "model2"
+# Варианты модели на HF Hub (subfolder в репозитории MODEL_ID) — выбираются
+# пользователем в панели параметров (см. SimplifierConfig.model_variant).
+MODEL_VARIANTS = ("small", "basic")
+DEFAULT_MODEL_VARIANT = "basic"
 # Локальная копия модели: если скачана (кнопка "Скачать модель"), веса
-# грузятся с диска, а не с Hugging Face Hub при каждом запуске.
+# грузятся с диска, а не с Hugging Face Hub при каждом запуске. Каждый
+# вариант модели кэшируется в своей подпапке, чтобы скачивание одного
+# варианта не мешало использовать другой.
 LOCAL_MODEL_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "model_local"
 )
-LOCAL_MODEL_SUBPATH = os.path.join(LOCAL_MODEL_DIR, MODEL_SUBFOLDER)
 # PREFIX больше не хардкодится: используется build_prefix(current_config).
 # Оставлен как fallback-константа на случай прямого импорта модуля где-то ещё.
 PREFIX = "simplify: "
@@ -53,9 +57,14 @@ MAX_INPUT_LEN = 256
 MAX_NEW_TOKENS = 256
 
 
-def _local_model_available() -> bool:
-    """Есть ли на диске уже скачанная копия модели (папка непустая)."""
-    return os.path.isdir(LOCAL_MODEL_SUBPATH) and bool(os.listdir(LOCAL_MODEL_SUBPATH))
+def _local_model_subpath(variant: str) -> str:
+    return os.path.join(LOCAL_MODEL_DIR, variant)
+
+
+def _local_model_available(variant: str) -> bool:
+    """Есть ли на диске уже скачанная копия модели данного варианта."""
+    subpath = _local_model_subpath(variant)
+    return os.path.isdir(subpath) and bool(os.listdir(subpath))
 
 # ---------------------------------------------------------------------------
 # Локализация (RU / UZ / EN)
@@ -108,6 +117,10 @@ LANGS = {
         "log_empty": "Пока нет ни одной записи.",
         "log_close": "Закрыть",
         "cfg_title": "Параметры упрощения",
+        "cfg_model": "Модель",
+        "cfg_model_small": "Small (быстрее)",
+        "cfg_model_basic": "Basic (точнее)",
+        "cfg_model_reloading": "Смена модели: загрузка...",
         "cfg_aggressiveness": "Агрессивность",
         "cfg_agg_conservative": "Мягкая",
         "cfg_agg_balanced": "Сбалансированная",
@@ -164,6 +177,10 @@ LANGS = {
         "log_empty": "Hozircha yozuvlar yo'q.",
         "log_close": "Yopish",
         "cfg_title": "Soddalashtirish parametrlari",
+        "cfg_model": "Model",
+        "cfg_model_small": "Small (tezroq)",
+        "cfg_model_basic": "Basic (aniqroq)",
+        "cfg_model_reloading": "Model almashtirilmoqda: yuklanmoqda...",
         "cfg_aggressiveness": "Agressivlik",
         "cfg_agg_conservative": "Yumshoq",
         "cfg_agg_balanced": "Muvozanatli",
@@ -220,6 +237,10 @@ LANGS = {
         "log_empty": "No entries yet.",
         "log_close": "Close",
         "cfg_title": "Simplification parameters",
+        "cfg_model": "Model",
+        "cfg_model_small": "Small (faster)",
+        "cfg_model_basic": "Basic (more accurate)",
+        "cfg_model_reloading": "Switching model: loading...",
         "cfg_aggressiveness": "Aggressiveness",
         "cfg_agg_conservative": "Conservative",
         "cfg_agg_balanced": "Balanced",
@@ -681,16 +702,22 @@ class LogWindow(tk.Toplevel):
 class ModelRunner:
     """Loads and runs the Uzbek text simplification model in the background."""
 
-    def __init__(self, on_loaded=None, on_error=None):
+    def __init__(self, on_loaded=None, on_error=None, variant: str = DEFAULT_MODEL_VARIANT):
         self.tokenizer = None
         self.model = None
         self.device = "cpu"
         self.loaded = False
         self.source = None  # "local" | "hub", заполняется после загрузки
+        self.variant = variant  # "small" | "basic" — какой subfolder загружен
         self.on_loaded = on_loaded
         self.on_error = on_error
 
-    def load_async(self):
+    def load_async(self, variant: str | None = None):
+        """Запускает загрузку в фоновом потоке. variant позволяет сменить
+        вариант модели (small/basic) перед перезагрузкой — если не передан,
+        используется self.variant, установленный ранее."""
+        if variant is not None:
+            self.variant = variant
         threading.Thread(target=self._load, daemon=True).start()
 
     def _load(self):
@@ -702,11 +729,11 @@ class ModelRunner:
 
             # Если модель уже скачана на диск (см. download_local) —
             # грузим её оттуда, без обращения к Hugging Face Hub.
-            if _local_model_available():
-                source, kwargs = LOCAL_MODEL_SUBPATH, {}
+            if _local_model_available(self.variant):
+                source, kwargs = _local_model_subpath(self.variant), {}
                 self.source = "local"
             else:
-                source, kwargs = MODEL_ID, {"subfolder": MODEL_SUBFOLDER}
+                source, kwargs = MODEL_ID, {"subfolder": self.variant}
                 self.source = "hub"
 
             self.tokenizer = AutoTokenizer.from_pretrained(source, **kwargs)
@@ -722,7 +749,7 @@ class ModelRunner:
                 self.on_error(str(e))
 
     def download_local(self):
-        """Скачивает веса модели (только subfolder=model2) на диск в
+        """Скачивает веса текущего варианта модели (self.variant) на диск в
         LOCAL_MODEL_DIR, чтобы дальнейшие запуски грузили модель с
         компьютера, а не с Hugging Face Hub. Синхронный вызов — гонять
         в отдельном потоке должен вызывающий код."""
@@ -731,7 +758,7 @@ class ModelRunner:
         os.makedirs(LOCAL_MODEL_DIR, exist_ok=True)
         snapshot_download(
             repo_id=MODEL_ID,
-            allow_patterns=[f"{MODEL_SUBFOLDER}/*"],
+            allow_patterns=[f"{self.variant}/*"],
             local_dir=LOCAL_MODEL_DIR,
         )
 
@@ -773,11 +800,15 @@ class SimplifierApp(_BaseTk):
         self.log = ProcessingLog()
         self.log_window = None
 
-        self.runner = ModelRunner(on_loaded=self._model_loaded, on_error=self._model_error)
-
         # Окна настроек больше нет — конфиг фиксирован и подобран под
         # максимальную точность упрощения (см. config.py).
         self.current_config = SimplifierConfig.load()
+
+        self.runner = ModelRunner(
+            on_loaded=self._model_loaded,
+            on_error=self._model_error,
+            variant=self.current_config.model_variant,
+        )
 
         # Состояние тоггла кнопки "В Markdown": показываем сейчас
         # Markdown-версию текста в поле вывода или обычную.
@@ -1075,6 +1106,20 @@ class SimplifierApp(_BaseTk):
         row = ttk.Frame(panel, style="TFrame")
         row.pack(fill="x")
 
+        # --- Вариант модели (small / basic, subfolder на HF Hub) ---
+        model_box = ttk.Frame(row, style="TFrame")
+        model_box.pack(side="left", padx=(0, 24))
+        self.cfg_model_label = ttk.Label(model_box, text="", style="Status.TLabel")
+        self.cfg_model_label.pack(anchor="w")
+        self._model_values = list(MODEL_VARIANTS)  # ["small", "basic"]
+        self.model_combo = ttk.Combobox(
+            model_box, state="readonly", width=18,
+            values=[t["cfg_model_small"], t["cfg_model_basic"]],
+        )
+        self.model_combo.current(self._model_values.index(self.current_config.model_variant))
+        self.model_combo.pack(anchor="w", pady=(2, 0))
+        self.model_combo.bind("<<ComboboxSelected>>", self._on_cfg_model_change)
+
         # --- Агрессивность ---
         agg_box = ttk.Frame(row, style="TFrame")
         agg_box.pack(side="left", padx=(0, 24))
@@ -1144,6 +1189,10 @@ class SimplifierApp(_BaseTk):
         """Обновляет подписи панели параметров при смене языка/темы."""
         t = LANGS[self.lang_code]
         self.cfg_title_label.config(text=t["cfg_title"])
+        self.cfg_model_label.config(text=t["cfg_model"])
+        model_values = [t["cfg_model_small"], t["cfg_model_basic"]]
+        self.model_combo.config(values=model_values)
+        self.model_combo.current(self._model_values.index(self.current_config.model_variant))
         self.cfg_agg_label.config(text=t["cfg_aggressiveness"])
         self.cfg_len_label.config(
             text=f"{t['cfg_max_length']}: {self.current_config.max_length_ratio:.2f}"
@@ -1160,6 +1209,26 @@ class SimplifierApp(_BaseTk):
 
     def _save_current_config(self):
         self.current_config.save()
+
+    def _on_cfg_model_change(self, _event=None):
+        """Смена варианта модели (small/basic). В отличие от остальных
+        параметров, влияет не на prefix, а на то, какие веса загружены —
+        поэтому здесь нужна фактическая перезагрузка ModelRunner."""
+        idx = self.model_combo.current()
+        variant = self._model_values[idx]
+        if variant == self.current_config.model_variant:
+            return
+
+        self.current_config.model_variant = variant
+        self._save_current_config()
+        self.log.add(f"Настройки: model_variant={variant}")
+
+        t = LANGS[self.lang_code]
+        self.runner.loaded = False
+        self.submit_btn.config_state("disabled")
+        self.status_var.set(t["cfg_model_reloading"])
+        self.log.add(f"Переключение модели на вариант '{variant}', перезагрузка...")
+        self.runner.load_async(variant=variant)
 
     def _on_cfg_aggressiveness_change(self, _event=None):
         idx = self.agg_combo.current()
@@ -1316,15 +1385,17 @@ class SimplifierApp(_BaseTk):
         def show():
             t = LANGS[self.lang_code]
             self.status_var.set(t["ready_local"] if self.runner.source == "local" else t["ready"])
+            self.submit_btn.config_state("normal")
             self.log.add(
-                f"Модель загружена (устройство: {self.runner.device}, "
-                f"источник: {self.runner.source})"
+                f"Модель загружена (вариант: {self.runner.variant}, "
+                f"устройство: {self.runner.device}, источник: {self.runner.source})"
             )
         self.after(0, show)
 
     def _model_error(self, err):
         def show():
             self.status_var.set(f"Error: {err}")
+            self.submit_btn.config_state("normal")
             self.log.add(f"Ошибка загрузки модели: {err}", level="ERROR")
             messagebox.showerror("Model load error", err)
         self.after(0, show)
@@ -1337,7 +1408,7 @@ class SimplifierApp(_BaseTk):
     def _on_download_model(self):
         t = LANGS[self.lang_code]
 
-        if _local_model_available():
+        if _local_model_available(self.current_config.model_variant):
             self.status_var.set(t["model_already_local"])
             self.log.add("Модель уже скачана локально — повторное скачивание не требуется")
             return

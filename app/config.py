@@ -23,8 +23,10 @@ from typing import Any, Literal, get_args
 logger = logging.getLogger(__name__)
 
 Aggressiveness = Literal["conservative", "balanced", "aggressive"]
+ModelVariant = Literal["small", "basic"]
 
 _VALID_AGGRESSIVENESS = get_args(Aggressiveness)
+_VALID_MODEL_VARIANTS = get_args(ModelVariant)
 _MAX_LENGTH_RATIO_RANGE = (0.3, 1.0)
 _NUM_BEAMS_RANGE = (1, 8)
 
@@ -38,6 +40,9 @@ class SimplifierConfig:
     # на значениях, дающих максимальную точность/качество упрощения
     # (не пользовательские, подобраны эмпирически под задачу).
     aggressiveness: Aggressiveness = "balanced"
+    # Вариант модели на Hugging Face Hub (subfolder в репозитории MODEL_ID):
+    # "small" — облегчённая/более быстрая версия, "basic" — базовая версия.
+    model_variant: ModelVariant = "basic"
     max_length_ratio: float = 0.75
     # num_beams=8 — верхняя граница диапазона (_NUM_BEAMS_RANGE), даёт
     # наиболее точный/качественный beam search за счёт скорости.
@@ -63,6 +68,11 @@ class SimplifierConfig:
                 if value in _VALID_AGGRESSIVENESS:
                     return value
                 raise ValueError(f"'{value}' not in {_VALID_AGGRESSIVENESS}")
+
+            if name == "model_variant":
+                if value in _VALID_MODEL_VARIANTS:
+                    return value
+                raise ValueError(f"'{value}' not in {_VALID_MODEL_VARIANTS}")
 
             if name == "max_length_ratio":
                 v = float(value)
