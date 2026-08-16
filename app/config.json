@@ -1,9 +1,10 @@
 {
-  "aggressiveness": "aggressive",
+  "aggressiveness": "conservative",
   "drop_dates": false,
   "drop_law_refs": false,
   "drop_stats": false,
   "hotkey_combo": "ctrl+alt+s",
   "max_length_ratio": 1.0,
+  "model_variant": "small",
   "num_beams": 4
 }

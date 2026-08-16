@@ -36,7 +36,7 @@ except ImportError:
 # упрощённого текста в Markdown. НЕ модель, НЕ API — обычная функция
 # строка -> строка, выполняется мгновенно и синхронно.
 from markdown_formatter import to_markdown
-from config import SimplifierConfig, build_prefix
+from config import SimplifierConfig, build_prefix, build_generation_kwargs
 
 MODEL_ID = "ismailoviskandar02/uzbek-text-simplifier"  # твой репозиторий модели на HF
 # Варианты модели на HF Hub (subfolder в репозитории MODEL_ID) — выбираются
@@ -762,7 +762,13 @@ class ModelRunner:
             local_dir=LOCAL_MODEL_DIR,
         )
 
-    def simplify(self, text: str, num_beams: int = 4, prefix: str = PREFIX) -> str:
+    def simplify(
+        self,
+        text: str,
+        num_beams: int = 4,
+        prefix: str = PREFIX,
+        config: SimplifierConfig | None = None,
+    ) -> str:
         import torch
 
         text = (text or "").strip()
@@ -775,14 +781,80 @@ class ModelRunner:
             max_length=MAX_INPUT_LEN,
         ).to(self.device)
 
+        # Конфиг (aggressiveness/max_length_ratio) больше не зашивается в
+        # текст промпта (см. build_prefix) — он передаётся здесь как
+        # настоящие параметры generate(), которые transformers понимает
+        # без дообучения модели.
+        gen_kwargs = (
+            build_generation_kwargs(config, MAX_NEW_TOKENS)
+            if config is not None
+            else {"max_new_tokens": MAX_NEW_TOKENS}
+        )
+
         with torch.no_grad():
             out = self.model.generate(
                 **inputs,
-                max_new_tokens=MAX_NEW_TOKENS,
                 num_beams=num_beams,
+                **gen_kwargs,
             )
 
-        return self.tokenizer.decode(out[0], skip_special_tokens=True)
+        decoded = self.tokenizer.decode(out[0], skip_special_tokens=True)
+
+        # Подстраховка: если модель всё же начинает вывод с эха промпта
+        # (частично обученный/слабый вариант "small"), не показываем эту
+        # служебную часть пользователю.
+        if decoded.startswith(prefix):
+            decoded = decoded[len(prefix):].lstrip()
+
+        # Чистим зацикленные повторы одного и того же слова/словосочетания
+        # подряд (симптом того же бага с "непонятным" промптом — модель
+        # застревает и штампует один и тот же кусок раз за разом).
+        decoded = self._dedupe_repeats(decoded)
+
+        # "Упрощённый" текст не должен получаться длиннее исходного — это
+        # верный признак, что модель зациклилась/сглючила, а не реально
+        # упростила текст. В этом случае лучше вернуть пользователю его же
+        # исходный текст, чем испорченный вывод.
+        if len(text) < len(decoded):
+            return text
+
+        return decoded
+
+    @staticmethod
+    def _dedupe_repeats(text: str, max_phrase_len: int = 4) -> str:
+        """Убирает подряд идущие дубли одного слова или короткой фразы
+        (до max_phrase_len слов), например:
+        "qwerty (conservative, max_length=1.0): qwerty (conservative, ...): qwerty"
+        -> "qwerty (conservative, max_length=1.0)"
+
+        Работает по словам: для каждой длины фразы n (от большей к
+        меньшей) схлопывает соседние одинаковые n-словные блоки, идущие
+        подряд без перерыва, оставляя только первое вхождение.
+        """
+        words = text.split(" ")
+        if len(words) < 2:
+            return text
+
+        for n in range(max_phrase_len, 0, -1):
+            i = 0
+            result: list[str] = []
+            while i < len(words):
+                block = words[i:i + n]
+                if len(block) == n:
+                    j = i + n
+                    repeats = 1
+                    while words[j:j + n] == block:
+                        repeats += 1
+                        j += n
+                    if repeats > 1:
+                        result.extend(block)
+                        i = j
+                        continue
+                result.append(words[i])
+                i += 1
+            words = result
+
+        return " ".join(words)
 
 
 class SimplifierApp(_BaseTk):
@@ -1775,7 +1847,9 @@ class SimplifierApp(_BaseTk):
 
         def worker():
             try:
-                result = self.runner.simplify(text, beams, prefix=prefix)
+                result = self.runner.simplify(
+                    text, beams, prefix=prefix, config=self.current_config
+                )
             except Exception as e:  # noqa: BLE001
                 result = None
                 err = str(e)

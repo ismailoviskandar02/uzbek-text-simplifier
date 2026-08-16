@@ -157,36 +157,56 @@ class SimplifierConfig:
 
 
 def build_prefix(config: SimplifierConfig) -> str:
-    """Строит task-prefix для model.generate() на основе конфига.
+    """Строит task-prefix для model.generate().
 
-    ЭФФЕКТ НЕ ГАРАНТИРОВАН: mT5-small в этом проекте fine-tuned только на
-    строке "simplify: " (см. docstring модуля). Расширенный формат префикса
-    ("simplify [key=value, ...]: ") модель не видела на этапе обучения — это
-    prompt-инжиниринг поверх уже обученной модели, а не conditioning через
-    дообучение. Проверяйте влияние параметров вручную/через ab_compare.py,
-    не полагайтесь на то, что они всегда меняют поведение предсказуемо.
+    ФИКС БАГА "в вывод отправляется системный конфиг": mT5-small в этом
+    проекте fine-tuned ТОЛЬКО на строке "simplify: ". Раньше сюда
+    подмешивались флаги конфига вида "simplify [aggressiveness=..., ...]: ",
+    как только конфиг отличался от дефолтного (а он отличается уже в
+    config.json из коробки: aggressiveness="conservative", max_length_ratio=1.0
+    против дефолтных "balanced"/0.75). Модель на этапе обучения такой
+    расширенный формат не видела — для неё это out-of-distribution текст,
+    и вместо упрощения она начинала зацикленно копировать этот промпт
+    обратно в вывод (видно на скриншоте: "qwerty (conservative,
+    max_length=1.0): qwerty (conservative, max_length=1.0): ...").
 
-    Обратная совместимость: конфиг по умолчанию (aggressiveness="balanced",
-    все drop_*=False) даёт байт-в-байт "simplify: ", как и раньше — потому
-    что в prefix попадают только параметры, отличающиеся от default.
+    Поэтому build_prefix теперь ВСЕГДА возвращает ровно "simplify: ",
+    независимо от конфига. Параметры aggressiveness/max_length_ratio/
+    drop_* не текст-инжинирятся в промпт — их эффект реализуется через
+    настоящие параметры генерации, см. build_generation_kwargs().
     """
-    default = SimplifierConfig()
-    flags: list[str] = []
+    return "simplify: "
 
-    if config.aggressiveness != default.aggressiveness:
-        flags.append(f"aggressiveness={config.aggressiveness}")
 
-    if config.max_length_ratio != default.max_length_ratio:
-        flags.append(f"max_length={config.max_length_ratio}")
+def build_generation_kwargs(config: SimplifierConfig, base_max_new_tokens: int) -> dict:
+    """Параметры для model.generate(), отражающие конфиг, БЕЗ изменения
+    текста промпта (в отличие от старого build_prefix).
 
-    if config.drop_dates:
-        flags.append("drop_dates=true")
-    if config.drop_law_refs:
-        flags.append("drop_law_refs=true")
-    if config.drop_stats:
-        flags.append("drop_stats=true")
+    - max_length_ratio масштабирует max_new_tokens: модель не сможет
+      выдать ответ длиннее, чем разрешено конфигом.
+    - aggressiveness влияет на repetition_penalty/length_penalty: более
+      агрессивное упрощение сильнее штрафует копирование входа один в
+      один и немного поощряет более короткие формулировки.
 
-    if not flags:
-        return "simplify: "
+    Это обычные, поддерживаемые transformers параметры generate(), а не
+    текст, который модель должна "понять" сама.
+    """
+    max_new_tokens = max(8, round(base_max_new_tokens * config.max_length_ratio))
 
-    return f"simplify [{', '.join(flags)}]: "
+    repetition_penalty = {
+        "conservative": 1.0,
+        "balanced": 1.2,
+        "aggressive": 1.4,
+    }.get(config.aggressiveness, 1.0)
+
+    length_penalty = {
+        "conservative": 1.0,
+        "balanced": 0.9,
+        "aggressive": 0.7,
+    }.get(config.aggressiveness, 1.0)
+
+    return {
+        "max_new_tokens": max_new_tokens,
+        "repetition_penalty": repetition_penalty,
+        "length_penalty": length_penalty,
+    }
