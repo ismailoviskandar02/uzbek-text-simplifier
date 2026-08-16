@@ -26,6 +26,7 @@ Aggressiveness = Literal["conservative", "balanced", "aggressive"]
 
 _VALID_AGGRESSIVENESS = get_args(Aggressiveness)
 _MAX_LENGTH_RATIO_RANGE = (0.3, 1.0)
+_NUM_BEAMS_RANGE = (1, 8)
 
 CONFIG_FILENAME = "config.json"
 _CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), CONFIG_FILENAME)
@@ -33,8 +34,14 @@ _CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), CONFIG_F
 
 @dataclass
 class SimplifierConfig:
+    # Окно настроек убрано из UI — все параметры генерации зафиксированы
+    # на значениях, дающих максимальную точность/качество упрощения
+    # (не пользовательские, подобраны эмпирически под задачу).
     aggressiveness: Aggressiveness = "balanced"
-    max_length_ratio: float = 0.6
+    max_length_ratio: float = 0.75
+    # num_beams=8 — верхняя граница диапазона (_NUM_BEAMS_RANGE), даёт
+    # наиболее точный/качественный beam search за счёт скорости.
+    num_beams: int = 8
     drop_dates: bool = False
     drop_law_refs: bool = False
     drop_stats: bool = False
@@ -63,6 +70,13 @@ class SimplifierConfig:
                 if lo <= v <= hi:
                     return v
                 raise ValueError(f"{v} outside range {_MAX_LENGTH_RATIO_RANGE}")
+
+            if name == "num_beams":
+                v = int(value)
+                lo, hi = _NUM_BEAMS_RANGE
+                if lo <= v <= hi:
+                    return v
+                raise ValueError(f"{v} outside range {_NUM_BEAMS_RANGE}")
 
             if name in ("drop_dates", "drop_law_refs", "drop_stats"):
                 if isinstance(value, bool):

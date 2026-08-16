@@ -23,6 +23,10 @@ _TEXT = {
         "balanced": "Сбалансированно",
         "aggressive": "Агрессивно",
         "max_length_label": "Максимальная длина вывода (доля от входа)",
+        "beams_label": "Точность упрощения",
+        "beams_fast": "Быстро",
+        "beams_medium": "Средне",
+        "beams_accurate": "Точно",
         "drop_dates": "Убирать даты",
         "drop_law_refs": "Убирать ссылки на законы/статьи",
         "drop_stats": "Убирать статистику/числа",
@@ -37,6 +41,10 @@ _TEXT = {
         "balanced": "Muvozanatli",
         "aggressive": "Agressiv",
         "max_length_label": "Chiqish maksimal uzunligi (kirishga nisbatan)",
+        "beams_label": "Soddalashtirish aniqligi",
+        "beams_fast": "Tez",
+        "beams_medium": "O'rtacha",
+        "beams_accurate": "Aniq",
         "drop_dates": "Sanalarni olib tashlash",
         "drop_law_refs": "Qonun/modda havolalarini olib tashlash",
         "drop_stats": "Statistika/raqamlarni olib tashlash",
@@ -51,6 +59,10 @@ _TEXT = {
         "balanced": "Balanced",
         "aggressive": "Aggressive",
         "max_length_label": "Max output length (ratio of input)",
+        "beams_label": "Simplification accuracy",
+        "beams_fast": "Fast",
+        "beams_medium": "Medium",
+        "beams_accurate": "Accurate",
         "drop_dates": "Drop dates",
         "drop_law_refs": "Drop law/article references",
         "drop_stats": "Drop statistics/numbers",
@@ -125,6 +137,21 @@ class SettingsWindow(tk.Toplevel):
         )
         max_length_scale.pack(fill="x", padx=12)
 
+        # --- num_beams (точность упрощения, перенесено сюда из главного
+        # окна app.py, чтобы все параметры генерации жили в одном месте
+        # и сохранялись вместе с остальным конфигом) ---
+        ttk.Label(frame, text=t["beams_label"], font=("Segoe UI", 10, "bold")).pack(
+            anchor="w", **pad
+        )
+        self.num_beams_var = tk.IntVar(value=self.config_obj.num_beams)
+        self.num_beams_value_label = ttk.Label(frame, text=self._beams_hint_text(self.num_beams_var.get()))
+        self.num_beams_value_label.pack(anchor="e", padx=12)
+        num_beams_scale = ttk.Scale(
+            frame, from_=1, to=8, orient="horizontal",
+            variable=self.num_beams_var, command=self._on_num_beams_change,
+        )
+        num_beams_scale.pack(fill="x", padx=12)
+
         # --- drop_* checkboxes ---
         ttk.Label(frame, text="", font=("Segoe UI", 4)).pack()  # small spacer
         self.drop_dates_var = tk.BooleanVar(value=self.config_obj.drop_dates)
@@ -149,14 +176,31 @@ class SettingsWindow(tk.Toplevel):
         ttk.Button(btn_row, text=t["save"], command=self._on_save).pack(side="right")
 
     # ------------------------------------------------------------------
+    def _beams_hint_text(self, v: int) -> str:
+        v = int(round(v))
+        if v <= 2:
+            hint = self._t["beams_fast"]
+        elif v <= 5:
+            hint = self._t["beams_medium"]
+        else:
+            hint = self._t["beams_accurate"]
+        return f"{hint} ({v})"
+
     def _on_max_length_change(self, _value=None):
         self.max_length_value_label.config(text=f"{self.max_length_var.get():.2f}")
+
+    def _on_num_beams_change(self, value=None):
+        v = int(round(float(value))) if value is not None else self.num_beams_var.get()
+        self.num_beams_var.set(v)
+        self.num_beams_value_label.config(text=self._beams_hint_text(v))
 
     def _on_reset(self):
         default = SimplifierConfig()
         self.aggressiveness_var.set(default.aggressiveness)
         self.max_length_var.set(default.max_length_ratio)
         self._on_max_length_change()
+        self.num_beams_var.set(default.num_beams)
+        self._on_num_beams_change(default.num_beams)
         self.drop_dates_var.set(default.drop_dates)
         self.drop_law_refs_var.set(default.drop_law_refs)
         self.drop_stats_var.set(default.drop_stats)
@@ -165,6 +209,7 @@ class SettingsWindow(tk.Toplevel):
         new_config = SimplifierConfig(
             aggressiveness=self.aggressiveness_var.get(),
             max_length_ratio=round(self.max_length_var.get(), 2),
+            num_beams=int(round(self.num_beams_var.get())),
             drop_dates=self.drop_dates_var.get(),
             drop_law_refs=self.drop_law_refs_var.get(),
             drop_stats=self.drop_stats_var.get(),
