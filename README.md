@@ -1,6 +1,7 @@
 # Uzbek Text Simplifier (юридический домен)
 
 > **готовый приложение в папке app**
+> **showcase: https://project-rho-snowy-95.vercel.app**
 
 Упрощение сложных узбекских юридических текстов (lex.uz) для обычного
 читателя.
